@@ -1,0 +1,1294 @@
+cd ~/projects/numerologpro
+
+set +e
+set +u
+set +o pipefail 2>/dev/null
+
+expected="922ca7b21d4e10c76ba5f9d3b581bc0f8d25188b"
+actual="$(git rev-parse HEAD 2>/dev/null)"
+ok=1
+
+pages="elyor/index.html quantocode/index.html oracle/index.html"
+tmp_root="${TMPDIR:-/tmp}/numerologpro-home-redesign"
+analytics_scripts="$tmp_root/analytics-scripts.html"
+analytics_noscript="$tmp_root/analytics-noscript.html"
+
+printf 'Expected HEAD: %s\n' "$expected"
+printf 'Actual HEAD:   %s\n' "$actual"
+
+if [ "$actual" != "$expected" ]; then
+    printf 'FAIL: неожиданный HEAD.\n'
+    ok=0
+fi
+
+if [ "$ok" -eq 1 ]; then
+    git fetch origin main
+    remote="$(git rev-parse origin/main 2>/dev/null)"
+    printf 'origin/main:   %s\n' "$remote"
+
+    if [ "$remote" != "$expected" ]; then
+        printf 'FAIL: origin/main не совпадает с ожидаемым HEAD.\n'
+        ok=0
+    fi
+fi
+
+if [ "$ok" -eq 1 ]; then
+    if [ -n "$(git diff --cached --name-only)" ] || [ -n "$(git diff --name-only)" ]; then
+        printf 'FAIL: обнаружены staged или изменённые tracked-файлы:\n'
+        git status --short
+        ok=0
+    fi
+fi
+
+if [ "$ok" -eq 1 ]; then
+    untracked="$(git ls-files --others --exclude-standard | sort)"
+    expected_untracked="$(printf '%s\n' \
+        'assets/images/home/hero-desktop.webp' \
+        'assets/images/home/hero-mobile.webp' \
+        'assets/images/home/og-quiet-house.jpg' \
+        | sort)"
+
+    if [ "$untracked" != "$expected_untracked" ]; then
+        printf 'FAIL: набор untracked-файлов отличается от ожидаемых изображений:\n%s\n' "$untracked"
+        ok=0
+    else
+        printf 'PASS: подтверждены только три новых изображения.\n'
+    fi
+fi
+
+if [ "$ok" -eq 1 ]; then
+    desktop_info="$(file assets/images/home/hero-desktop.webp)"
+    mobile_info="$(file assets/images/home/hero-mobile.webp)"
+    og_info="$(file assets/images/home/og-quiet-house.jpg)"
+
+    printf '%s\n%s\n%s\n' "$desktop_info" "$mobile_info" "$og_info"
+
+    if ! printf '%s' "$desktop_info" | grep -q 'WebP image.*1920x1200'; then
+        printf 'FAIL: desktop hero имеет неожиданный формат или размер.\n'
+        ok=0
+    fi
+
+    if ! printf '%s' "$mobile_info" | grep -q 'WebP image.*1080x1360'; then
+        printf 'FAIL: mobile hero имеет неожиданный формат или размер.\n'
+        ok=0
+    fi
+
+    if ! printf '%s' "$og_info" | grep -q 'JPEG image data.*1200x630'; then
+        printf 'FAIL: OG имеет неожиданный формат или размер.\n'
+        ok=0
+    fi
+fi
+
+if [ "$ok" -eq 1 ]; then
+    mkdir -p "$tmp_root"
+    rm -f "$analytics_scripts" "$analytics_noscript"
+
+    ga_before="$(grep -o 'googletagmanager\.com' index.html | wc -l | tr -d ' ')"
+    ym_before="$(grep -o 'mc\.yandex\.ru' index.html | wc -l | tr -d ' ')"
+
+    awk '
+        function flush_script() {
+            if (buffer ~ /googletagmanager\.com|mc\.yandex\.ru/) {
+                print buffer
+            }
+            buffer = ""
+            inside = 0
+        }
+        {
+            if (!inside && $0 ~ /<script/) {
+                inside = 1
+                buffer = $0
+                if ($0 ~ /<\/script>/) {
+                    flush_script()
+                }
+                next
+            }
+            if (inside) {
+                buffer = buffer ORS $0
+                if ($0 ~ /<\/script>/) {
+                    flush_script()
+                }
+            }
+        }
+    ' index.html > "$analytics_scripts"
+
+    awk '
+        function flush_noscript() {
+            if (buffer ~ /mc\.yandex\.ru/) {
+                print buffer
+            }
+            buffer = ""
+            inside = 0
+        }
+        {
+            if (!inside && $0 ~ /<noscript/) {
+                inside = 1
+                buffer = $0
+                if ($0 ~ /<\/noscript>/) {
+                    flush_noscript()
+                }
+                next
+            }
+            if (inside) {
+                buffer = buffer ORS $0
+                if ($0 ~ /<\/noscript>/) {
+                    flush_noscript()
+                }
+            }
+        }
+    ' index.html > "$analytics_noscript"
+
+    ga_saved="$(grep -o 'googletagmanager\.com' "$analytics_scripts" | wc -l | tr -d ' ')"
+    ym_saved="$(
+        {
+            grep -o 'mc\.yandex\.ru' "$analytics_scripts"
+            grep -o 'mc\.yandex\.ru' "$analytics_noscript"
+        } | wc -l | tr -d ' '
+    )"
+
+    printf 'Analytics before: GA=%s YM=%s\n' "$ga_before" "$ym_before"
+    printf 'Analytics saved:  GA=%s YM=%s\n' "$ga_saved" "$ym_saved"
+
+    if [ "$ga_before" -ne 4 ] || [ "$ym_before" -ne 8 ] || \
+       [ "$ga_saved" -ne "$ga_before" ] || [ "$ym_saved" -ne "$ym_before" ]; then
+        printf 'FAIL: точное сохранение аналитики не подтверждено.\n'
+        ok=0
+    else
+        printf 'PASS: аналитика извлечена без изменения маркеров.\n'
+    fi
+fi
+
+if [ "$ok" -eq 1 ]; then
+    before_hashes="$tmp_root/product-pages-before.sha256"
+    sha256sum $pages > "$before_hashes"
+
+    mkdir -p assets/css assets/js
+fi
+
+if [ "$ok" -eq 1 ]; then
+    printf '%s\n' \
+'@font-face {' \
+'  font-family: "Inter";' \
+'  src: url("../fonts/inter-roman.woff2") format("woff2");' \
+'  font-style: normal;' \
+'  font-weight: 100 900;' \
+'  font-display: swap;' \
+'}' \
+'' \
+':root {' \
+'  color-scheme: dark;' \
+'  --bg: #030711;' \
+'  --surface: rgba(10, 17, 35, 0.74);' \
+'  --surface-strong: rgba(14, 23, 46, 0.94);' \
+'  --line: rgba(177, 203, 255, 0.17);' \
+'  --text: #f8f4eb;' \
+'  --muted: #b9c4d9;' \
+'  --gold: #f4c879;' \
+'  --blue: #4e8cff;' \
+'  --violet: #9b72ff;' \
+'  --coral: #ff8b72;' \
+'  --cyan: #48d9d2;' \
+'  --radius: 28px;' \
+'  --shadow: 0 32px 90px rgba(0, 0, 0, 0.42);' \
+'}' \
+'' \
+'* {' \
+'  box-sizing: border-box;' \
+'}' \
+'' \
+'html {' \
+'  scroll-behavior: smooth;' \
+'}' \
+'' \
+'body {' \
+'  margin: 0;' \
+'  overflow-x: hidden;' \
+'  background:' \
+'    radial-gradient(circle at 15% 20%, rgba(44, 93, 190, 0.18), transparent 32rem),' \
+'    radial-gradient(circle at 85% 60%, rgba(151, 81, 190, 0.13), transparent 32rem),' \
+'    var(--bg);' \
+'  color: var(--text);' \
+'  font-family: "Inter", system-ui, sans-serif;' \
+'  line-height: 1.6;' \
+'}' \
+'' \
+'body::before {' \
+'  position: fixed;' \
+'  inset: 0;' \
+'  z-index: -1;' \
+'  background-image: url("data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%22.9%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22 opacity=%22.28%22/%3E%3C/svg%3E");' \
+'  content: "";' \
+'  opacity: 0.035;' \
+'  pointer-events: none;' \
+'}' \
+'' \
+'a {' \
+'  color: inherit;' \
+'}' \
+'' \
+'button, a {' \
+'  -webkit-tap-highlight-color: transparent;' \
+'}' \
+'' \
+':focus-visible {' \
+'  outline: 3px solid var(--gold);' \
+'  outline-offset: 4px;' \
+'}' \
+'' \
+'.skip-link {' \
+'  position: fixed;' \
+'  top: 12px;' \
+'  left: 12px;' \
+'  z-index: 100;' \
+'  padding: 10px 16px;' \
+'  border-radius: 999px;' \
+'  background: var(--text);' \
+'  color: var(--bg);' \
+'  transform: translateY(-160%);' \
+'}' \
+'' \
+'.skip-link:focus {' \
+'  transform: translateY(0);' \
+'}' \
+'' \
+'.shell {' \
+'  width: min(1180px, calc(100% - 40px));' \
+'  margin-inline: auto;' \
+'}' \
+'' \
+'.site-header {' \
+'  position: absolute;' \
+'  top: 0;' \
+'  right: 0;' \
+'  left: 0;' \
+'  z-index: 20;' \
+'  padding: 24px 0;' \
+'}' \
+'' \
+'.nav {' \
+'  display: flex;' \
+'  align-items: center;' \
+'  justify-content: space-between;' \
+'  gap: 24px;' \
+'}' \
+'' \
+'.brand {' \
+'  display: inline-flex;' \
+'  align-items: center;' \
+'  gap: 12px;' \
+'  color: var(--text);' \
+'  font-size: 17px;' \
+'  font-weight: 750;' \
+'  letter-spacing: 0.02em;' \
+'  text-decoration: none;' \
+'}' \
+'' \
+'.brand-mark {' \
+'  display: grid;' \
+'  width: 42px;' \
+'  height: 42px;' \
+'  border: 1px solid rgba(244, 200, 121, 0.44);' \
+'  border-radius: 14px;' \
+'  background: linear-gradient(145deg, rgba(78, 140, 255, 0.3), rgba(244, 200, 121, 0.25));' \
+'  box-shadow: 0 0 30px rgba(100, 133, 255, 0.24);' \
+'  place-items: center;' \
+'}' \
+'' \
+'.brand-mark::before {' \
+'  width: 14px;' \
+'  height: 18px;' \
+'  border: 2px solid var(--gold);' \
+'  border-bottom: 0;' \
+'  content: "";' \
+'  transform: perspective(30px) rotateX(-12deg);' \
+'}' \
+'' \
+'.nav-links {' \
+'  display: flex;' \
+'  align-items: center;' \
+'  gap: 28px;' \
+'  margin: 0;' \
+'  padding: 0;' \
+'  list-style: none;' \
+'}' \
+'' \
+'.nav-links a {' \
+'  color: var(--muted);' \
+'  font-size: 14px;' \
+'  font-weight: 650;' \
+'  text-decoration: none;' \
+'  transition: color 180ms ease;' \
+'}' \
+'' \
+'.nav-links a:hover {' \
+'  color: var(--text);' \
+'}' \
+'' \
+'.hero {' \
+'  position: relative;' \
+'  display: grid;' \
+'  min-height: 780px;' \
+'  overflow: hidden;' \
+'  align-items: center;' \
+'  isolation: isolate;' \
+'}' \
+'' \
+'.hero-media, .hero-media::after, .hero-picture, .hero-picture img {' \
+'  position: absolute;' \
+'  inset: 0;' \
+'}' \
+'' \
+'.hero-media {' \
+'  z-index: -2;' \
+'  background: #02050c;' \
+'}' \
+'' \
+'.hero-picture img {' \
+'  width: 100%;' \
+'  height: 100%;' \
+'  object-fit: cover;' \
+'  object-position: center;' \
+'  transform: scale(1.025);' \
+'  transition: transform 180ms linear;' \
+'}' \
+'' \
+'.hero-media::after {' \
+'  background:' \
+'    linear-gradient(90deg, rgba(2, 5, 13, 0.98) 0%, rgba(2, 5, 13, 0.82) 35%, rgba(2, 5, 13, 0.26) 68%, rgba(2, 5, 13, 0.16) 100%),' \
+'    linear-gradient(0deg, var(--bg) 0%, transparent 24%);' \
+'  content: "";' \
+'}' \
+'' \
+'.hero-content {' \
+'  position: relative;' \
+'  z-index: 2;' \
+'  width: min(680px, 58%);' \
+'  padding-top: 108px;' \
+'}' \
+'' \
+'.eyebrow {' \
+'  display: inline-flex;' \
+'  align-items: center;' \
+'  gap: 10px;' \
+'  margin-bottom: 22px;' \
+'  color: #d6dded;' \
+'  font-size: 12px;' \
+'  font-weight: 800;' \
+'  letter-spacing: 0.17em;' \
+'  text-transform: uppercase;' \
+'}' \
+'' \
+'.eyebrow::before {' \
+'  width: 34px;' \
+'  height: 1px;' \
+'  background: linear-gradient(90deg, var(--blue), var(--gold));' \
+'  content: "";' \
+'}' \
+'' \
+'h1, h2, h3, p {' \
+'  margin-top: 0;' \
+'}' \
+'' \
+'h1 {' \
+'  max-width: 760px;' \
+'  margin-bottom: 24px;' \
+'  font-size: clamp(52px, 7vw, 96px);' \
+'  font-weight: 760;' \
+'  letter-spacing: -0.065em;' \
+'  line-height: 0.96;' \
+'  text-wrap: balance;' \
+'}' \
+'' \
+'.hero-lead {' \
+'  max-width: 620px;' \
+'  margin-bottom: 34px;' \
+'  color: #d0d8e8;' \
+'  font-size: clamp(18px, 2vw, 23px);' \
+'  line-height: 1.55;' \
+'  text-wrap: balance;' \
+'}' \
+'' \
+'.actions {' \
+'  display: flex;' \
+'  flex-wrap: wrap;' \
+'  gap: 14px;' \
+'}' \
+'' \
+'.button {' \
+'  display: inline-flex;' \
+'  min-height: 52px;' \
+'  align-items: center;' \
+'  justify-content: center;' \
+'  gap: 10px;' \
+'  padding: 13px 22px;' \
+'  border: 1px solid transparent;' \
+'  border-radius: 999px;' \
+'  font-size: 15px;' \
+'  font-weight: 760;' \
+'  text-decoration: none;' \
+'  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;' \
+'}' \
+'' \
+'.button:hover {' \
+'  transform: translateY(-2px);' \
+'}' \
+'' \
+'.button-primary {' \
+'  background: linear-gradient(110deg, #f5d28d, #f1ae65);' \
+'  box-shadow: 0 14px 42px rgba(241, 174, 101, 0.2);' \
+'  color: #10121a;' \
+'}' \
+'' \
+'.button-secondary {' \
+'  border-color: rgba(255, 255, 255, 0.2);' \
+'  background: rgba(9, 16, 32, 0.5);' \
+'  backdrop-filter: blur(14px);' \
+'}' \
+'' \
+'.hero-note {' \
+'  margin: 22px 0 0;' \
+'  color: #9facbf;' \
+'  font-size: 13px;' \
+'}' \
+'' \
+'.section {' \
+'  padding: 108px 0;' \
+'}' \
+'' \
+'.section-heading {' \
+'  display: grid;' \
+'  margin-bottom: 44px;' \
+'  gap: 18px;' \
+'}' \
+'' \
+'.section-heading h2 {' \
+'  max-width: 820px;' \
+'  margin-bottom: 0;' \
+'  font-size: clamp(36px, 5vw, 64px);' \
+'  letter-spacing: -0.05em;' \
+'  line-height: 1.04;' \
+'  text-wrap: balance;' \
+'}' \
+'' \
+'.section-heading p {' \
+'  max-width: 660px;' \
+'  margin-bottom: 0;' \
+'  color: var(--muted);' \
+'  font-size: 18px;' \
+'}' \
+'' \
+'.product-grid {' \
+'  display: grid;' \
+'  grid-template-columns: repeat(3, 1fr);' \
+'  gap: 20px;' \
+'}' \
+'' \
+'.product-card {' \
+'  position: relative;' \
+'  display: flex;' \
+'  min-height: 440px;' \
+'  overflow: hidden;' \
+'  flex-direction: column;' \
+'  justify-content: flex-end;' \
+'  padding: 30px;' \
+'  border: 1px solid var(--line);' \
+'  border-radius: var(--radius);' \
+'  background: var(--surface);' \
+'  box-shadow: var(--shadow);' \
+'  text-decoration: none;' \
+'  transition: border-color 220ms ease, transform 220ms ease;' \
+'  isolation: isolate;' \
+'}' \
+'' \
+'.product-card::before, .product-card::after {' \
+'  position: absolute;' \
+'  content: "";' \
+'  pointer-events: none;' \
+'}' \
+'' \
+'.product-card::before {' \
+'  inset: 0;' \
+'  z-index: -2;' \
+'  background: var(--card-background);' \
+'}' \
+'' \
+'.product-card::after {' \
+'  top: 10%;' \
+'  right: -18%;' \
+'  z-index: -1;' \
+'  width: 260px;' \
+'  height: 260px;' \
+'  border-radius: 50%;' \
+'  background: var(--card-glow);' \
+'  filter: blur(20px);' \
+'  opacity: 0.72;' \
+'  transition: transform 350ms ease;' \
+'}' \
+'' \
+'.product-card:hover {' \
+'  border-color: rgba(255, 255, 255, 0.36);' \
+'  transform: translateY(-7px);' \
+'}' \
+'' \
+'.product-card:hover::after {' \
+'  transform: scale(1.22) translate(-6%, 6%);' \
+'}' \
+'' \
+'.product-card--quantocode {' \
+'  --card-background: linear-gradient(160deg, rgba(38, 83, 171, 0.38), rgba(8, 16, 35, 0.9) 70%);' \
+'  --card-glow: radial-gradient(circle, rgba(72, 130, 255, 0.85), transparent 68%);' \
+'}' \
+'' \
+'.product-card--oracle {' \
+'  --card-background: linear-gradient(160deg, rgba(108, 54, 146, 0.38), rgba(19, 12, 31, 0.92) 70%);' \
+'  --card-glow: radial-gradient(circle, rgba(210, 130, 255, 0.75), transparent 68%);' \
+'}' \
+'' \
+'.product-card--elyor {' \
+'  --card-background: linear-gradient(160deg, rgba(160, 84, 65, 0.38), rgba(28, 17, 25, 0.92) 70%);' \
+'  --card-glow: radial-gradient(circle, rgba(255, 151, 105, 0.8), transparent 68%);' \
+'}' \
+'' \
+'.product-number {' \
+'  position: absolute;' \
+'  top: 24px;' \
+'  left: 28px;' \
+'  color: rgba(255, 255, 255, 0.46);' \
+'  font-size: 12px;' \
+'  font-weight: 800;' \
+'  letter-spacing: 0.16em;' \
+'}' \
+'' \
+'.product-card h3 {' \
+'  margin-bottom: 14px;' \
+'  font-size: 31px;' \
+'  letter-spacing: -0.04em;' \
+'}' \
+'' \
+'.product-card p {' \
+'  margin-bottom: 24px;' \
+'  color: #c5cede;' \
+'}' \
+'' \
+'.card-link {' \
+'  display: inline-flex;' \
+'  align-items: center;' \
+'  gap: 8px;' \
+'  color: var(--text);' \
+'  font-size: 14px;' \
+'  font-weight: 760;' \
+'}' \
+'' \
+'.principle {' \
+'  display: grid;' \
+'  padding: 48px;' \
+'  border: 1px solid var(--line);' \
+'  border-radius: calc(var(--radius) + 4px);' \
+'  background:' \
+'    radial-gradient(circle at 82% 20%, rgba(89, 122, 255, 0.2), transparent 32rem),' \
+'    var(--surface-strong);' \
+'  box-shadow: var(--shadow);' \
+'  grid-template-columns: 0.8fr 1.2fr;' \
+'  gap: 64px;' \
+'}' \
+'' \
+'.principle h2 {' \
+'  margin-bottom: 0;' \
+'  font-size: clamp(34px, 4vw, 54px);' \
+'  letter-spacing: -0.05em;' \
+'  line-height: 1.05;' \
+'}' \
+'' \
+'.principle-copy {' \
+'  display: grid;' \
+'  gap: 20px;' \
+'}' \
+'' \
+'.principle-copy p {' \
+'  margin-bottom: 0;' \
+'  color: #c5cede;' \
+'  font-size: 18px;' \
+'}' \
+'' \
+'.final-cta {' \
+'  padding-top: 40px;' \
+'  text-align: center;' \
+'}' \
+'' \
+'.final-cta h2 {' \
+'  margin-bottom: 20px;' \
+'  font-size: clamp(38px, 6vw, 72px);' \
+'  letter-spacing: -0.055em;' \
+'  line-height: 1;' \
+'}' \
+'' \
+'.final-cta p {' \
+'  max-width: 650px;' \
+'  margin: 0 auto 30px;' \
+'  color: var(--muted);' \
+'  font-size: 19px;' \
+'}' \
+'' \
+'.site-footer {' \
+'  padding: 44px 0;' \
+'  border-top: 1px solid var(--line);' \
+'}' \
+'' \
+'.footer-inner {' \
+'  display: flex;' \
+'  align-items: center;' \
+'  justify-content: space-between;' \
+'  gap: 28px;' \
+'}' \
+'' \
+'.footer-links {' \
+'  display: flex;' \
+'  flex-wrap: wrap;' \
+'  gap: 20px;' \
+'}' \
+'' \
+'.footer-links a {' \
+'  color: var(--muted);' \
+'  font-size: 14px;' \
+'  text-decoration: none;' \
+'}' \
+'' \
+'.footer-links a:hover {' \
+'  color: var(--text);' \
+'}' \
+'' \
+'.copyright {' \
+'  margin: 0;' \
+'  color: #7f8ba1;' \
+'  font-size: 13px;' \
+'}' \
+'' \
+'[data-reveal] {' \
+'  opacity: 0;' \
+'  transform: translateY(28px);' \
+'  transition: opacity 700ms ease, transform 700ms ease;' \
+'}' \
+'' \
+'[data-reveal].is-visible {' \
+'  opacity: 1;' \
+'  transform: none;' \
+'}' \
+'' \
+'@media (max-width: 900px) {' \
+'  .product-grid {' \
+'    grid-template-columns: 1fr;' \
+'  }' \
+'' \
+'  .product-card {' \
+'    min-height: 360px;' \
+'  }' \
+'' \
+'  .principle {' \
+'    grid-template-columns: 1fr;' \
+'    gap: 28px;' \
+'  }' \
+'}' \
+'' \
+'@media (max-width: 720px) {' \
+'  .shell {' \
+'    width: min(100% - 28px, 1180px);' \
+'  }' \
+'' \
+'  .site-header {' \
+'    padding-top: 17px;' \
+'  }' \
+'' \
+'  .nav-links {' \
+'    display: none;' \
+'  }' \
+'' \
+'  .hero {' \
+'    min-height: 900px;' \
+'    align-items: end;' \
+'  }' \
+'' \
+'  .hero-picture img {' \
+'    object-position: center top;' \
+'  }' \
+'' \
+'  .hero-media::after {' \
+'    background:' \
+'      linear-gradient(0deg, rgba(2, 5, 13, 1) 0%, rgba(2, 5, 13, 0.92) 36%, rgba(2, 5, 13, 0.12) 72%),' \
+'      linear-gradient(90deg, rgba(2, 5, 13, 0.35), transparent);' \
+'  }' \
+'' \
+'  .hero-content {' \
+'    width: 100%;' \
+'    padding: 0 0 72px;' \
+'  }' \
+'' \
+'  h1 {' \
+'    font-size: clamp(48px, 15vw, 68px);' \
+'  }' \
+'' \
+'  .hero-lead {' \
+'    font-size: 18px;' \
+'  }' \
+'' \
+'  .actions {' \
+'    align-items: stretch;' \
+'    flex-direction: column;' \
+'  }' \
+'' \
+'  .button {' \
+'    width: 100%;' \
+'  }' \
+'' \
+'  .section {' \
+'    padding: 76px 0;' \
+'  }' \
+'' \
+'  .product-card {' \
+'    min-height: 390px;' \
+'    padding: 25px;' \
+'  }' \
+'' \
+'  .principle {' \
+'    padding: 30px 24px;' \
+'  }' \
+'' \
+'  .footer-inner {' \
+'    align-items: flex-start;' \
+'    flex-direction: column;' \
+'  }' \
+'}' \
+'' \
+'@media (prefers-reduced-motion: reduce) {' \
+'  html {' \
+'    scroll-behavior: auto;' \
+'  }' \
+'' \
+'  *, *::before, *::after {' \
+'    scroll-behavior: auto !important;' \
+'    transition-duration: 0.01ms !important;' \
+'  }' \
+'' \
+'  [data-reveal] {' \
+'    opacity: 1;' \
+'    transform: none;' \
+'  }' \
+'}' \
+        > assets/css/home.css
+
+    printf 'PASS: создана отдельная CSS-система новой главной.\n'
+fi
+
+if [ "$ok" -eq 1 ]; then
+    printf '%s\n' \
+'(() => {' \
+'  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;' \
+'  const revealElements = document.querySelectorAll("[data-reveal]");' \
+'' \
+'  if (reducedMotion || !("IntersectionObserver" in window)) {' \
+'    revealElements.forEach((element) => element.classList.add("is-visible"));' \
+'  } else {' \
+'    const observer = new IntersectionObserver((entries) => {' \
+'      entries.forEach((entry) => {' \
+'        if (entry.isIntersecting) {' \
+'          entry.target.classList.add("is-visible");' \
+'          observer.unobserve(entry.target);' \
+'        }' \
+'      });' \
+'    }, { threshold: 0.14 });' \
+'' \
+'    revealElements.forEach((element) => observer.observe(element));' \
+'  }' \
+'' \
+'  if (!reducedMotion) {' \
+'    const heroImage = document.querySelector(".hero-picture img");' \
+'    window.addEventListener("scroll", () => {' \
+'      if (!heroImage || window.scrollY > window.innerHeight) return;' \
+'      heroImage.style.transform = `scale(1.025) translateY(${window.scrollY * 0.035}px)`;' \
+'    }, { passive: true });' \
+'  }' \
+'})();' \
+        > assets/js/home.js
+
+    printf 'PASS: создан минимальный JS для reveal и hero depth.\n'
+fi
+
+if [ "$ok" -eq 1 ]; then
+    printf '%s\n' \
+'<!doctype html>' \
+'<html lang="ru">' \
+'<head>' \
+'  <meta charset="utf-8">' \
+'  <meta name="viewport" content="width=device-width, initial-scale=1">' \
+'  <title>Тихий Дом — три способа услышать себя</title>' \
+'  <meta name="description" content="КвантоКод, Mystic Oracle и ЭЛИОР — три инструмента для самопонимания и бесплатные точки входа в Telegram.">' \
+'  <link rel="canonical" href="https://numerologpro.ru/">' \
+'  <link rel="icon" href="content/images/size/w256h256/format/png/2026/05/favicon.png" type="image/png">' \
+'  <meta name="theme-color" content="#030711">' \
+'  <meta property="og:locale" content="ru_RU">' \
+'  <meta property="og:type" content="website">' \
+'  <meta property="og:site_name" content="Тихий Дом">' \
+'  <meta property="og:title" content="Тихий Дом — три способа услышать себя">' \
+'  <meta property="og:description" content="Числа, символы и образы — инструменты, которые помогают увидеть главное и сделать следующий шаг.">' \
+'  <meta property="og:url" content="https://numerologpro.ru/">' \
+'  <meta property="og:image" content="https://numerologpro.ru/assets/images/home/og-quiet-house.jpg">' \
+'  <meta property="og:image:width" content="1200">' \
+'  <meta property="og:image:height" content="630">' \
+'  <meta property="og:image:alt" content="Тихий Дом — три способа услышать себя">' \
+'  <meta name="twitter:card" content="summary_large_image">' \
+'  <meta name="twitter:title" content="Тихий Дом — три способа услышать себя">' \
+'  <meta name="twitter:description" content="КвантоКод, Mystic Oracle и ЭЛИОР — три инструмента для самопонимания.">' \
+'  <meta name="twitter:image" content="https://numerologpro.ru/assets/images/home/og-quiet-house.jpg">' \
+'  <link rel="preload" as="image" href="assets/images/home/hero-desktop.webp" media="(min-width: 721px)" fetchpriority="high">' \
+'  <link rel="preload" as="image" href="assets/images/home/hero-mobile.webp" media="(max-width: 720px)" fetchpriority="high">' \
+'  <link rel="preload" as="font" href="assets/fonts/inter-roman.woff2" type="font/woff2" crossorigin>' \
+'  <link rel="stylesheet" href="assets/css/home.css">' \
+'  <script type="application/ld+json">' \
+'  {' \
+'    "@context": "https://schema.org",' \
+'    "@type": "WebSite",' \
+'    "name": "Тихий Дом",' \
+'    "url": "https://numerologpro.ru/",' \
+'    "description": "КвантоКод, Mystic Oracle и ЭЛИОР — инструменты для самопонимания.",' \
+'    "inLanguage": "ru-RU"' \
+'  }' \
+'  </script>' \
+        > index.html
+
+    cat "$analytics_scripts" >> index.html
+
+    printf '%s\n' \
+'</head>' \
+'<body>' \
+'  <a class="skip-link" href="#main">Перейти к содержанию</a>' \
+'  <header class="site-header">' \
+'    <div class="shell nav">' \
+'      <a class="brand" href="./" aria-label="Тихий Дом — главная">' \
+'        <span class="brand-mark" aria-hidden="true"></span>' \
+'        <span>Тихий Дом</span>' \
+'      </a>' \
+'      <nav aria-label="Основная навигация">' \
+'        <ul class="nav-links">' \
+'          <li><a href="#products">Продукты</a></li>' \
+'          <li><a href="quantocode/">КвантоКод</a></li>' \
+'          <li><a href="oracle/">Oracle</a></li>' \
+'          <li><a href="elyor/">ЭЛИОР</a></li>' \
+'        </ul>' \
+'      </nav>' \
+'    </div>' \
+'  </header>' \
+'' \
+'  <main id="main">' \
+'    <section class="hero" aria-labelledby="hero-title">' \
+'      <div class="hero-media" aria-hidden="true">' \
+'        <picture class="hero-picture">' \
+'          <source media="(max-width: 720px)" srcset="assets/images/home/hero-mobile.webp">' \
+'          <img src="assets/images/home/hero-desktop.webp" width="1920" height="1200" alt="" fetchpriority="high">' \
+'        </picture>' \
+'      </div>' \
+'      <div class="shell">' \
+'        <div class="hero-content">' \
+'          <span class="eyebrow">Пространство самопонимания</span>' \
+'          <h1 id="hero-title">Три способа услышать себя</h1>' \
+'          <p class="hero-lead">Числа, символы и образы — инструменты, которые помогают увидеть главное и сделать следующий шаг.</p>' \
+'          <div class="actions">' \
+'            <a class="button button-primary" href="#products">Выбрать свой путь <span aria-hidden="true">↓</span></a>' \
+'            <a class="button button-secondary" href="quantocode/">Начать с КвантоКода <span aria-hidden="true">→</span></a>' \
+'          </div>' \
+'          <p class="hero-note">Бесплатные точки входа в Telegram. Без регистрации на сайте.</p>' \
+'        </div>' \
+'      </div>' \
+'    </section>' \
+'' \
+'    <section class="section" id="products" aria-labelledby="products-title">' \
+'      <div class="shell">' \
+'        <div class="section-heading" data-reveal>' \
+'          <span class="eyebrow">Три инструмента</span>' \
+'          <h2 id="products-title">Начните с того, что откликается сейчас</h2>' \
+'          <p>У каждого продукта свой язык: числа, образы или символы. Все три помогают внимательнее посмотреть на себя и ситуацию.</p>' \
+'        </div>' \
+'        <div class="product-grid">' \
+'          <a class="product-card product-card--quantocode" href="quantocode/" data-reveal>' \
+'            <span class="product-number">01 · ЧИСЛА</span>' \
+'            <h3>КвантоКод</h3>' \
+'            <p>Квантовая матрица личности: три кода — Душа, Тело и Личность — по дате рождения и имени.</p>' \
+'            <span class="card-link">Рассчитать Код Души <span aria-hidden="true">→</span></span>' \
+'          </a>' \
+'          <a class="product-card product-card--oracle" href="oracle/" data-reveal>' \
+'            <span class="product-number">02 · ОБРАЗЫ</span>' \
+'            <h3>Mystic Oracle</h3>' \
+'            <p>Таро, Руны, Астрология и Сонник — восемь систем, которые помогают услышать собственный ответ.</p>' \
+'            <span class="card-link">Задать вопрос <span aria-hidden="true">→</span></span>' \
+'          </a>' \
+'          <a class="product-card product-card--elyor" href="elyor/" data-reveal>' \
+'            <span class="product-number">03 · СИМВОЛ</span>' \
+'            <h3>ЭЛИОР</h3>' \
+'            <p>Персональный символ-якорь под важную цель: образ и мантра для фокуса и ежедневной практики.</p>' \
+'            <span class="card-link">Создать первый символ <span aria-hidden="true">→</span></span>' \
+'          </a>' \
+'        </div>' \
+'      </div>' \
+'    </section>' \
+'' \
+'    <section class="section" aria-labelledby="principle-title">' \
+'      <div class="shell principle" data-reveal>' \
+'        <div>' \
+'          <span class="eyebrow">Принцип Тихого Дома</span>' \
+'          <h2 id="principle-title">Не решать за вас. Помочь увидеть яснее.</h2>' \
+'        </div>' \
+'        <div class="principle-copy">' \
+'          <p>Это не обещание предсказать судьбу и не замена вашим решениям. Числа, символы и образы становятся способом остановиться, заметить важное и услышать собственную позицию.</p>' \
+'          <p>Выберите инструмент, который подходит вашему вопросу сегодня. Первый шаг доступен бесплатно в Telegram.</p>' \
+'        </div>' \
+'      </div>' \
+'    </section>' \
+'' \
+'    <section class="section final-cta" aria-labelledby="final-title">' \
+'      <div class="shell" data-reveal>' \
+'        <span class="eyebrow">Ваш следующий шаг</span>' \
+'        <h2 id="final-title">С какого языка начнём?</h2>' \
+'        <p>С чисел, вопроса к Оракулу или личного символа. Все пути начинаются с короткого бесплатного знакомства.</p>' \
+'        <div class="actions" style="justify-content:center">' \
+'          <a class="button button-secondary" href="quantocode/">КвантоКод</a>' \
+'          <a class="button button-secondary" href="oracle/">Mystic Oracle</a>' \
+'          <a class="button button-secondary" href="elyor/">ЭЛИОР</a>' \
+'        </div>' \
+'      </div>' \
+'    </section>' \
+'  </main>' \
+'' \
+'  <footer class="site-footer">' \
+'    <div class="shell footer-inner">' \
+'      <a class="brand" href="./">' \
+'        <span class="brand-mark" aria-hidden="true"></span>' \
+'        <span>Тихий Дом</span>' \
+'      </a>' \
+'      <div class="footer-links" aria-label="Разделы сайта">' \
+'        <a href="./">Главная</a>' \
+'        <a href="quantocode/">КвантоКод</a>' \
+'        <a href="oracle/">Mystic Oracle</a>' \
+'        <a href="elyor/">ЭЛИОР</a>' \
+'      </div>' \
+'      <p class="copyright">© 2026 Тихий Дом</p>' \
+'    </div>' \
+'  </footer>' \
+        >> index.html
+
+    cat "$analytics_noscript" >> index.html
+
+    printf '%s\n' \
+'  <script src="assets/js/home.js" defer></script>' \
+'</body>' \
+'</html>' \
+        >> index.html
+
+    printf 'PASS: новая главная создана, сохранённая аналитика подключена.\n'
+fi
+
+if [ "$ok" -eq 1 ]; then
+    printf '%s\n' \
+'<!doctype html>' \
+'<html lang="ru">' \
+'<head>' \
+'  <meta charset="utf-8">' \
+'  <meta name="viewport" content="width=device-width, initial-scale=1">' \
+'  <meta name="robots" content="noindex, follow">' \
+'  <meta name="theme-color" content="#030711">' \
+'  <title>Страница не найдена | Тихий Дом</title>' \
+'  <style>' \
+'    *{box-sizing:border-box}' \
+'    body{margin:0;display:grid;min-height:100vh;place-items:center;overflow:hidden;background:#030711;color:#f8f4eb;font-family:Inter,system-ui,sans-serif}' \
+'    body::before{position:fixed;inset:-20%;background:radial-gradient(circle at 65% 35%,rgba(93,103,255,.35),transparent 25%),radial-gradient(circle at 35% 65%,rgba(244,181,103,.2),transparent 28%);content:"";filter:blur(20px)}' \
+'    main{position:relative;width:min(760px,calc(100% - 32px));padding:64px 28px;text-align:center}' \
+'    .code{margin:0;background:linear-gradient(120deg,#fff1bd,#8ea7ff,#ff9f80);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:clamp(96px,25vw,220px);font-weight:850;letter-spacing:-.09em;line-height:.8}' \
+'    h1{margin:38px 0 16px;font-size:clamp(34px,6vw,58px);letter-spacing:-.05em}' \
+'    p{max-width:540px;margin:0 auto 30px;color:#b9c4d9;font-size:18px;line-height:1.6}' \
+'    a{display:inline-flex;min-height:52px;align-items:center;padding:13px 24px;border-radius:999px;background:linear-gradient(110deg,#f5d28d,#f1ae65);color:#10121a;font-weight:760;text-decoration:none}' \
+'    a:focus-visible{outline:3px solid #fff;outline-offset:5px}' \
+'  </style>' \
+        > 404.html
+
+    cat "$analytics_scripts" >> 404.html
+
+    printf '%s\n' \
+'</head>' \
+'<body>' \
+'  <main>' \
+'    <p class="code" aria-hidden="true">404</p>' \
+'    <h1>Страница не найдена</h1>' \
+'    <p>Возможно, адрес изменился или такой страницы больше нет. Вернитесь в Тихий Дом и выберите нужное направление.</p>' \
+'    <a id="home-link" href="https://numerologpro.ru/">Вернуться на главную</a>' \
+'  </main>' \
+        >> 404.html
+
+    cat "$analytics_noscript" >> 404.html
+
+    printf '%s\n' \
+'  <script>' \
+'    if (location.hostname.endsWith("github.io")) {' \
+'      document.getElementById("home-link").href = "/numerologpro/";' \
+'    }' \
+'  </script>' \
+'</body>' \
+'</html>' \
+        >> 404.html
+
+    printf 'PASS: создана автономная пользовательская 404.\n'
+fi
+
+if [ "$ok" -eq 1 ]; then
+    ga_after="$(grep -o 'googletagmanager\.com' index.html | wc -l | tr -d ' ')"
+    ym_after="$(grep -o 'mc\.yandex\.ru' index.html | wc -l | tr -d ' ')"
+
+    if [ "$ga_after" -ne "$ga_before" ] || [ "$ym_after" -ne "$ym_before" ]; then
+        printf 'FAIL: количества аналитики новой главной изменились: GA=%s YM=%s\n' "$ga_after" "$ym_after"
+        ok=0
+    else
+        printf 'PASS: аналитика главной сохранена: GA=%s YM=%s.\n' "$ga_after" "$ym_after"
+    fi
+fi
+
+if [ "$ok" -eq 1 ]; then
+    for file in index.html 404.html; do
+        html_open="$(grep -o '<html' "$file" | wc -l | tr -d ' ')"
+        html_close="$(grep -o '</html>' "$file" | wc -l | tr -d ' ')"
+        head_open="$(grep -o '<head>' "$file" | wc -l | tr -d ' ')"
+        head_close="$(grep -o '</head>' "$file" | wc -l | tr -d ' ')"
+        body_open="$(grep -o '<body>' "$file" | wc -l | tr -d ' ')"
+        body_close="$(grep -o '</body>' "$file" | wc -l | tr -d ' ')"
+
+        if [ "$html_open" -ne 1 ] || [ "$html_close" -ne 1 ] || \
+           [ "$head_open" -ne 1 ] || [ "$head_close" -ne 1 ] || \
+           [ "$body_open" -ne 1 ] || [ "$body_close" -ne 1 ]; then
+            printf 'FAIL: повреждены HTML-границы %s\n' "$file"
+            ok=0
+        fi
+    done
+fi
+
+if [ "$ok" -eq 1 ]; then
+    sha256sum -c "$before_hashes"
+
+    if [ "$?" -ne 0 ]; then
+        printf 'FAIL: одна из трёх продуктовых страниц изменилась.\n'
+        ok=0
+    else
+        printf 'PASS: три продуктовые страницы побайтно не изменены.\n'
+    fi
+fi
+
+if [ "$ok" -eq 1 ]; then
+    if grep -Eiq \
+        'ghost/api/|portal\.min\.js|sodo-search|comments-ui|member-attribution|gh-members-styles|/privacy/|/consent/|/about/|/oferta/' \
+        index.html 404.html
+    then
+        printf 'FAIL: в новой главной или 404 обнаружены запрещённые маршруты/Ghost-маркеры.\n'
+        ok=0
+    else
+        printf 'PASS: Ghost-маркеры и исключённые маршруты отсутствуют.\n'
+    fi
+fi
+
+if [ "$ok" -eq 1 ]; then
+    if grep -Eiq \
+        '₽|рубл|тариф|купить|оплат|стоимост|telegram stars|подписк[аи]' \
+        index.html 404.html
+    then
+        printf 'FAIL: обнаружены коммерческие транзакционные маркеры.\n'
+        ok=0
+    else
+        printf 'PASS: коммерческие транзакционные маркеры отсутствуют.\n'
+    fi
+fi
+
+if [ "$ok" -eq 1 ]; then
+    sed -i \
+        's/Текущий гейт - стабилизация опубликованного статического migration baseline: локализация обязательных ресурсов, удаление доказанных Ghost-остатков и технический QA GitHub Pages preview\./Текущий гейт - визуальный и технический QA новой главной «Тихого Дома» и пользовательской 404 в GitHub Pages preview./' \
+        docs/STATUS.md
+
+    printf '%s\n' \
+'' \
+'## D-013. Визуальная система главной «Тихого Дома»' \
+'' \
+'Статус: принято.' \
+'' \
+'Главная создаётся как самостоятельная выразительная дизайн-система без Ghost theme CSS и без Tailwind Play CDN.' \
+'' \
+'Визуальное направление: «живой цифровой портал» с глубоким ночным фоном и отдельными цветовыми потоками КвантоКода, Mystic Oracle и ЭЛИОР.' \
+'' \
+'Hero использует отдельные адаптивные WebP-изображения без встроенного текста. Основной текст остаётся HTML. Для Open Graph используется отдельное изображение 1200×630.' \
+'' \
+'Три продуктовые страницы на этом этапе визуально и текстово не перерабатываются.' \
+        >> docs/DECISIONS.md
+
+    printf '%s\n' \
+'' \
+'## Актуализация задачи новой главной' \
+'' \
+'- [x] Утвердить структуру новой главной «Тихого Дома».' \
+'- [x] Утвердить визуальное направление «живой цифровой портал».' \
+'- [x] Подготовить desktop/mobile hero и отдельный OG.' \
+'- [x] Реализовать новую главную без Ghost theme CSS.' \
+'- [x] Создать пользовательскую `404.html`.' \
+'- [ ] Провести человеческий desktop/mobile QA новой главной.' \
+'- [ ] После QA исправить только подтверждённые визуальные или UX-проблемы.' \
+        >> docs/TODO.md
+
+    printf '%s\n' \
+'' \
+'## 25.08.2026 - Новая главная «Тихого Дома» и пользовательская 404' \
+'' \
+'- Согласована структура новой главной и визуальное направление «живой цифровой портал».' \
+'- Добавлены отдельные desktop/mobile hero и Open Graph изображение.' \
+'- Старая главная КвантоКода заменена зонтичной главной трёх продуктов.' \
+'- Для главной созданы независимые CSS и JavaScript без Ghost theme runtime и Tailwind CDN.' \
+'- Сохранены подтверждённые Google Analytics и Яндекс Метрика.' \
+'- Создана автономная пользовательская `404.html`.' \
+'- Страницы `/elyor/`, `/quantocode/` и `/oracle/` не изменялись.' \
+'' \
+'Результат: ожидается человеческий визуальный QA GitHub Pages preview.' \
+        >> docs/OPERATIONS.md
+
+    printf '%s\n' \
+'' \
+'## Утверждённая визуальная система главной' \
+'' \
+'- Главная «Тихого Дома» использует направление «живой цифровой портал».' \
+'- Hero имеет отдельные desktop/mobile WebP без встроенного текста; текст размещается в HTML.' \
+'- Open Graph изображение создаётся отдельно в формате 1200×630.' \
+'- Главная не использует Ghost theme CSS и Tailwind Play CDN.' \
+'- До отдельного решения редизайн главной не распространяется на три продуктовые страницы.' \
+        >> AGENTS.md
+
+    printf 'PASS: проектные документы актуализированы.\n'
+fi
+
+if [ "$ok" -eq 1 ]; then
+    server_log="${TMPDIR:-/tmp}/numerologpro-home-http.log"
+    rm -f "$server_log"
+
+    python -m http.server 8765 --directory "$HOME/projects" >"$server_log" 2>&1 &
+    server_pid=$!
+    sleep 2
+
+    routes="
+/numerologpro/
+/numerologpro/404.html
+/numerologpro/elyor/
+/numerologpro/quantocode/
+/numerologpro/oracle/
+/numerologpro/assets/css/home.css
+/numerologpro/assets/js/home.js
+/numerologpro/assets/fonts/inter-roman.woff2
+/numerologpro/assets/images/home/hero-desktop.webp
+/numerologpro/assets/images/home/hero-mobile.webp
+/numerologpro/assets/images/home/og-quiet-house.jpg
+/numerologpro/content/images/size/w256h256/format/png/2026/05/favicon.png
+/numerologpro/robots.txt
+/numerologpro/sitemap.xml
+"
+
+    for route in $routes; do
+        code="$(curl -sS -o /dev/null -w '%{http_code}' "http://127.0.0.1:8765$route")"
+        printf '%s %s\n' "$code" "$route"
+
+        if [ "$code" != "200" ]; then
+            ok=0
+        fi
+    done
+
+    kill "$server_pid" 2>/dev/null
+    wait "$server_pid" 2>/dev/null
+
+    if [ "$ok" -eq 1 ]; then
+        printf 'PASS: все обязательные локальные маршруты и ресурсы возвращают HTTP 200.\n'
+    else
+        printf 'FAIL: локальная HTTP-проверка не прошла.\n'
+    fi
+fi
+
+if [ "$ok" -eq 1 ]; then
+    git diff --check
+
+    if [ "$?" -ne 0 ]; then
+        printf 'FAIL: git diff --check обнаружил ошибки.\n'
+        ok=0
+    else
+        printf 'PASS: git diff --check.\n'
+    fi
+fi
+
+if [ "$ok" -eq 1 ]; then
+    git add -A
+
+    if [ -n "$(git diff --name-only)" ] || [ -n "$(git ls-files --others --exclude-standard)" ]; then
+        printf 'FAIL: после staging остались unstaged/untracked файлы.\n'
+        ok=0
+    fi
+fi
+
+if [ "$ok" -eq 1 ]; then
+    if git diff --cached -U0 | grep -Eiq \
+        'BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY|authorization:[[:space:]]*bearer|password[[:space:]]*[:=][[:space:]]*[^[:space:]]+|api[_-]?key[[:space:]]*[:=][[:space:]]*[^[:space:]]+'
+    then
+        printf 'FAIL: staged diff содержит возможный секрет.\n'
+        ok=0
+    else
+        printf 'PASS: очевидные секреты в staged diff не обнаружены.\n'
+    fi
+fi
+
+printf '\nStaged diff stat:\n'
+git diff --cached --stat
+
+printf '\nStaged files:\n'
+git diff --cached --name-status
+
+if [ "$ok" -eq 1 ]; then
+    git diff --cached --check
+
+    if [ "$?" -ne 0 ]; then
+        printf 'FAIL: staged whitespace-проверка не прошла.\n'
+        ok=0
+    fi
+fi
+
+if [ "$ok" -eq 1 ]; then
+    git commit -m "feat: create Quiet House homepage and custom 404"
+
+    if [ "$?" -ne 0 ]; then
+        printf 'FAIL: commit не создан.\n'
+        ok=0
+    fi
+fi
+
+if [ "$ok" -eq 1 ]; then
+    git push origin main
+
+    if [ "$?" -ne 0 ]; then
+        printf 'FAIL: push не выполнен.\n'
+        ok=0
+    fi
+fi
+
+if [ "$ok" -eq 1 ]; then
+    local_head="$(git rev-parse HEAD)"
+    remote_head="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
+
+    printf 'Local HEAD:  %s\n' "$local_head"
+    printf 'Remote HEAD: %s\n' "$remote_head"
+
+    if [ "$local_head" != "$remote_head" ]; then
+        printf 'FAIL: локальный и удалённый HEAD не совпадают.\n'
+        ok=0
+    fi
+fi
+
+printf '\nFinal status:\n'
+git status --short
+
+if [ "$ok" -eq 1 ] && [ -z "$(git status --short)" ]; then
+    printf '\nPASS: новая главная и 404 созданы, проверены, закоммичены и отправлены в origin/main.\n'
+    printf 'STOP-GATE: после обновления GitHub Pages требуется человеческий desktop/mobile QA.\n'
+else
+    printf '\nFAIL: операция завершена не полностью; смотри первое сообщение FAIL выше.\n'
+fi
