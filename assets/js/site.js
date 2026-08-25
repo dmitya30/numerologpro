@@ -1,3 +1,31 @@
-function dropdown(){const r=window.matchMedia("(max-width: 767px)"),a=document.querySelector(".gh-navigation"),s=a.querySelector(".gh-navigation-menu"),l=s?.querySelector(".nav");if(l){const e=document.querySelector(".gh-navigation-logo"),t=l.innerHTML;r.matches&&l.querySelectorAll("li").forEach(function(e,t){e.style.transitionDelay=.03*(t+1)+"s"});const n=function(){if(!r.matches){for(var e=[];l.offsetWidth+64>s.offsetWidth&&l.lastElementChild;)e.unshift(l.lastElementChild),l.lastElementChild.remove();if(e.length){const o=document.createElement("button"),i=(o.setAttribute("class","gh-more-toggle gh-icon-button"),o.setAttribute("aria-label","More"),o.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor"><path d="M21.333 16c0-1.473 1.194-2.667 2.667-2.667v0c1.473 0 2.667 1.194 2.667 2.667v0c0 1.473-1.194 2.667-2.667 2.667v0c-1.473 0-2.667-1.194-2.667-2.667v0zM13.333 16c0-1.473 1.194-2.667 2.667-2.667v0c1.473 0 2.667 1.194 2.667 2.667v0c0 1.473-1.194 2.667-2.667 2.667v0c-1.473 0-2.667-1.194-2.667-2.667v0zM5.333 16c0-1.473 1.194-2.667 2.667-2.667v0c1.473 0 2.667 1.194 2.667 2.667v0c0 1.473-1.194 2.667-2.667 2.667v0c-1.473 0-2.667-1.194-2.667-2.667v0z"></path></svg>',document.createElement("div"));i.setAttribute("class","gh-dropdown"),10<=e.length?(a.classList.add("is-dropdown-mega"),i.style.gridTemplateRows=`repeat(${Math.ceil(e.length/2)}, 1fr)`):a.classList.remove("is-dropdown-mega"),e.forEach(function(e){i.appendChild(e)}),o.appendChild(i),l.appendChild(o);var t=o.getBoundingClientRect(),n=window.innerWidth/2;t.left<n&&i.classList.add("is-left"),a.classList.add("is-dropdown-loaded"),window.addEventListener("click",function(e){a.classList.contains("is-dropdown-open")?a.classList.remove("is-dropdown-open"):o.contains(e.target)&&a.classList.add("is-dropdown-open")})}else a.classList.add("is-dropdown-loaded")}};n(),window.addEventListener("load",function(){e||n()}),window.addEventListener("resize",function(){setTimeout(()=>{l.innerHTML=t,n()},1)})}}
+(() => {
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const revealElements = document.querySelectorAll("[data-reveal]");
+
+  if (reducedMotion || !("IntersectionObserver" in window)) {
+    revealElements.forEach((element) => element.classList.add("is-visible"));
+  } else {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
+
+    revealElements.forEach((element) => observer.observe(element));
+  }
+
+  if (!reducedMotion) {
+    const heroImage = document.querySelector(".hero-picture img");
+    window.addEventListener("scroll", () => {
+      if (!heroImage || window.scrollY > window.innerHeight) return;
+      heroImage.style.transform = `scale(1.025) translateY(${window.scrollY * 0.035}px)`;
+    }, { passive: true });
+  }
+})();
+
+function dropdown(){const r=window.matchMedia("(max-width: 767px)"),a=document.querySelector(".gh-navigation"),s=a?.querySelector(".gh-navigation-menu"),l=s?.querySelector(".nav");if(l){const e=document.querySelector(".gh-navigation-logo"),t=l.innerHTML;r.matches&&l.querySelectorAll("li").forEach(function(e,t){e.style.transitionDelay=.03*(t+1)+"s"});const n=function(){if(!r.matches){for(var e=[];l.offsetWidth+64>s.offsetWidth&&l.lastElementChild;)e.unshift(l.lastElementChild),l.lastElementChild.remove();if(e.length){const o=document.createElement("button"),i=(o.setAttribute("class","gh-more-toggle gh-icon-button"),o.setAttribute("aria-label","More"),o.innerHTML='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="currentColor"><path d="M21.333 16c0-1.473 1.194-2.667 2.667-2.667v0c1.473 0 2.667 1.194 2.667 2.667v0c0 1.473-1.194 2.667-2.667 2.667v0c-1.473 0-2.667-1.194-2.667-2.667v0zM13.333 16c0-1.473 1.194-2.667 2.667-2.667v0c1.473 0 2.667 1.194 2.667 2.667v0c0 1.473-1.194 2.667-2.667 2.667v0c-1.473 0-2.667-1.194-2.667-2.667v0zM5.333 16c0-1.473 1.194-2.667 2.667-2.667v0c1.473 0 2.667 1.194 2.667 2.667v0c0 1.473-1.194 2.667-2.667 2.667v0c-1.473 0-2.667-1.194-2.667-2.667v0z"></path></svg>',document.createElement("div"));i.setAttribute("class","gh-dropdown"),10<=e.length?(a.classList.add("is-dropdown-mega"),i.style.gridTemplateRows=`repeat(${Math.ceil(e.length/2)}, 1fr)`):a.classList.remove("is-dropdown-mega"),e.forEach(function(e){i.appendChild(e)}),o.appendChild(i),l.appendChild(o);var t=o.getBoundingClientRect(),n=window.innerWidth/2;t.left<n&&i.classList.add("is-left"),a.classList.add("is-dropdown-loaded"),window.addEventListener("click",function(e){a.classList.contains("is-dropdown-open")?a.classList.remove("is-dropdown-open"):o.contains(e.target)&&a.classList.add("is-dropdown-open")})}else a.classList.add("is-dropdown-loaded")}};n(),window.addEventListener("load",function(){e||n()}),window.addEventListener("resize",function(){setTimeout(()=>{l.innerHTML=t,n()},1)})}}
 
 document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", dropdown) : dropdown();
