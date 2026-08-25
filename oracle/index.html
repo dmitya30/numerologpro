@@ -29,7 +29,7 @@
         var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
         var textColor = (yiq >= 128) ? 'dark' : 'light';
 
-        document.documentElement.className = `has-${textColor}-text`;
+        document.documentElement.classList.add(`has-${textColor}-text`);
     </script>
 
     <meta name="description" content="8 систем - Таро, Руны, Астрология, Сонник и другие. Задай вопрос
@@ -263,13 +263,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-<main class="gh-main">
-    <article class="gh-article post featured no-image">
-
-
-        <section class="gh-content gh-canvas is-body">
-
-<!--kg-card-begin: html-->
+<main>
 <div class="oracle-page-wrapper">
   <div class="oracle-inner">
 
@@ -364,12 +358,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   </div>
 </div>
-
-<!--kg-card-end: html-->
-
-        </section>
-
-    </article>
 </main>
 
 
