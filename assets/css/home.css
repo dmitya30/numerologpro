@@ -596,3 +596,12 @@ h1 {
     transform: none;
   }
 }
+
+
+/* Brand display typeface */
+h1,
+h2,
+h3 {
+  font-family: "Lora", Georgia, serif;
+  font-weight: 600;
+}
