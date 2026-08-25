@@ -606,11 +606,10 @@ h3 {
   font-weight: 600;
 }
 
-/* Mobile hero: preserve the full image width and keep text below it */
+/* Mobile hero: full image with copy in the dark fields */
 @media (max-width: 720px) {
   .hero {
     min-height: 0;
-    padding-top: 125.9259vw;
     align-items: initial;
   }
 
@@ -629,6 +628,39 @@ h3 {
   }
 
   .hero-content {
-    padding-top: 36px;
+    position: relative;
+    width: 100%;
+    padding: calc(125.9259vw + 24px) 0 64px;
+  }
+
+  .hero-content > .eyebrow {
+    position: absolute;
+    top: clamp(78px, 23vw, 118px);
+    left: 0;
+    margin: 0;
+  }
+
+  .hero-copy {
+    position: absolute;
+    top: 66vw;
+    right: 0;
+    left: 0;
+  }
+
+  .hero-copy h1 {
+    margin-bottom: 14px;
+    font-size: clamp(40px, 12.5vw, 54px);
+    line-height: 0.98;
+  }
+
+  .hero-copy .hero-lead {
+    max-width: 34rem;
+    margin-bottom: 0;
+    font-size: 16px;
+    line-height: 1.42;
+  }
+
+  .hero-content > .actions {
+    margin-top: 0;
   }
 }
