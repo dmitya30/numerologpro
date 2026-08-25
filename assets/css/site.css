@@ -2765,11 +2765,22 @@ body.page-elyor h1.el-h1,
 }
 }
 
-/* Product Ghost shell corrections */
-html.product-legacy-root,
+
+/* Product page context after Ghost shell removal */
+body.page-quantocode,
+body.page-elyor {
+  --product-page-background: #faf8f4;
+  --product-header-color: #1f2937;
+}
+
+body.page-oracle {
+  --product-page-background: #0d0b1a;
+  --product-header-color: #f4efe8;
+}
+
 body.product-legacy,
 body.product-legacy .gh-viewport {
-  background-color: var(--td-bg, #faf8f4);
+  background-color: var(--product-page-background);
 }
 
 body.product-legacy {
@@ -2777,8 +2788,13 @@ body.product-legacy {
 }
 
 body.product-legacy .gh-navigation {
-  background-color: var(--td-bg, #faf8f4) !important;
-  color: var(--td-text, #1f2937);
+  background-color: var(--product-page-background) !important;
+  color: var(--product-header-color);
+}
+
+body.product-legacy .gh-navigation a,
+body.product-legacy .gh-navigation button {
+  color: inherit;
 }
 
 body.product-legacy > .gh-viewport > main {
@@ -2786,4 +2802,7 @@ body.product-legacy > .gh-viewport > main {
   margin: 0;
   padding: 0;
   background: transparent;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 1.8rem;
+  line-height: 1.6;
 }
