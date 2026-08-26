@@ -1,17 +1,21 @@
 <!DOCTYPE html>
-<html lang="ru" class="product-legacy-root">
+<html lang="ru">
 <head>
 
     <title>Квантовая матрица личности - расчёт кодов по дате рождения | КвантоКод</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="preload" as="style" href="../assets/css/site.css">
+    
+    <link rel="preload" as="style" href="../assets/css/legacy-product.css?v=231d578c47">
     <link rel="preload" as="script" href="../assets/js/site.js?v=231d578c47">
 
-<link rel="stylesheet" type="text/css" href="../assets/css/site.css">
+<link rel="stylesheet" type="text/css" href="../assets/css/legacy-product.css?v=231d578c47">
 
-
+    <style>
+        :root {
+            --background-color: #ffffff
+        }
+    </style>
 
     <script>
         /* The script for calculating the color contrast has been taken from
@@ -29,14 +33,14 @@
         var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
         var textColor = (yiq >= 128) ? 'dark' : 'light';
 
-        document.documentElement.classList.add(`has-${textColor}-text`);
+        document.documentElement.className = `has-${textColor}-text`;
     </script>
 
     <meta name="description" content="Квантовая матрица личности: три кода - Душа, Тело, Личность - по дате рождения и имени. Система координат для самопонимания. Код Души бесплатно, в Telegram.">
     <link rel="icon" href="../assets/images/brand/favicon.png" type="image/png">
     <link rel="canonical" href="https://numerologpro.ru/quantocode/">
     <meta name="referrer" content="no-referrer-when-downgrade">
-
+    
     <meta property="og:site_name" content="Тихий Дом: инструменты для самопознания.">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Квантовая матрица личности - посмотри, какой ты на самом деле">
@@ -54,7 +58,7 @@
     <meta name="twitter:data1" content="Дмитрий Паневин">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-
+    
     <script type="application/ld+json">
 {
     "@context": "https://schema.org",
@@ -77,12 +81,12 @@
 }
     </script>
 
-
-
-
-
-
-
+    
+    
+    
+    
+    
+    <style>:root {--ghost-accent-color: #0F4C5C;}</style>
     <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
     (function(m,e,t,r,i,k,a){
@@ -176,11 +180,944 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <!-- Тихий Дом: шрифты Lora + Inter -->
 
-
-
+<link rel="stylesheet" href="../assets/css/lora.css">
+<link rel="stylesheet" href="../assets/css/inter.css">
 
 <!-- Тихий Дом: дизайн-система -->
+<style>
+  /* ============================================================
+     1. ДИЗАЙН-ТОКЕНЫ
+     ============================================================ */
+  :root {
+    --td-bg: #FAF8F4;
+    --td-bg-secondary: #EFE9DD;
+    --td-bg-quote: #E8DFCF;
+    --td-text: #1F2937;
+    --td-text-muted: #6B7280;
+    --td-accent: #0F4C5C;
+    --td-accent-warm: #C97B4F;
+    --td-success: #5B8266;
+    --td-border: rgba(31, 41, 55, 0.1);
 
+    --td-w-wide: 1100px;
+    --td-w-narrow: 880px;
+    --td-w-reading: 720px;
+
+    --td-radius-sm: 8px;
+    --td-radius-md: 12px;
+    --td-radius-lg: 16px;
+
+    --td-shadow-sm: 0 4px 12px rgba(15, 76, 92, 0.15);
+    --td-shadow-md: 0 6px 18px rgba(201, 123, 79, 0.25);
+
+    --td-transition: 0.2s ease;
+    --td-transition-fast: 0.15s ease;
+
+    /* Перекрытие переменных темы Source */
+    --background-color: #FAF8F4 !important;
+    --color-primary-text: #1F2937 !important;
+    --color-secondary-text: #4B5563 !important;
+    --ghost-accent-color: #0F4C5C !important;
+    --color-darkgrey: #1F2937 !important;
+    --color-midgrey: #6B7280 !important;
+    --color-lightgrey: #EFE9DD !important;
+    --color-whitegrey: #FAF8F4 !important;
+    --color-border: #E8DFCF !important;
+  }
+
+  /* ============================================================
+     2. ПЕРЕБИВКА ТЕМЫ SOURCE
+     ============================================================ */
+  html.dark-mode,
+  html[data-theme="dark"],
+  body.dark-mode {
+    --background-color: #FAF8F4 !important;
+    --color-primary-text: #1F2937 !important;
+    background-color: #FAF8F4 !important;
+    color: #1F2937 !important;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background-color: #FAF8F4 !important;
+      --color-primary-text: #1F2937 !important;
+    }
+    html, body {
+      background-color: #FAF8F4 !important;
+      color: #1F2937 !important;
+    }
+  }
+
+  /* Скрытие UI-элементов темы */
+  .gh-head-actions .gh-theme-toggle,
+  .gh-head .gh-theme-toggle,
+  button[aria-label*="theme" i],
+  button[aria-label*="тема" i],
+  .theme-toggle,
+  #theme-toggle,
+  .gh-head-actions .gh-button,
+  .gh-head-actions [data-portal="signup"],
+  .gh-head-actions a[href*="#/portal"],
+  .gh-head-actions a[href*="signup"],
+  .gh-head-button,
+  .gh-navigation-members,
+  .gh-subscribe,
+  .subscribe-form,
+  .gh-newsletter,
+  .footer-subscribe,
+  section.gh-subscribe-block,
+  .gh-foot,
+  .site-footer,
+  footer.gh-foot,
+  .gh-foot-menu,
+  .gh-powered,
+  .gh-footer,
+  .gh-article-meta,
+  .gh-article-author-meta,
+  .gh-author-meta,
+  .gh-article-author-image,
+  .gh-author-image,
+  .gh-article-author,
+  .gh-author-name,
+  .gh-meta,
+  .post-card-meta,
+  .gh-card-meta,
+  .gh-article-footer .gh-author-card,
+  .author-profile,
+  .post-info {
+    display: none !important;
+  }
+
+  /* Прижатие футера к низу */
+  html, body {
+    min-height: 100vh;
+    overflow-x: clip;
+  }
+  body { display: flex; flex-direction: column; }
+  .site-main, .gh-main, main.site-main, main.gh-main { flex: 1 0 auto; }
+  .gh-canvas, .gh-content, article.gh-article {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .gh-canvas > *:last-child,
+  .gh-content > *:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  .td-header-cta {
+    display: inline-block;
+    margin-left: 16px;
+    padding: 8px 18px;
+    background-color: var(--td-accent-warm);
+    color: #fff !important;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .td-header-cta:hover {
+    background-color: var(--td-accent);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+  }
+
+  /* ============================================================
+     3. БАЗОВАЯ ТИПОГРАФИКА
+     ============================================================ */
+  html, body {
+    background-color: var(--td-bg) !important;
+    color: var(--td-text) !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    font-size: 18px;
+    line-height: 1.65;
+    font-weight: 400;
+  }
+
+  h1, h2, h3, h4, h5, h6,
+  .gh-article-title,
+  .gh-canvas h1,
+  .gh-canvas h2,
+  .gh-canvas h3 {
+    font-family: 'Lora', Georgia, serif !important;
+    color: var(--td-text);
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  h1, .gh-article-title { font-size: clamp(36px, 5vw, 60px); font-weight: 600; }
+  h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 500; }
+  h3 { font-size: clamp(22px, 2.5vw, 28px); font-weight: 500; }
+
+  p, li, blockquote {
+    font-family: 'Inter', sans-serif;
+    color: var(--td-text);
+  }
+
+  small, .gh-foot, .gh-foot * { font-size: 15px; }
+
+  a {
+    color: var(--td-accent);
+    text-decoration-color: rgba(15, 76, 92, 0.3);
+    text-underline-offset: 3px;
+    transition: color var(--td-transition-fast), text-decoration-color var(--td-transition-fast);
+  }
+  a:hover {
+    color: var(--td-accent-warm);
+    text-decoration-color: var(--td-accent-warm);
+  }
+
+  .gh-card,
+  .post-card {
+    background-color: var(--td-bg-secondary) !important;
+    border-radius: var(--td-radius-md);
+    border: 1px solid rgba(31, 41, 55, 0.05);
+  }
+
+  /* ============================================================
+     4. EXCERPT - лид под H1 на страницах и постах
+     ============================================================ */
+  .gh-article-excerpt,
+  .gh-article-excerpt.is-body,
+  .gh-canvas .gh-article-excerpt,
+  article .gh-article-excerpt {
+    font-family: 'Inter', sans-serif !important;
+    font-size: clamp(19px, 2vw, 22px) !important;
+    line-height: 1.5 !important;
+    font-weight: 400 !important;
+    color: var(--td-text) !important;
+    max-width: var(--td-w-reading) !important;
+    margin: 8px auto 32px !important;
+    padding: 0 20px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* ============================================================
+     5. ШАПКА САЙТА
+     ============================================================ */
+  .gh-head,
+  .gh-foot {
+    background-color: var(--td-bg) !important;
+    border-color: rgba(31, 41, 55, 0.08) !important;
+  }
+
+  /* Sticky header */
+  .gh-navigation {
+    position: sticky !important;
+    top: 0;
+    z-index: 100;
+    background-color: var(--td-bg) !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    min-height: 0 !important;
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+  }
+
+  header.gh-navigation,
+  header.gh-navigation.gh-outer,
+  .gh-navigation.is-middle-logo {
+    min-height: 0 !important;
+    height: auto !important;
+  }
+  .gh-navigation-inner,
+  .gh-navigation .gh-inner,
+  header.gh-navigation .gh-navigation-inner.gh-inner {
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  /* Логотип (картинка) */
+  .gh-navigation-logo {
+    line-height: 1 !important;
+  }
+  .gh-navigation-logo img {
+    max-height: 44px !important;
+    width: auto !important;
+    display: block;
+  }
+
+  /* Текстовый логотип (fallback, если без картинки) */
+  .gh-head-logo,
+  .gh-logo,
+  .site-logo,
+  .gh-head .gh-head-logo a,
+  .gh-head a.gh-head-logo,
+  .gh-navigation-logo.is-title {
+    font-family: 'Lora', Georgia, serif !important;
+    font-weight: 600 !important;
+    color: var(--td-text) !important;
+    letter-spacing: 0.01em;
+  }
+  .gh-navigation-logo.is-title:hover {
+    color: var(--td-accent-warm) !important;
+  }
+
+  /* Меню - шрифт и компактный padding пунктов */
+  .gh-head-menu,
+  .gh-head-menu ul,
+  .gh-head nav ul,
+  .gh-navigation-menu,
+  .gh-navigation-menu .nav,
+  .gh-navigation-menu .nav li,
+  .gh-navigation-menu .nav li a {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 500 !important;
+    font-size: 18px !important;
+  }
+  .gh-navigation-menu .nav li a {
+    padding-top: 6px !important;
+    padding-bottom: 6px !important;
+  }
+
+  /* Цвета пунктов меню */
+  .gh-head-menu a,
+  .gh-head nav a,
+  .gh-navigation-menu .nav > li > a,
+  .gh-head-actions a {
+    color: var(--td-text) !important;
+    text-decoration: none !important;
+    transition: color var(--td-transition-fast);
+  }
+  .gh-head-menu .nav-current a,
+  .gh-head .nav-current a,
+  .gh-navigation-menu .nav > li.nav-current > a,
+  li.nav-current a,
+  li.nav-current > span {
+    color: var(--td-accent) !important;
+    font-weight: 600 !important;
+  }
+  .gh-head-menu a:hover,
+  .gh-head nav a:hover,
+  .gh-navigation-menu .nav > li > a:hover,
+  .gh-navigation-menu .nav > li.nav-current > a:hover,
+  li.nav-current a:hover {
+    color: var(--td-accent-warm) !important;
+  }
+
+  /* ============================================================
+     6. ЛЕНДИНГ-УТИЛИТЫ
+     ============================================================ */
+  .td-section-out {
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    box-sizing: border-box;
+  }
+
+  .td-section-inner {
+    max-width: var(--td-w-wide);
+    margin: 0 auto;
+  }
+  .td-section-inner--narrow {
+    max-width: var(--td-w-narrow);
+    margin: 0 auto;
+  }
+  .td-section-inner--narrowest {
+    max-width: var(--td-w-reading);
+    margin: 0 auto;
+  }
+
+  .td-section-title {
+    font-family: 'Lora', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(30px, 4vw, 40px);
+    color: var(--td-text);
+    margin: 0 0 16px;
+    text-align: center;
+  }
+
+  .td-section-lead {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--td-text);
+    text-align: center;
+    max-width: var(--td-w-reading);
+    margin: 0 auto 56px;
+  }
+
+  /* ============================================================
+     7. КНОПКИ
+     ============================================================ */
+  .td-btn {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    text-decoration: none !important;
+    border: none;
+    border-radius: var(--td-radius-sm);
+    cursor: pointer;
+    text-align: center;
+    transition: background-color var(--td-transition), transform var(--td-transition-fast), box-shadow var(--td-transition);
+  }
+  .td-btn--sm  { font-size: 16px; padding: 12px 24px; }
+  .td-btn      { font-size: 17px; padding: 14px 32px; }
+  .td-btn--lg  { font-size: 18px; padding: 18px 40px; border-radius: 10px; }
+
+  .td-btn--primary {
+    background-color: var(--td-accent);
+    color: #FFFFFF !important;
+    box-shadow: var(--td-shadow-sm);
+  }
+  .td-btn--primary:hover {
+    background-color: var(--td-accent-warm);
+    transform: translateY(-1px);
+    box-shadow: var(--td-shadow-md);
+  }
+  .td-btn--warm {
+    background-color: var(--td-accent-warm);
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 14px rgba(201, 123, 79, 0.3);
+  }
+  .td-btn--warm:hover {
+    background-color: var(--td-bg);
+    color: var(--td-accent) !important;
+    transform: translateY(-1px);
+  }
+
+  .td-btn:focus-visible,
+  .gh-head-menu a:focus-visible,
+  .gh-head-logo:focus-visible,
+  a:focus-visible,
+  summary:focus-visible {
+    outline: 2px solid var(--td-accent-warm);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* ============================================================
+     8. ЧИСЛА В ТЕКСТЕ
+     ============================================================ */
+  .td-num {
+    font-weight: 600;
+    color: var(--td-accent);
+    font-feature-settings: "tnum" 1, "lnum" 1;
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+
+  /* ============================================================
+     9. КОНТЕНТНЫЕ СТРАНИЦЫ И ПОСТЫ - единый источник стилей
+        Применяется к содержимому .gh-content на Pages и Posts.
+        На главной (home-template) не применяется, потому что
+        там кастомная вёрстка через .td-section-out.
+     ============================================================ */
+
+  /* Контейнер: читательская ширина 720px, центрирование.
+     Отключаем grid темы Source на не-главных шаблонах,
+     чтобы дочерние элементы не наследовали колоночные ограничения. */
+  :not(.home-template) section.gh-content,
+  :not(.home-template) section.gh-content.gh-canvas {
+    display: block !important;
+    grid-template-columns: none !important;
+    max-width: var(--td-w-reading) !important;
+    margin: 0 auto !important;
+    padding: 24px 20px 60px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Дочерние элементы - обычный поток, без grid-column */
+  :not(.home-template) section.gh-content > * {
+    grid-column: auto !important;
+    max-width: none !important;
+  }
+
+  /* На главной - обнуляем все отступы у gh-content,
+     потому что контент управляется секциями .td-section-out */
+  body.home-template section.gh-content,
+  body.home-template section.gh-content.gh-canvas {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: none !important;
+  }
+
+  /* На главной - обнуляем верхние margin у всех детей gh-content,
+     чтобы убрать тему Source's правило .gh-content > * + * { margin-top: 28px } */
+  body.home-template section.gh-content > *,
+  body.home-template section.gh-content > * + * {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* Параграфы */
+  .gh-content > p {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 18px !important;
+    line-height: 1.7 !important;
+    color: var(--td-text) !important;
+    margin: 0 0 22px !important;
+  }
+
+  /* Заголовки */
+  .gh-content > h2 {
+    font-family: 'Lora', Georgia, serif !important;
+    font-weight: 500 !important;
+    font-size: clamp(28px, 3.5vw, 36px) !important;
+    line-height: 1.25 !important;
+    color: var(--td-text) !important;
+    margin: 56px 0 20px !important;
+  }
+  .gh-content > h3 {
+    font-family: 'Lora', Georgia, serif !important;
+    font-weight: 500 !important;
+    font-size: 24px !important;
+    line-height: 1.3 !important;
+    color: var(--td-accent) !important;
+    margin: 36px 0 16px !important;
+  }
+  .gh-content > h4 {
+    font-family: 'Lora', Georgia, serif !important;
+    font-weight: 500 !important;
+    font-size: 20px !important;
+    line-height: 1.3 !important;
+    color: var(--td-text) !important;
+    margin: 28px 0 12px !important;
+  }
+
+  /* Цитаты */
+  .gh-content > blockquote {
+    font-family: 'Lora', Georgia, serif !important;
+    font-style: italic !important;
+    font-size: 20px !important;
+    line-height: 1.55 !important;
+    color: var(--td-accent-warm) !important;
+    margin: 24px 0 !important;
+    padding: 4px 0 4px 20px !important;
+    border-left: 2px solid var(--td-accent-warm) !important;
+    background: none !important;
+    border-radius: 0 !important;
+  }
+  .gh-content > blockquote p {
+    font-family: inherit !important;
+    font-size: 20px !important;
+    line-height: 1.55 !important;
+    color: var(--td-accent-warm) !important;
+    font-style: italic !important;
+    margin: 0 !important;
+  }
+
+  /* Списки */
+  .gh-content > ul,
+  .gh-content > ol {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 18px !important;
+    line-height: 1.7 !important;
+    color: var(--td-text) !important;
+    margin: 0 0 22px !important;
+    padding-left: 24px !important;
+  }
+  .gh-content > ul li,
+  .gh-content > ol li {
+    font-size: 18px !important;
+    line-height: 1.7 !important;
+    color: var(--td-text) !important;
+    margin: 0 0 8px !important;
+  }
+
+  /* Inline strong / em */
+  .gh-content > p strong,
+  .gh-content > ul li strong,
+  .gh-content > ol li strong {
+    font-weight: 600;
+    color: inherit;
+  }
+  .gh-content > p em,
+  .gh-content > ul li em,
+  .gh-content > ol li em {
+    font-style: italic;
+    color: inherit;
+  }
+
+  /* Inline-код */
+  .gh-content code {
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace !important;
+    font-size: 0.92em !important;
+    background-color: var(--td-bg-secondary) !important;
+    color: var(--td-text) !important;
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+  }
+
+  /* Блочный код */
+  .gh-content > pre {
+    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace !important;
+    font-size: 15px !important;
+    line-height: 1.55 !important;
+    background-color: var(--td-bg-secondary) !important;
+    color: var(--td-text) !important;
+    padding: 16px 20px !important;
+    border-radius: var(--td-radius-md) !important;
+    margin: 0 0 24px !important;
+    overflow-x: auto !important;
+  }
+  .gh-content > pre code {
+    background: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    font-size: inherit !important;
+  }
+
+  /* Разделитель */
+  .gh-content > hr {
+    border: none !important;
+    border-top: 1px solid var(--td-border) !important;
+    margin: 48px auto 24px !important;
+    max-width: 100px !important;
+    width: 100px !important;
+    background: none !important;
+    height: 0 !important;
+  }
+
+  /* Подпись автора: курсивный параграф после <hr> */
+  .gh-content > hr + p,
+  .gh-content > hr + p em {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 14px !important;
+    line-height: 1.55 !important;
+    color: var(--td-text-muted) !important;
+    font-style: italic !important;
+    margin: 24px 0 0 !important;
+  }
+  .gh-content > hr + p a {
+    color: var(--td-accent) !important;
+    text-decoration: none !important;
+    border-bottom: 1px solid rgba(15, 76, 92, 0.3);
+    transition: color var(--td-transition-fast), border-color var(--td-transition-fast);
+  }
+  .gh-content > hr + p a:hover {
+    color: var(--td-accent-warm) !important;
+    border-color: var(--td-accent-warm);
+  }
+
+  /* Таблицы из markdown (без класса, могут быть в обёртке темы) */
+  .gh-content table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin: 0 0 24px !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 17px !important;
+    line-height: 1.5 !important;
+  }
+  .gh-content table th {
+    background-color: var(--td-bg-secondary) !important;
+    color: var(--td-text) !important;
+    font-weight: 600 !important;
+    text-align: left !important;
+    padding: 12px 16px !important;
+    border-bottom: 2px solid var(--td-accent-warm) !important;
+  }
+  .gh-content table td {
+    padding: 12px 16px !important;
+    border-bottom: 1px solid rgba(31, 41, 55, 0.08) !important;
+    color: var(--td-text) !important;
+  }
+  .gh-content table tr:last-child td {
+    border-bottom: none !important;
+  }
+
+  /* ============================================================
+     10. УТИЛИТЫ КОНТЕНТА - самостоятельные классы
+        Используются в html-card сниппетах: CTA, byline, table.
+        Работают независимо от того, в каком контейнере лежат.
+     ============================================================ */
+
+  /* Таблица в фирменном стиле (для html-card) */
+  .td-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin: 0 0 24px !important;
+    font-family: 'Inter', sans-serif !important;
+    font-size: 17px !important;
+    line-height: 1.5 !important;
+  }
+  .td-table {
+    table-layout: auto;
+  }
+  .td-table th:last-child,
+  .td-table td:last-child {
+    white-space: nowrap;       /* цена не переносится */
+    width: 1%;                  /* сжимается до контента */
+    text-align: right;
+  }
+
+  .gh-table {
+    width: 100%;
+    overflow-x: auto;
+    margin: 0 0 24px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .gh-table .td-table {
+    margin: 0 !important;
+    min-width: 480px; /* ниже этой ширины - горизонтальный скролл */
+  }
+
+  .gh-content .gh-table table th,
+  .gh-content .gh-table .td-table th,
+  .td-table th {
+    font-size: 17px !important;
+    font-weight: 600 !important;
+    background-color: var(--td-bg-secondary) !important;
+    color: var(--td-text) !important;
+    text-align: left !important;
+    padding: 12px 16px !important;
+    border-bottom: 2px solid var(--td-accent-warm) !important;
+  }
+
+  .gh-content .gh-table table td,
+  .gh-content .gh-table .td-table td,
+  .td-table td {
+    font-size: 17px !important;
+    padding: 12px 16px !important;
+    border-bottom: 1px solid rgba(31, 41, 55, 0.08) !important;
+    color: var(--td-text) !important;
+  }
+
+  .td-table tr:last-child td {
+    border-bottom: none !important;
+  }
+
+  /* CTA-обёртка */
+  .td-page-cta {
+    margin: 40px 0 8px;
+    text-align: center;
+  }
+  .td-page-cta a {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    padding: 18px 40px;
+    background-color: var(--td-accent);
+    color: #FFFFFF !important;
+    border-radius: 10px;
+    text-decoration: none !important;
+    box-shadow: var(--td-shadow-sm);
+    transition: background-color var(--td-transition), transform var(--td-transition-fast), box-shadow var(--td-transition);
+  }
+  .td-page-cta a:hover {
+    background-color: var(--td-accent-warm);
+    transform: translateY(-1px);
+    box-shadow: var(--td-shadow-md);
+  }
+
+  /* Подпись автора (для html-card) */
+  .td-byline {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--td-border);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--td-text-muted);
+    font-style: italic;
+  }
+  .td-byline a {
+    color: var(--td-accent) !important;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(15, 76, 92, 0.3);
+    transition: color var(--td-transition-fast), border-color var(--td-transition-fast);
+  }
+  .td-byline a:hover {
+    color: var(--td-accent-warm) !important;
+    border-color: var(--td-accent-warm);
+  }
+
+  /* ============================================================
+     10b. Нейтрализация обёртки .gh-table от темы Source
+     Тема автоматически оборачивает html-card-таблицы в
+     <div class="gh-table"> с overflow-x:auto и nowrap у ячеек.
+     Мы это отключаем и заставляем таблицу адаптироваться
+     по столбцам: первый - переносится, последний - фиксируется.
+     ============================================================ */
+  .gh-content .gh-table {
+    overflow-x: visible !important;
+    margin: 0 0 24px !important;
+    width: 100% !important;
+  }
+  .gh-content .gh-table table,
+  .gh-content .gh-table .td-table {
+    table-layout: auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+  }
+  .gh-content .gh-table th,
+  .gh-content .gh-table td {
+    white-space: normal !important;
+    word-break: break-word;
+  }
+  .gh-content .gh-table th:last-child,
+  .gh-content .gh-table td:last-child {
+    white-space: nowrap !important;
+    width: 1%;
+    text-align: right;
+  }
+
+  /* ============================================================
+     11. ШАПКА СТАТЬИ (H1, тег, excerpt, featured image)
+     ============================================================ */
+  /* Шапка статьи - отключаем grid темы Source, чтобы title и excerpt
+     получали полную ширину экрана, а не сжатую центральную колонку */
+  :not(.home-template) header.gh-article-header,
+  :not(.home-template) header.gh-article-header.gh-canvas {
+    display: block !important;
+    grid-template-columns: none !important;
+    padding: 0 !important;
+    max-width: none !important;
+    margin: 0 auto !important;
+  }
+  :not(.home-template) header.gh-article-header > * {
+    grid-column: auto !important;
+  }
+
+  /* Заголовок статьи - единая ширина с excerpt и content */
+  .gh-article-title,
+  .gh-canvas h1.gh-article-title,
+  article h1.gh-article-title {
+    font-family: 'Lora', Georgia, serif !important;
+    font-weight: 600 !important;
+    font-size: clamp(36px, 5vw, 52px) !important;
+    line-height: 1.2 !important;
+    color: var(--td-text) !important;
+    margin: 0 auto 16px !important;
+    max-width: var(--td-w-reading) !important;
+    padding: 0 20px !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+  }
+
+  /* Тег в шапке статьи - туда же */
+  .gh-article-header > .gh-article-tag {
+    max-width: var(--td-w-reading);
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+
+  /* Главная картинка статьи - та же ширина */
+  .gh-article-image,
+  .gh-article-header .gh-article-image {
+    grid-column: 1 / -1;
+    max-width: var(--td-w-reading);
+    margin: 24px auto 32px;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+
+  .gh-article-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--td-radius-md);
+  }
+
+  /* Скрыть стандартный header статьи только на главной (для SEO остаётся в DOM) */
+  body.home-template .gh-article-header,
+  body.home-template .gh-article-title,
+  body.home-template .gh-article-excerpt {
+    display: none !important;
+  }
+
+  /* ============================================================
+     12. АДАПТИВ - мобильные значения
+     ============================================================ */
+  @media (max-width: 720px) {
+    /* Контейнер контента - padding 20px уже задан в разделе 9,
+       здесь только уменьшаем вертикальные отступы */
+    :not(.home-template) section.gh-content,
+    :not(.home-template) section.gh-content.gh-canvas {
+      padding: 16px 20px 40px !important;
+    }
+
+    /* Картинка статьи - уменьшаем вертикальные отступы */
+    .gh-article-image,
+    .gh-article-header .gh-article-image {
+      margin: 16px auto 24px;
+    }
+
+    /* Типографика контента */
+    .gh-content > p {
+      font-size: 17px !important;
+      line-height: 1.65 !important;
+    }
+    .gh-content > h2 {
+      font-size: 26px !important;
+      margin: 40px 0 16px !important;
+    }
+    .gh-content > h3 {
+      font-size: 21px !important;
+      margin: 28px 0 12px !important;
+    }
+    .gh-content > h4 {
+      font-size: 19px !important;
+      margin: 24px 0 10px !important;
+    }
+    .gh-content > blockquote,
+    .gh-content > blockquote p {
+      font-size: 18px !important;
+      line-height: 1.5 !important;
+    }
+    .gh-content > ul,
+    .gh-content > ol,
+    .gh-content > ul li,
+    .gh-content > ol li {
+      font-size: 17px !important;
+      line-height: 1.65 !important;
+    }
+    .gh-content table,
+    .gh-content .gh-table table,
+    .td-table {
+      font-size: 15px !important;
+    }
+    .gh-content table th,
+    .gh-content table td,
+    .gh-content .gh-table table th,
+    .gh-content .gh-table table td,
+    .td-table th,
+    .td-table td {
+      padding: 10px 12px !important;
+      font-size: 15px !important;
+    }
+    .gh-content > pre {
+      font-size: 14px !important;
+      padding: 12px 16px !important;
+    }
+
+    .gh-navigation:not(.is-open) .gh-navigation-menu,
+    .gh-navigation:not(.is-open) .gh-navigation-actions {
+      display: none !important;
+    }
+
+    header.gh-navigation .gh-navigation-inner.gh-inner,
+    header.gh-navigation.is-middle-logo .gh-navigation-inner.gh-inner {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      grid-template-columns: none !important;
+      grid-template-rows: none !important;
+      height: auto !important;
+      min-height: 0 !important;
+    }
+
+    header.gh-navigation .gh-navigation-brand {
+      display: flex !important;
+      align-items: center !important;
+      gap: 12px !important;
+      width: 100% !important;
+      grid-template-columns: none !important;
+    }
+    header.gh-navigation .gh-navigation-brand .gh-navigation-logo {
+      margin-right: auto !important;
+    }
+
+    /* Когда бургер открыт - переключаем в колонку, чтобы меню встало под brand */
+    header.gh-navigation.is-open .gh-navigation-inner.gh-inner {
+      flex-direction: column !important;
+      align-items: stretch !important;
+    }
+
+  }
+</style>
 
 
 <script type="application/ld+json">
@@ -230,13 +1167,312 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 </script>
 
+<style>
+/* ═══ ФИКС 1 - фон страницы (бьём глобальный светлый CSS) ═══ */
+body.page-quantocode,
+body.page-quantocode.page-template,
+html body.page-quantocode {
+  background-color: #0E0E1A !important;
+  color: #E8E6F0 !important;
+}
+@media (prefers-color-scheme: dark) {
+  body.page-quantocode,
+  html body.page-quantocode {
+    background-color: #0E0E1A !important;
+    color: #E8E6F0 !important;
+  }
+}
 
+/* ═══ ФИКС 2 - gh-content на всю ширину, без grid темы ═══ */
+body.page-quantocode section.gh-content,
+body.page-quantocode section.gh-content.gh-canvas,
+body.page-quantocode section.gh-content.is-body {
+  padding: 0 !important;
+  margin: 0 !important;
+  max-width: none !important;
+  width: 100% !important;
+  display: block !important;
+  grid-template-columns: none !important;
+  box-sizing: border-box !important;
+}
+body.page-quantocode section.gh-content > * {
+  grid-column: auto !important;
+  max-width: none !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* ═══ ФИКС 3 - скрыть Ghost-заголовок страницы ═══ */
+body.page-quantocode .gh-article-header,
+body.page-quantocode .gh-article-title,
+body.page-quantocode .gh-article-excerpt,
+body.page-quantocode .gh-canvas > header {
+  display: none !important;
+}
+
+/* ═══ ШАПКА: тёмная только на /quantocode/ ═══ */
+body.page-quantocode .gh-navigation {
+  background-color: rgba(14, 14, 26, 0.95) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border-bottom: 1px solid rgba(201, 168, 106, 0.12) !important;
+  box-shadow: none !important;
+}
+body.page-quantocode .gh-navigation .nav a,
+body.page-quantocode .gh-navigation-menu .nav > li > a {
+  color: rgba(232, 230, 240, 0.80) !important;
+}
+body.page-quantocode .gh-navigation .nav a:hover,
+body.page-quantocode .gh-navigation-menu .nav > li > a:hover {
+  color: #C9A86A !important;
+}
+body.page-quantocode .gh-navigation-logo,
+body.page-quantocode .gh-navigation-logo.is-title {
+  color: rgba(232, 230, 240, 0.90) !important;
+}
+body.page-quantocode .gh-navigation-logo img {
+  filter: brightness(0) invert(1) !important;
+  opacity: 0.9;
+}
+body.page-quantocode .td-header-cta { display: none !important; }
+
+/* ═══ ОБЁРТКА ═══ */
+.qk-wrap {
+  min-height: 100vh;
+  background: #0E0E1A;
+  color: #E8E6F0;
+  font-family: 'Inter', system-ui, sans-serif;
+  position: relative;
+  overflow-x: hidden;
+}
+.qk-wrap::before {
+  content: '';
+  position: fixed;
+  top: -15%; left: 50%;
+  transform: translateX(-50%);
+  width: 820px; height: 820px;
+  background: radial-gradient(ellipse at center,
+    rgba(120, 110, 200, 0.10) 0%,
+    rgba(60, 55, 110, 0.06) 45%,
+    transparent 70%);
+  pointer-events: none; z-index: 0;
+}
+.qk-wrap::after {
+  content: '';
+  position: fixed;
+  bottom: -8%; right: -8%;
+  width: 460px; height: 460px;
+  background: radial-gradient(ellipse at center,
+    rgba(201, 168, 106, 0.07) 0%, transparent 65%);
+  pointer-events: none; z-index: 0;
+}
+
+.qk-inner {
+  position: relative; z-index: 1;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 40px 22px 56px;
+  box-sizing: border-box;
+}
+
+/* ═══ ГЕРОЙ: геометрия трёх кодов ═══ */
+.qk-mark {
+  display: flex; justify-content: center; align-items: center;
+  gap: 13px; margin-bottom: 24px;
+}
+.qk-mark span {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #C9A86A;
+  box-shadow: 0 0 16px rgba(201,168,106,.5);
+}
+.qk-mark span:nth-child(2) { opacity: .65; }
+.qk-mark span:nth-child(3) { opacity: .4; }
+
+/* ═══ HERO ═══ */
+h1.qk-h1,
+body.page-quantocode h1.qk-h1,
+.qk-inner h1.qk-h1 {
+  font-family: 'Lora', Georgia, serif !important;
+  font-size: clamp(1.7rem, 5vw, 2.6rem) !important;
+  font-weight: 600 !important;
+  line-height: 1.22 !important;
+  text-align: center !important;
+  color: #F0EEFA !important;
+  margin: 0 0 14px !important;
+  letter-spacing: -0.01em !important;
+  padding: 0 !important; max-width: none !important;
+}
+.qk-h1 .sub {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(1.05rem, 3.2vw, 1.45rem);
+  font-weight: 500;
+  color: #E8E6F0;
+  margin-top: 12px;
+  line-height: 1.35;
+}
+.qk-frame {
+  font-family: 'Lora', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(0.98rem, 2.6vw, 1.12rem);
+  line-height: 1.55;
+  text-align: center;
+  color: rgba(232,230,240,.66);
+  max-width: 480px;
+  margin: 0 auto 30px;
+}
+
+/* ═══ CTA ═══ */
+.qk-cta-wrap { text-align: center; margin-bottom: 16px; }
+.qk-cta {
+  display: inline-block; width: 100%; max-width: 400px;
+  padding: 16px 28px;
+  background: #C9A86A;
+  color: #1A1410 !important;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem; font-weight: 600;
+  text-decoration: none !important;
+  border-radius: 12px; letter-spacing: .01em;
+  box-shadow: 0 4px 22px rgba(201,168,106,.30), 0 1px 4px rgba(0,0,0,.4);
+  transition: transform .18s ease, box-shadow .18s ease;
+  -webkit-tap-highlight-color: transparent; box-sizing: border-box;
+}
+.qk-cta:hover {
+  transform: translateY(-2px);
+  background: #D4B57E;
+  box-shadow: 0 8px 30px rgba(201,168,106,.45), 0 2px 8px rgba(0,0,0,.4);
+  color: #1A1410 !important; text-decoration: none !important;
+}
+.qk-cta:active { transform: translateY(0); }
+.qk-hint {
+  display: block; text-align: center;
+  font-size: .8rem; color: rgba(232,230,240,.4);
+  margin-top: 9px;
+}
+
+/* ═══ СЕКЦИИ ═══ */
+.qk-sec { margin-top: 48px; }
+.qk-h2 {
+  font-family: 'Lora', Georgia, serif !important;
+  font-weight: 600 !important;
+  font-size: clamp(1.35rem, 4vw, 1.85rem) !important;
+  line-height: 1.25 !important;
+  color: #F0EEFA !important;
+  text-align: center;
+  margin: 0 0 12px !important;
+}
+.qk-lead {
+  font-size: .96rem; line-height: 1.6;
+  text-align: center; color: rgba(232,230,240,.7);
+  max-width: 520px; margin: 0 auto 28px;
+}
+
+/* ═══ 3 КОДА ═══ */
+.qk-cards { display: grid; grid-template-columns: 1fr; gap: 12px; }
+@media (min-width: 600px) { .qk-cards { grid-template-columns: repeat(3,1fr); } }
+.qk-card {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(201,168,106,.14);
+  border-radius: 14px; padding: 20px 18px;
+}
+.qk-card h3 {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 1.05rem !important; font-weight: 600 !important;
+  color: #D4B57E !important; margin: 0 0 8px !important;
+}
+.qk-card p {
+  font-size: .9rem; line-height: 1.5;
+  color: rgba(232,230,240,.78); margin: 0;
+}
+.qk-connect {
+  font-size: .92rem; line-height: 1.55;
+  text-align: center; color: rgba(232,230,240,.62);
+  margin: 22px auto 0; max-width: 520px;
+}
+
+/* ═══ ШТРИХИ ═══ */
+.qk-feats { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 22px; }
+@media (min-width: 600px) { .qk-feats { grid-template-columns: repeat(3,1fr); } }
+.qk-feat {
+  background: rgba(255,255,255,.025);
+  border-radius: 11px; padding: 13px 15px;
+  font-size: .82rem; line-height: 1.45;
+  color: rgba(232,230,240,.62);
+}
+.qk-feat b { display: block; color: rgba(232,230,240,.9); font-weight: 600; margin-bottom: 3px; font-size: .9rem; }
+
+/* ═══ ОТСТРОЙКА ═══ */
+.qk-mani {
+  font-size: .98rem; line-height: 1.65;
+  color: rgba(232,230,240,.82); margin: 0 0 24px;
+}
+.qk-points { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.qk-points li {
+  position: relative; padding-left: 26px;
+  font-size: .96rem; line-height: 1.5; color: #E8E6F0;
+}
+.qk-points li::before {
+  content: ''; position: absolute; left: 0; top: 8px;
+  width: 8px; height: 8px; border-radius: 50%; background: #C9A86A;
+}
+
+/* ═══ ШАГИ ═══ */
+.qk-steps { display: grid; grid-template-columns: 1fr; gap: 12px; }
+@media (min-width: 600px) { .qk-steps { grid-template-columns: repeat(3,1fr); } }
+
+.qk-step {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 13px; padding: 18px 16px;
+}
+.qk-step .n {
+  font-family: 'Lora', serif; font-size: 1.3rem; font-weight: 600;
+  color: #C9A86A; display: block; margin: 0 0 6px !important; line-height: 1.1 !important;
+}
+.qk-step b {
+  display: block; font-size: .96rem; font-weight: 600;
+  margin: 0 0 5px !important; line-height: 1.3 !important; color: #F0EEFA;
+}
+.qk-step span.t {
+  display: block; font-size: .85rem !important;
+  line-height: 1.4 !important; color: rgba(232,230,240,.66) !important;
+  margin: 0 !important;
+}
+
+.qk-bridge {
+  font-family: 'Lora', serif; font-style: italic;
+  font-size: .96rem; line-height: 1.55;
+  text-align: center; color: rgba(232,230,240,.66);
+  margin: 24px auto 0; max-width: 520px;
+}
+
+/* ═══ ФИНАЛ ═══ */
+.qk-final { text-align: center; }
+.qk-final .qk-lead { margin-bottom: 24px; }
+
+/* ═══ ЮР-ССЫЛКИ ═══ */
+.qk-foot { margin-top: 40px; text-align: center; }
+.qk-foot a {
+  font-size: .75rem; color: rgba(232,230,240,.28) !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid rgba(232,230,240,.09);
+  padding-bottom: 1px; margin: 0 8px;
+  transition: color .15s ease;
+}
+.qk-foot a:hover { color: rgba(201,168,106,.6) !important; }
+
+/* ═══ МОБАЙЛ ═══ */
+@media (max-width: 480px) {
+  .qk-inner { padding: 32px 16px 48px; }
+  .qk-sec { margin-top: 40px; }
+}
+</style>
 
 </head>
-<body class="product-legacy page-template page-quantocode has-sans-title has-sans-body">
+<body class="page-template page-quantocode has-sans-title has-sans-body">
 
 <div class="gh-viewport">
-
+    
     <header id="gh-navigation" class="gh-navigation is-middle-logo gh-outer">
     <div class="gh-navigation-inner gh-inner">
 
@@ -271,9 +1507,19 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 </header>
 
+    
 
+<main class="gh-main">
+    <article class="gh-article post no-image">
 
-<main>
+            <header class="gh-article-header gh-canvas">
+                <h1 class="gh-article-title is-title">Квантовая матрица личности - расчёт кодов по дате рождения | КвантоКод</h1>
+                    <p class="gh-article-excerpt is-body">Квантовая матрица личности: три кода - Душа, Тело, Личность - по дате рождения и имени. Система координат для самопонимания, а не предсказание судьбы. Код Души бесплатно, в Telegram.</p>
+                            </header>
+
+        <section class="gh-content gh-canvas is-body">
+            
+<!--kg-card-begin: html-->
 <div class="qk-wrap">
   <div class="qk-inner">
 
@@ -349,10 +1595,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
   </div>
 </div>
+
+<!--kg-card-end: html-->
+
+        </section>
+
+    </article>
 </main>
 
 
-
+    
     <footer class="gh-footer gh-outer">
     <div class="gh-footer-inner gh-inner">
 
@@ -391,11 +1643,38 @@ document.addEventListener('DOMContentLoaded', function() {
             <circle cx="12" cy="12" r="3"></circle>
             <circle cx="20" cy="12" r="3"></circle>
         </g>
-
+        <style data-cap="butt">
+            .nc-loop-dots-4-24-icon-o{--animation-duration:0.8s}
+            .nc-loop-dots-4-24-icon-o *{opacity:.4;transform:scale(.75);animation:nc-loop-dots-4-anim var(--animation-duration) infinite}
+            .nc-loop-dots-4-24-icon-o :nth-child(1){transform-origin:4px 12px;animation-delay:-.3s;animation-delay:calc(var(--animation-duration)/-2.666)}
+            .nc-loop-dots-4-24-icon-o :nth-child(2){transform-origin:12px 12px;animation-delay:-.15s;animation-delay:calc(var(--animation-duration)/-5.333)}
+            .nc-loop-dots-4-24-icon-o :nth-child(3){transform-origin:20px 12px}
+            @keyframes nc-loop-dots-4-anim{0%,100%{opacity:.4;transform:scale(.75)}50%{opacity:1;transform:scale(1)}}
+        </style>
     </g>
 </svg>        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
     <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"../>
+    <style>
+        .checkmark {
+            width: 40px;
+            height: 40px;
+            display: block;
+            stroke-width: 2.5;
+            stroke: currentColor;
+            stroke-miterlimit: 10;
+        }
 
+        .checkmark__check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke .3s cubic-bezier(0.650, 0.000, 0.450, 1.000) forwards;
+        }
+
+        @keyframes stroke {
+            100% { stroke-dashoffset: 0; }
+        }
+    </style>
 </svg>    </button>
     <p data-members-error></p>
 </form>                </section>
