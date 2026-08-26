@@ -180,3 +180,9 @@
 - SEO, аналитика, существующие продуктовые CTA и внутреннее содержимое wrapper сохранены.
 - Проведён локальный визуальный QA трех страниц; header скорректирован по опубликованному визуальному baseline.
 - Следующий шаг: удалить из products.css неиспользуемые Ghost-селекторы и перенести оставшиеся необходимые inline CSS-правила без изменения внешнего вида.
+## 26.08.2026 - Удаление Ghost theme CSS из product bundle
+
+- Из products.css удален неиспользуемый CSS bundle темы Ghost Source.
+- Сохранены минимальный reset, базовые переменные, локальные Inter font-face и подтвержденные стили чистой product shell.
+- HTML, SEO, аналитика, Telegram CTA, wrapper-разметка и embedded product CSS не изменялись.
+- Следующий шаг: локальный визуальный QA, затем перенос embedded product CSS в products.css.
