@@ -139,3 +139,10 @@
 - Соответствующее обязательное правило добавлено в `AGENTS.md`.
 - `legacy-product.css`, `site.js` и исходные снимки `.work/static-baseline/` не изменялись.
 - Следующий шаг: послойное удаление Ghost runtime без одновременного изменения CSS и продуктовой разметки.
+
+## 26.08.2026 - Удаление мёртвого Ghost members workaround
+
+- Подтверждено, что внешний Ghost Portal, Search, comments и members runtime уже отсутствует на трех продуктовых страницах.
+- Из `/quantocode/`, `/oracle/` и `/elyor/` удален оставшийся inline-скрипт, предназначенный только для отключения Ghost member attribution.
+- Другие script-блоки, аналитика, Telegram URL, видимый текст, inline CSS, разметка и визуальное оформление не изменялись.
+- Следующий шаг: аудит Ghost-классов по фактическому использованию в `legacy-product.css` перед заменой header/footer и content shell.

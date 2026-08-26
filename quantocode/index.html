@@ -164,19 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-<script>
-/* Отключаем Ghost member attribution для telegram.me ссылок */
-document.addEventListener('DOMContentLoaded', function() {
-  document.querySelectorAll('a[href*="telegram.me"]').forEach(function(el) {
-    el.setAttribute('data-ref', 'false');
-    /* rel="noreferrer" не трогаем если уже есть noopener */
-    var rel = el.getAttribute('rel') || '';
-    if (rel.indexOf('noreferrer') === -1) {
-      el.setAttribute('rel', (rel + ' noreferrer').trim());
-    }
-  });
-});
-</script>
+
 
 <!-- Тихий Дом: шрифты Lora + Inter -->
 
