@@ -33,7 +33,7 @@
         var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
         var textColor = (yiq >= 128) ? 'dark' : 'light';
 
-        document.documentElement.className = `has-${textColor}-text`;
+        document.documentElement.classList.add(`has-${textColor}-text`);
     </script>
 
     <meta name="description" content="Квантовая матрица личности: три кода - Душа, Тело, Личность - по дате рождения и имени. Система координат для самопонимания. Код Души бесплатно, в Telegram.">
