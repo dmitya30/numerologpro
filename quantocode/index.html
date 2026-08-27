@@ -12,25 +12,6 @@
 
     
 
-    <script>
-        /* The script for calculating the color contrast has been taken from
-        https://gomakethings.com/dynamically-changing-the-text-color-based-on-background-color-contrast-with-vanilla-js/ */
-        var accentColor = getComputedStyle(document.documentElement).getPropertyValue('--background-color');
-        accentColor = accentColor.trim().slice(1);
-
-        if (accentColor.length === 3) {
-            accentColor = accentColor[0] + accentColor[0] + accentColor[1] + accentColor[1] + accentColor[2] + accentColor[2];
-        }
-
-        var r = parseInt(accentColor.substr(0, 2), 16);
-        var g = parseInt(accentColor.substr(2, 2), 16);
-        var b = parseInt(accentColor.substr(4, 2), 16);
-        var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
-        var textColor = (yiq >= 128) ? 'dark' : 'light';
-
-        document.documentElement.classList.add(`has-${textColor}-text`);
-    </script>
-
     <meta name="description" content="Квантовая матрица личности: три кода - Душа, Тело, Личность - по дате рождения и имени. Система координат для самопонимания. Код Души бесплатно, в Telegram.">
     <link rel="icon" href="../assets/images/brand/favicon.png" type="image/png">
     <link rel="canonical" href="https://numerologpro.ru/quantocode/">
@@ -144,21 +125,6 @@
   }
 }
 </script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  var nav = document.querySelector('.gh-navigation-actions') || document.querySelector('.gh-navigation');
-  if (!nav) return;
-  var cta = document.createElement('a');
-  cta.href = 'https://telegram.me/quantocode_bot?utm_source=site&utm_medium=header&utm_campaign=main';
-  cta.target = '_blank';
-  cta.rel = 'noopener';
-  cta.className = 'td-header-cta';
-  cta.textContent = 'Рассчитать';
-  nav.appendChild(cta);
-});
-</script>
-
 
 <!-- Тихий Дом: шрифты Lora + Inter -->
 
@@ -302,37 +268,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   </div>
 </main>
-
-<script>
-// Цель: клик по CTA в бот
-document.addEventListener('click', function(e) {
-  var link = e.target.closest('a');
-  if (!link) return;
-  if (link.href && link.href.indexOf('telegram.me/quantocode_bot') !== -1) {
-    if (typeof ym === 'function') ym(109066888, 'reachGoal', 'cta_bot');
-    if (typeof gtag === 'function') gtag('event', 'cta_bot_click', { event_category: 'engagement', event_label: link.href });
-  }
-}, true);
-
-// Цель: scroll до блока тарифов
-(function() {
-  var fired = false;
-  function checkScroll() {
-    if (fired) return;
-    var el = document.getElementById('pricing');
-    if (!el) return;
-    var rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight && rect.bottom > 0) {
-      fired = true;
-      if (typeof ym === 'function') ym(109066888, 'reachGoal', 'scroll_pricing');
-      if (typeof gtag === 'function') gtag('event', 'scroll_pricing', { event_category: 'engagement' });
-      window.removeEventListener('scroll', checkScroll);
-    }
-  }
-  window.addEventListener('scroll', checkScroll, { passive: true });
-  document.addEventListener('DOMContentLoaded', checkScroll);
-})();
-</script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
