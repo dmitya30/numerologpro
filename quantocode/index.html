@@ -271,33 +271,7 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  /* 1. Прячем меню/actions - оставляем лого */
-  var menu    = document.querySelector('.product-header');
-  var actions = document.querySelector('.product-header__inner');
-  if (menu)    menu.style.display    = 'none';
-  if (actions) actions.style.display = 'none';
-
-  /* 2. Кнопка в шапку */
-  var brand = document.querySelector('.product-header__logo');
-  if (brand) {
-    var btn = document.createElement('a');
-    btn.href        = 'https://telegram.me/quantocode_bot?start=site_quanto_header';
-    btn.target      = '_blank';
-    btn.rel         = 'noopener';
-    btn.textContent = 'Рассчитать бесплатно';
-    btn.style.cssText = [
-      'display:inline-flex','align-items:center','margin-left:auto',
-      'padding:8px 16px','background:#C9A86A','color:#1A1410',
-      'border-radius:8px','font-family:Inter,system-ui,sans-serif',
-      'font-size:13px','font-weight:600','text-decoration:none',
-      'white-space:nowrap','transition:opacity 0.15s ease','flex-shrink:0'
-    ].join(';');
-    btn.addEventListener('mouseenter', function(){ this.style.opacity='0.85'; });
-    btn.addEventListener('mouseleave', function(){ this.style.opacity='1'; });
-    brand.appendChild(btn);
-  }
-
-  /* 3. Трекинг кликов в бот */
+  /* Трекинг кликов в бот */
   document.addEventListener('click', function(e) {
     var link = e.target.closest('a');
     if (!link) return;
