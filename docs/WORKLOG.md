@@ -194,3 +194,10 @@
 - Исправлен общий селектор `*`, `*::before`, `*::after`.
 - DOM, header, main-wrapper, JavaScript, аналитика и Telegram-ссылки не изменялись.
 - Локальный визуальный QA `/quantocode/`, `/oracle/` и `/elyor/` пройден.
+
+## 27.08.2026 - Удалены Ghost-селекторы из product CSS
+
+- Из `product-quantocode.css`, `product-oracle.css` и `product-elyor.css` удалены селекторы `.gh-*` и Ghost-only правила.
+- В смешанных групповых правилах сохранены действующие не-Ghost селекторы.
+- HTML, общий `products.css`, header, main-wrapper, JavaScript и ссылки не изменялись.
+- После очистки выполнен локальный визуальный QA всех трёх продуктовых страниц; изменений UI не обнаружено.

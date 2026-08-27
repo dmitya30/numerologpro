@@ -69,42 +69,16 @@
   }
 
   /* Скрытие UI-элементов темы */
-  .gh-head-actions .gh-theme-toggle,
-  .gh-head .gh-theme-toggle,
   button[aria-label*="theme" i],
-  button[aria-label*="тема" i],
-  .theme-toggle,
-  #theme-toggle,
-  .gh-head-actions .gh-button,
-  .gh-head-actions [data-portal="signup"],
-  .gh-head-actions a[href*="#/portal"],
-  .gh-head-actions a[href*="signup"],
-  .gh-head-button,
-  .gh-navigation-members,
-  .gh-subscribe,
-  .subscribe-form,
-  .gh-newsletter,
-  .footer-subscribe,
-  section.gh-subscribe-block,
-  .gh-foot,
-  .site-footer,
-  footer.gh-foot,
-  .gh-foot-menu,
-  .gh-powered,
-  .gh-footer,
-  .gh-article-meta,
-  .gh-article-author-meta,
-  .gh-author-meta,
-  .gh-article-author-image,
-  .gh-author-image,
-  .gh-article-author,
-  .gh-author-name,
-  .gh-meta,
-  .post-card-meta,
-  .gh-card-meta,
-  .gh-article-footer .gh-author-card,
-  .author-profile,
-  .post-info {
+button[aria-label*="тема" i],
+.theme-toggle,
+#theme-toggle,
+.subscribe-form,
+.footer-subscribe,
+.site-footer,
+.post-card-meta,
+.author-profile,
+.post-info {
     display: none !important;
   }
 
@@ -114,15 +88,10 @@
     overflow-x: clip;
   }
   body { display: flex; flex-direction: column; }
-  .site-main, .gh-main, main.site-main, main.gh-main { flex: 1 0 auto; }
-  .gh-canvas, .gh-content, article.gh-article {
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
-  }
-  .gh-canvas > *:last-child,
-  .gh-content > *:last-child {
-    margin-bottom: 0 !important;
-  }
+  .site-main,
+main.site-main { flex: 1 0 auto; }
+  
+  
 
   .td-header-cta {
     display: inline-block;
@@ -155,18 +124,19 @@
     font-weight: 400;
   }
 
-  h1, h2, h3, h4, h5, h6,
-  .gh-article-title,
-  .gh-canvas h1,
-  .gh-canvas h2,
-  .gh-canvas h3 {
+  h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: 'Lora', Georgia, serif !important;
     color: var(--td-text);
     font-weight: 600;
     line-height: 1.25;
   }
 
-  h1, .gh-article-title { font-size: clamp(36px, 5vw, 60px); font-weight: 600; }
+  h1 { font-size: clamp(36px, 5vw, 60px); font-weight: 600; }
   h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 500; }
   h3 { font-size: clamp(22px, 2.5vw, 28px); font-weight: 500; }
 
@@ -175,7 +145,7 @@
     color: var(--td-text);
   }
 
-  small, .gh-foot, .gh-foot * { font-size: 15px; }
+  small { font-size: 15px; }
 
   a {
     color: var(--td-accent);
@@ -188,7 +158,6 @@
     text-decoration-color: var(--td-accent-warm);
   }
 
-  .gh-card,
   .post-card {
     background-color: var(--td-bg-secondary) !important;
     border-radius: var(--td-radius-md);
@@ -198,119 +167,43 @@
   /* ============================================================
      4. EXCERPT - лид под H1 на страницах и постах
      ============================================================ */
-  .gh-article-excerpt,
-  .gh-article-excerpt.is-body,
-  .gh-canvas .gh-article-excerpt,
-  article .gh-article-excerpt {
-    font-family: 'Inter', sans-serif !important;
-    font-size: clamp(19px, 2vw, 22px) !important;
-    line-height: 1.5 !important;
-    font-weight: 400 !important;
-    color: var(--td-text) !important;
-    max-width: var(--td-w-reading) !important;
-    margin: 8px auto 32px !important;
-    padding: 0 20px !important;
-    box-sizing: border-box !important;
-  }
+  
 
   /* ============================================================
      5. ШАПКА САЙТА
      ============================================================ */
-  .gh-head,
-  .gh-foot {
-    background-color: var(--td-bg) !important;
-    border-color: rgba(31, 41, 55, 0.08) !important;
-  }
+  
 
   /* Sticky header */
-  .gh-navigation {
-    position: sticky !important;
-    top: 0;
-    z-index: 100;
-    background-color: var(--td-bg) !important;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    min-height: 0 !important;
-    padding-top: 6px !important;
-    padding-bottom: 6px !important;
-  }
+  
 
-  header.gh-navigation,
-  header.gh-navigation.gh-outer,
-  .gh-navigation.is-middle-logo {
-    min-height: 0 !important;
-    height: auto !important;
-  }
-  .gh-navigation-inner,
-  .gh-navigation .gh-inner,
-  header.gh-navigation .gh-navigation-inner.gh-inner {
-    min-height: 0 !important;
-    height: auto !important;
-  }
+  
+  
 
   /* Логотип (картинка) */
-  .gh-navigation-logo {
-    line-height: 1 !important;
-  }
-  .gh-navigation-logo img {
-    max-height: 44px !important;
-    width: auto !important;
-    display: block;
-  }
+  
+  
 
   /* Текстовый логотип (fallback, если без картинки) */
-  .gh-head-logo,
-  .gh-logo,
-  .site-logo,
-  .gh-head .gh-head-logo a,
-  .gh-head a.gh-head-logo,
-  .gh-navigation-logo.is-title {
+  .site-logo {
     font-family: 'Lora', Georgia, serif !important;
     font-weight: 600 !important;
     color: var(--td-text) !important;
     letter-spacing: 0.01em;
   }
-  .gh-navigation-logo.is-title:hover {
-    color: var(--td-accent-warm) !important;
-  }
+  
 
   /* Меню - шрифт и компактный padding пунктов */
-  .gh-head-menu,
-  .gh-head-menu ul,
-  .gh-head nav ul,
-  .gh-navigation-menu,
-  .gh-navigation-menu .nav,
-  .gh-navigation-menu .nav li,
-  .gh-navigation-menu .nav li a {
-    font-family: 'Inter', sans-serif !important;
-    font-weight: 500 !important;
-    font-size: 18px !important;
-  }
-  .gh-navigation-menu .nav li a {
-    padding-top: 6px !important;
-    padding-bottom: 6px !important;
-  }
+  
+  
 
   /* Цвета пунктов меню */
-  .gh-head-menu a,
-  .gh-head nav a,
-  .gh-navigation-menu .nav > li > a,
-  .gh-head-actions a {
-    color: var(--td-text) !important;
-    text-decoration: none !important;
-    transition: color var(--td-transition-fast);
-  }
-  .gh-head-menu .nav-current a,
-  .gh-head .nav-current a,
-  .gh-navigation-menu .nav > li.nav-current > a,
+  
   li.nav-current a,
-  li.nav-current > span {
+li.nav-current > span {
     color: var(--td-accent) !important;
     font-weight: 600 !important;
   }
-  .gh-head-menu a:hover,
-  .gh-head nav a:hover,
-  .gh-navigation-menu .nav > li > a:hover,
-  .gh-navigation-menu .nav > li.nav-current > a:hover,
   li.nav-current a:hover {
     color: var(--td-accent-warm) !important;
   }
@@ -396,10 +289,8 @@
   }
 
   .td-btn:focus-visible,
-  .gh-head-menu a:focus-visible,
-  .gh-head-logo:focus-visible,
-  a:focus-visible,
-  summary:focus-visible {
+a:focus-visible,
+summary:focus-visible {
     outline: 2px solid var(--td-accent-warm);
     outline-offset: 2px;
     border-radius: 4px;
@@ -415,224 +306,63 @@
     font-variant-numeric: tabular-nums lining-nums;
   }
 
-  /* ============================================================
-     9. КОНТЕНТНЫЕ СТРАНИЦЫ И ПОСТЫ - единый источник стилей
-        Применяется к содержимому .gh-content на Pages и Posts.
-        На главной (home-template) не применяется, потому что
-        там кастомная вёрстка через .td-section-out.
-     ============================================================ */
+  
 
   /* Контейнер: читательская ширина 720px, центрирование.
      Отключаем grid темы Source на не-главных шаблонах,
      чтобы дочерние элементы не наследовали колоночные ограничения. */
-  :not(.home-template) section.gh-content,
-  :not(.home-template) section.gh-content.gh-canvas {
-    display: block !important;
-    grid-template-columns: none !important;
-    max-width: var(--td-w-reading) !important;
-    margin: 0 auto !important;
-    padding: 24px 20px 60px !important;
-    box-sizing: border-box !important;
-  }
+  
 
   /* Дочерние элементы - обычный поток, без grid-column */
-  :not(.home-template) section.gh-content > * {
-    grid-column: auto !important;
-    max-width: none !important;
-  }
+  
 
   /* На главной - обнуляем все отступы у gh-content,
      потому что контент управляется секциями .td-section-out */
-  body.home-template section.gh-content,
-  body.home-template section.gh-content.gh-canvas {
-    padding: 0 !important;
-    margin: 0 !important;
-    max-width: none !important;
-  }
+  
 
-  /* На главной - обнуляем верхние margin у всех детей gh-content,
-     чтобы убрать тему Source's правило .gh-content > * + * { margin-top: 28px } */
-  body.home-template section.gh-content > *,
-  body.home-template section.gh-content > * + * {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-  }
+  
+  
 
   /* Параграфы */
-  .gh-content > p {
-    font-family: 'Inter', sans-serif !important;
-    font-size: 18px !important;
-    line-height: 1.7 !important;
-    color: var(--td-text) !important;
-    margin: 0 0 22px !important;
-  }
+  
 
   /* Заголовки */
-  .gh-content > h2 {
-    font-family: 'Lora', Georgia, serif !important;
-    font-weight: 500 !important;
-    font-size: clamp(28px, 3.5vw, 36px) !important;
-    line-height: 1.25 !important;
-    color: var(--td-text) !important;
-    margin: 56px 0 20px !important;
-  }
-  .gh-content > h3 {
-    font-family: 'Lora', Georgia, serif !important;
-    font-weight: 500 !important;
-    font-size: 24px !important;
-    line-height: 1.3 !important;
-    color: var(--td-accent) !important;
-    margin: 36px 0 16px !important;
-  }
-  .gh-content > h4 {
-    font-family: 'Lora', Georgia, serif !important;
-    font-weight: 500 !important;
-    font-size: 20px !important;
-    line-height: 1.3 !important;
-    color: var(--td-text) !important;
-    margin: 28px 0 12px !important;
-  }
+  
+  
+  
 
   /* Цитаты */
-  .gh-content > blockquote {
-    font-family: 'Lora', Georgia, serif !important;
-    font-style: italic !important;
-    font-size: 20px !important;
-    line-height: 1.55 !important;
-    color: var(--td-accent-warm) !important;
-    margin: 24px 0 !important;
-    padding: 4px 0 4px 20px !important;
-    border-left: 2px solid var(--td-accent-warm) !important;
-    background: none !important;
-    border-radius: 0 !important;
-  }
-  .gh-content > blockquote p {
-    font-family: inherit !important;
-    font-size: 20px !important;
-    line-height: 1.55 !important;
-    color: var(--td-accent-warm) !important;
-    font-style: italic !important;
-    margin: 0 !important;
-  }
+  
+  
 
   /* Списки */
-  .gh-content > ul,
-  .gh-content > ol {
-    font-family: 'Inter', sans-serif !important;
-    font-size: 18px !important;
-    line-height: 1.7 !important;
-    color: var(--td-text) !important;
-    margin: 0 0 22px !important;
-    padding-left: 24px !important;
-  }
-  .gh-content > ul li,
-  .gh-content > ol li {
-    font-size: 18px !important;
-    line-height: 1.7 !important;
-    color: var(--td-text) !important;
-    margin: 0 0 8px !important;
-  }
+  
+  
 
   /* Inline strong / em */
-  .gh-content > p strong,
-  .gh-content > ul li strong,
-  .gh-content > ol li strong {
-    font-weight: 600;
-    color: inherit;
-  }
-  .gh-content > p em,
-  .gh-content > ul li em,
-  .gh-content > ol li em {
-    font-style: italic;
-    color: inherit;
-  }
+  
+  
 
   /* Inline-код */
-  .gh-content code {
-    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace !important;
-    font-size: 0.92em !important;
-    background-color: var(--td-bg-secondary) !important;
-    color: var(--td-text) !important;
-    padding: 2px 6px !important;
-    border-radius: 4px !important;
-  }
+  
 
   /* Блочный код */
-  .gh-content > pre {
-    font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace !important;
-    font-size: 15px !important;
-    line-height: 1.55 !important;
-    background-color: var(--td-bg-secondary) !important;
-    color: var(--td-text) !important;
-    padding: 16px 20px !important;
-    border-radius: var(--td-radius-md) !important;
-    margin: 0 0 24px !important;
-    overflow-x: auto !important;
-  }
-  .gh-content > pre code {
-    background: none !important;
-    padding: 0 !important;
-    border-radius: 0 !important;
-    font-size: inherit !important;
-  }
+  
+  
 
   /* Разделитель */
-  .gh-content > hr {
-    border: none !important;
-    border-top: 1px solid var(--td-border) !important;
-    margin: 48px auto 24px !important;
-    max-width: 100px !important;
-    width: 100px !important;
-    background: none !important;
-    height: 0 !important;
-  }
+  
 
   /* Подпись автора: курсивный параграф после <hr> */
-  .gh-content > hr + p,
-  .gh-content > hr + p em {
-    font-family: 'Inter', sans-serif !important;
-    font-size: 14px !important;
-    line-height: 1.55 !important;
-    color: var(--td-text-muted) !important;
-    font-style: italic !important;
-    margin: 24px 0 0 !important;
-  }
-  .gh-content > hr + p a {
-    color: var(--td-accent) !important;
-    text-decoration: none !important;
-    border-bottom: 1px solid rgba(15, 76, 92, 0.3);
-    transition: color var(--td-transition-fast), border-color var(--td-transition-fast);
-  }
-  .gh-content > hr + p a:hover {
-    color: var(--td-accent-warm) !important;
-    border-color: var(--td-accent-warm);
-  }
+  
+  
+  
 
   /* Таблицы из markdown (без класса, могут быть в обёртке темы) */
-  .gh-content table {
-    width: 100% !important;
-    border-collapse: collapse !important;
-    margin: 0 0 24px !important;
-    font-family: 'Inter', sans-serif !important;
-    font-size: 17px !important;
-    line-height: 1.5 !important;
-  }
-  .gh-content table th {
-    background-color: var(--td-bg-secondary) !important;
-    color: var(--td-text) !important;
-    font-weight: 600 !important;
-    text-align: left !important;
-    padding: 12px 16px !important;
-    border-bottom: 2px solid var(--td-accent-warm) !important;
-  }
-  .gh-content table td {
-    padding: 12px 16px !important;
-    border-bottom: 1px solid rgba(31, 41, 55, 0.08) !important;
-    color: var(--td-text) !important;
-  }
-  .gh-content table tr:last-child td {
-    border-bottom: none !important;
-  }
+  
+  
+  
+  
 
   /* ============================================================
      10. УТИЛИТЫ КОНТЕНТА - самостоятельные классы
@@ -659,19 +389,9 @@
     text-align: right;
   }
 
-  .gh-table {
-    width: 100%;
-    overflow-x: auto;
-    margin: 0 0 24px;
-    -webkit-overflow-scrolling: touch;
-  }
-  .gh-table .td-table {
-    margin: 0 !important;
-    min-width: 480px; /* ниже этой ширины - горизонтальный скролл */
-  }
+  
+  
 
-  .gh-content .gh-table table th,
-  .gh-content .gh-table .td-table th,
   .td-table th {
     font-size: 17px !important;
     font-weight: 600 !important;
@@ -682,8 +402,6 @@
     border-bottom: 2px solid var(--td-accent-warm) !important;
   }
 
-  .gh-content .gh-table table td,
-  .gh-content .gh-table .td-table td,
   .td-table td {
     font-size: 17px !important;
     padding: 12px 16px !important;
@@ -741,102 +459,33 @@
     border-color: var(--td-accent-warm);
   }
 
-  /* ============================================================
-     10b. Нейтрализация обёртки .gh-table от темы Source
-     Тема автоматически оборачивает html-card-таблицы в
-     <div class="gh-table"> с overflow-x:auto и nowrap у ячеек.
-     Мы это отключаем и заставляем таблицу адаптироваться
-     по столбцам: первый - переносится, последний - фиксируется.
-     ============================================================ */
-  .gh-content .gh-table {
-    overflow-x: visible !important;
-    margin: 0 0 24px !important;
-    width: 100% !important;
-  }
-  .gh-content .gh-table table,
-  .gh-content .gh-table .td-table {
-    table-layout: auto !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    margin: 0 !important;
-  }
-  .gh-content .gh-table th,
-  .gh-content .gh-table td {
-    white-space: normal !important;
-    word-break: break-word;
-  }
-  .gh-content .gh-table th:last-child,
-  .gh-content .gh-table td:last-child {
-    white-space: nowrap !important;
-    width: 1%;
-    text-align: right;
-  }
+  
+  
+  
+  
+  
 
   /* ============================================================
      11. ШАПКА СТАТЬИ (H1, тег, excerpt, featured image)
      ============================================================ */
   /* Шапка статьи - отключаем grid темы Source, чтобы title и excerpt
      получали полную ширину экрана, а не сжатую центральную колонку */
-  :not(.home-template) header.gh-article-header,
-  :not(.home-template) header.gh-article-header.gh-canvas {
-    display: block !important;
-    grid-template-columns: none !important;
-    padding: 0 !important;
-    max-width: none !important;
-    margin: 0 auto !important;
-  }
-  :not(.home-template) header.gh-article-header > * {
-    grid-column: auto !important;
-  }
+  
+  
 
   /* Заголовок статьи - единая ширина с excerpt и content */
-  .gh-article-title,
-  .gh-canvas h1.gh-article-title,
-  article h1.gh-article-title {
-    font-family: 'Lora', Georgia, serif !important;
-    font-weight: 600 !important;
-    font-size: clamp(36px, 5vw, 52px) !important;
-    line-height: 1.2 !important;
-    color: var(--td-text) !important;
-    margin: 0 auto 16px !important;
-    max-width: var(--td-w-reading) !important;
-    padding: 0 20px !important;
-    box-sizing: border-box !important;
-    text-align: center !important;
-  }
+  
 
   /* Тег в шапке статьи - туда же */
-  .gh-article-header > .gh-article-tag {
-    max-width: var(--td-w-reading);
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0 20px;
-    box-sizing: border-box;
-  }
+  
 
   /* Главная картинка статьи - та же ширина */
-  .gh-article-image,
-  .gh-article-header .gh-article-image {
-    grid-column: 1 / -1;
-    max-width: var(--td-w-reading);
-    margin: 24px auto 32px;
-    padding: 0 20px;
-    box-sizing: border-box;
-  }
+  
 
-  .gh-article-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: var(--td-radius-md);
-  }
+  
 
   /* Скрыть стандартный header статьи только на главной (для SEO остаётся в DOM) */
-  body.home-template .gh-article-header,
-  body.home-template .gh-article-title,
-  body.home-template .gh-article-excerpt {
-    display: none !important;
-  }
+  
 
   /* ============================================================
      12. АДАПТИВ - мобильные значения
@@ -844,98 +493,37 @@
   @media (max-width: 720px) {
     /* Контейнер контента - padding 20px уже задан в разделе 9,
        здесь только уменьшаем вертикальные отступы */
-    :not(.home-template) section.gh-content,
-    :not(.home-template) section.gh-content.gh-canvas {
-      padding: 16px 20px 40px !important;
-    }
+    
 
     /* Картинка статьи - уменьшаем вертикальные отступы */
-    .gh-article-image,
-    .gh-article-header .gh-article-image {
-      margin: 16px auto 24px;
-    }
+    
 
     /* Типографика контента */
-    .gh-content > p {
-      font-size: 17px !important;
-      line-height: 1.65 !important;
-    }
-    .gh-content > h2 {
-      font-size: 26px !important;
-      margin: 40px 0 16px !important;
-    }
-    .gh-content > h3 {
-      font-size: 21px !important;
-      margin: 28px 0 12px !important;
-    }
-    .gh-content > h4 {
-      font-size: 19px !important;
-      margin: 24px 0 10px !important;
-    }
-    .gh-content > blockquote,
-    .gh-content > blockquote p {
-      font-size: 18px !important;
-      line-height: 1.5 !important;
-    }
-    .gh-content > ul,
-    .gh-content > ol,
-    .gh-content > ul li,
-    .gh-content > ol li {
-      font-size: 17px !important;
-      line-height: 1.65 !important;
-    }
-    .gh-content table,
-    .gh-content .gh-table table,
+    
+    
+    
+    
+    
+    
     .td-table {
       font-size: 15px !important;
     }
-    .gh-content table th,
-    .gh-content table td,
-    .gh-content .gh-table table th,
-    .gh-content .gh-table table td,
     .td-table th,
-    .td-table td {
+.td-table td {
       padding: 10px 12px !important;
       font-size: 15px !important;
     }
-    .gh-content > pre {
-      font-size: 14px !important;
-      padding: 12px 16px !important;
-    }
+    
 
-    .gh-navigation:not(.is-open) .gh-navigation-menu,
-    .gh-navigation:not(.is-open) .gh-navigation-actions {
-      display: none !important;
-    }
+    
 
-    header.gh-navigation .gh-navigation-inner.gh-inner,
-    header.gh-navigation.is-middle-logo .gh-navigation-inner.gh-inner {
-      display: flex !important;
-      flex-direction: row !important;
-      align-items: center !important;
-      justify-content: space-between !important;
-      grid-template-columns: none !important;
-      grid-template-rows: none !important;
-      height: auto !important;
-      min-height: 0 !important;
-    }
+    
 
-    header.gh-navigation .gh-navigation-brand {
-      display: flex !important;
-      align-items: center !important;
-      gap: 12px !important;
-      width: 100% !important;
-      grid-template-columns: none !important;
-    }
-    header.gh-navigation .gh-navigation-brand .gh-navigation-logo {
-      margin-right: auto !important;
-    }
+    
+    
 
     /* Когда бургер открыт - переключаем в колонку, чтобы меню встало под brand */
-    header.gh-navigation.is-open .gh-navigation-inner.gh-inner {
-      flex-direction: column !important;
-      align-items: stretch !important;
-    }
+    
 
   }
 
@@ -961,60 +549,22 @@ html body.page-oracle {
    ФИКС 2 - gh-content: перебиваем глобальный
    :not(.home-template) через body.page-oracle
    ═══════════════════════════════════════════════ */
-body.page-oracle section.gh-content,
-body.page-oracle section.gh-content.gh-canvas,
-body.page-oracle section.gh-content.is-body {
-  padding: 0 !important;
-  margin: 0 !important;
-  max-width: none !important;
-  width: 100% !important;
-  display: block !important;
-  grid-template-columns: none !important;
-  box-sizing: border-box !important;
-}
-body.page-oracle section.gh-content > * {
-  grid-column: auto !important;
-  max-width: none !important;
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-}
+
+
 
 /* ═══════════════════════════════════════════════
    ФИКС 3 - Ghost-заголовок страницы: скрыть
    ═══════════════════════════════════════════════ */
-body.page-oracle .gh-article-header,
-body.page-oracle .gh-article-title,
-body.page-oracle .gh-article-excerpt,
-body.page-oracle .gh-canvas > header {
-  display: none !important;
-}
+
 
 /* ═══════════════════════════════════════════════
    ШАПКА: тёмная тема только на /oracle/
    ═══════════════════════════════════════════════ */
-body.page-oracle .gh-navigation {
-  background-color: rgba(13, 11, 26, 0.95) !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
-  border-bottom: 1px solid rgba(201, 169, 110, 0.12) !important;
-  box-shadow: none !important;
-}
-body.page-oracle .gh-navigation .nav a,
-body.page-oracle .gh-navigation-menu .nav > li > a {
-  color: rgba(232, 224, 240, 0.80) !important;
-}
-body.page-oracle .gh-navigation .nav a:hover,
-body.page-oracle .gh-navigation-menu .nav > li > a:hover {
-  color: #c9a96e !important;
-}
-body.page-oracle .gh-navigation-logo,
-body.page-oracle .gh-navigation-logo.is-title {
-  color: rgba(232, 224, 240, 0.90) !important;
-}
-body.page-oracle .gh-navigation-logo img {
-  filter: brightness(0) invert(1) !important;
-  opacity: 0.9;
-}
+
+
+
+
+
 body.page-oracle .td-header-cta {
   display: none !important;
 }
