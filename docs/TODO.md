@@ -98,3 +98,26 @@
 - [ ] Получить отдельное разрешение на отключение Ghost.
 - [ ] Получить отдельное разрешение на удаление или отмену VPS.
 - [ ] Обновить итоговый статус и журнал операций.
+
+## Оперативный checkpoint — 27.08.2026
+
+Текущий подтверждённый HEAD: `87d2c743baf605fbb4ea93d3a2ef03a96135c3ea`.
+
+- [x] Восстановить статические product headers и пройти визуальный QA `/quantocode/`, `/oracle/`, `/elyor/`.
+- [x] Удалить неиспользуемый `legacy-product.css` и мёртвый Ghost navigation runtime.
+- [x] Удалить остаточные Ghost-маркеры из product CSS без изменения визуала.
+- [x] Повторить глобальный read-only static baseline audit.
+- [x] Подтвердить отсутствие Ghost-классов, Ghost-текста и legacy runtime references.
+- [x] Подтвердить product header и tracking gate для трёх product pages.
+- [x] Подтвердить `robots.txt` и четыре URL в `sitemap.xml`.
+- [ ] Устранить дубли `og:title`, `og:description`, `og:url` и Twitter metadata в `/quantocode/` и `/elyor/`, сохранив основной SEO-блок.
+- [ ] Исследовать фактическую схему подключения Lora: ссылка на отсутствующий `assets/css/lora.css` есть на трёх product pages, но перенос Lora `@font-face` в `products.css` не подтверждён.
+- [ ] Только после font-аудита решить, восстановить локальный `lora.css` или удалить его подключения.
+- [ ] Удалить либо корректно обработать ссылки на исключённые маршруты `/privacy/`, `/consent/`, `/oferta/` согласно D-006.
+- [ ] Проверить, действительно ли неподключённый `assets/css/inter.css` полностью дублируется другими действующими стилями, и только затем решить вопрос удаления.
+- [ ] Проверить Schema.org: в `/oracle/` и `/elyor/` обнаружены признаки скопированного `Organization` с `alternateName: "КвантоКод"`.
+- [ ] После точечных исправлений повторить metadata/runtime/internal-link audit.
+- [ ] Провести повторный визуальный QA product pages.
+
+Последняя попытка cleanup остановлена на preflight до изменения файлов: проверка ошибочно ожидала локальные Lora-декларации в `products.css`. Следующий шаг — отдельный read-only аудит Lora/Inter и структурированных данных без предположений.
+
