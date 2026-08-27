@@ -284,13 +284,13 @@
 <script>
 document.addEventListener('DOMContentLoaded', function () {
   /* 1. Прячем меню/actions - оставляем лого */
-  var menu    = document.querySelector('.gh-navigation-menu');
-  var actions = document.querySelector('.gh-navigation-actions');
+  var menu    = document.querySelector('.product-header');
+  var actions = document.querySelector('.product-header__inner');
   if (menu)    menu.style.display    = 'none';
   if (actions) actions.style.display = 'none';
 
   /* 2. Кнопка в шапку */
-  var brand = document.querySelector('.gh-navigation-brand');
+  var brand = document.querySelector('.product-header__logo');
   if (brand) {
     var btn = document.createElement('a');
     btn.href        = 'https://telegram.me/yourElyor_bot?start=site_elyor_header';

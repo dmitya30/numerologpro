@@ -281,13 +281,13 @@
 document.addEventListener('DOMContentLoaded', function () {
 
   /* 1. Скрываем меню и actions - оставляем только лого */
-  var menu    = document.querySelector('.gh-navigation-menu');
-  var actions = document.querySelector('.gh-navigation-actions');
+  var menu    = document.querySelector('.product-header');
+  var actions = document.querySelector('.product-header__inner');
   if (menu)    menu.style.display    = 'none';
   if (actions) actions.style.display = 'none';
 
   /* 2. Oracle-CTA в шапку */
-  var brand = document.querySelector('.gh-navigation-brand');
+  var brand = document.querySelector('.product-header__logo');
   if (brand) {
     var btn = document.createElement('a');
     btn.href        = 'https://telegram.me/mistic_oracle_bot?start=site_oracle_header';
