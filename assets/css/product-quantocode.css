@@ -4,7 +4,6 @@
             --background-color: #ffffff
         }
 
-:root {--ghost-accent-color: #0F4C5C;}
 
 /* ============================================================
      1. ДИЗАЙН-ТОКЕНЫ
@@ -38,7 +37,6 @@
     --background-color: #FAF8F4 !important;
     --color-primary-text: #1F2937 !important;
     --color-secondary-text: #4B5563 !important;
-    --ghost-accent-color: #0F4C5C !important;
     --color-darkgrey: #1F2937 !important;
     --color-midgrey: #6B7280 !important;
     --color-lightgrey: #EFE9DD !important;
@@ -316,8 +314,6 @@ summary:focus-visible {
   /* Дочерние элементы - обычный поток, без grid-column */
   
 
-  /* На главной - обнуляем все отступы у gh-content,
-     потому что контент управляется секциями .td-section-out */
   
 
   
@@ -542,11 +538,9 @@ html body.page-quantocode {
   }
 }
 
-/* ═══ ФИКС 2 - gh-content на всю ширину, без grid темы ═══ */
 
 
 
-/* ═══ ФИКС 3 - скрыть Ghost-заголовок страницы ═══ */
 
 
 /* ═══ ШАПКА: тёмная только на /quantocode/ ═══ */
