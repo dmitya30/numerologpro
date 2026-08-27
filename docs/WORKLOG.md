@@ -251,3 +251,10 @@
 - Удален неиспользуемый inter.css, определения которого уже находятся в products.css.
 - Header, CTA, аналитика, canonical, Schema и основной контент не изменялись.
 - Следующий шаг: контрольный read-only metadata/runtime audit и проверка Schema.org.
+
+## 27.08.2026 - Удалены ошибочные Schema.org-хвосты КвантоКода
+
+- Из страниц Oracle и ЭЛИОР удалены скопированные Ghost JSON-LD-блоки Organization и WebSite с alternateName КвантоКод.
+- Продуктовые Article, WebPage и SoftwareApplication Schema.org сохранены.
+- Видимый контент, CSS, header, CTA, аналитика и Telegram-ссылки не изменялись.
+- Следующий шаг: удалить подтвержденные коммерческие формулировки и повторить глобальный read-only audit.
