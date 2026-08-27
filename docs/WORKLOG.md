@@ -186,3 +186,11 @@
 - Сохранены минимальный reset, базовые переменные, локальные Inter font-face и подтвержденные стили чистой product shell.
 - HTML, SEO, аналитика, Telegram CTA, wrapper-разметка и embedded product CSS не изменялись.
 - Следующий шаг: локальный визуальный QA, затем перенос embedded product CSS в products.css.
+
+## 27.08.2026 - CSS продуктовых страниц вынесен из HTML
+
+- Четыре inline style-блока каждой продуктовой страницы перенесены во внешние файлы `product-quantocode.css`, `product-oracle.css` и `product-elyor.css`.
+- Общий reset и проверенный header остаются в `assets/css/products.css`.
+- Исправлен общий селектор `*`, `*::before`, `*::after`.
+- DOM, header, main-wrapper, JavaScript, аналитика и Telegram-ссылки не изменялись.
+- Локальный визуальный QA `/quantocode/`, `/oracle/` и `/elyor/` пройден.
