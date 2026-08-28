@@ -16,7 +16,7 @@
 
 Из product pages удалены скрытые SEO-заголовки, legacy Article metadata и Schema.org, Telegram ref-workaround, дублирующий stylesheet preload и другие подтверждённые Ghost-хвосты. Воспроизводимый static-site integrity checker проходит.
 
-Текущий гейт - подготовка GitHub Pages custom domain, удаление временного каталога `migration-audit/` из публикуемой ветки, DNS cutover и production QA. DNS, VPS и Ghost пока не изменялись.
+GitHub Pages custom domain `numerologpro.ru` настроен, корневой файл `CNAME` создан GitHub. Каталог `migration-audit/` удаляется из публикуемой ветки после переноса итоговых фактов в постоянную документацию. Текущий гейт - DNS cutover и production QA. DNS, VPS и Ghost пока не изменялись.
 
 ## Репозиторий
 

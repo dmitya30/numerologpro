@@ -149,3 +149,12 @@ GitHub Pages не настраивался. DNS, VPS и Ghost не изменя�
 - На этом checkpoint DNS, GitHub Pages custom domain, VPS и Ghost не изменялись.
 
 Результат: PASS.
+
+## 28.08.2026 - Подготовка GitHub Pages custom domain
+
+- В настройках GitHub Pages назначен custom domain `numerologpro.ru`.
+- GitHub автоматически создал корневой файл `CNAME`.
+- `migration-audit/` удалён из публикуемой ветки после переноса итоговых фактов в постоянную документацию.
+- DNS-записи, VPS и Ghost не изменялись.
+
+Результат: PASS.
