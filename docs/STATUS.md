@@ -16,7 +16,7 @@
 
 Воспроизводимые static-site проверки и полный browser-level QA GitHub Pages project preview завершены: PASS.
 
-Текущий гейт - зафиксировать итоговое поведение `/about/` и остальных legacy URL перед подготовкой custom domain, DNS rollback и production cutover.
+Поведение `/about/` и остальных legacy URL зафиксировано решением D-014. Текущий гейт - реализовать `/about/` из исходного текста в визуальной системе нового сайта, не добавляя страницу в навигацию главной.
 
 ## Репозиторий
 
@@ -105,5 +105,5 @@ Production-перенос должен быть завершён до оконч
 - Product CSS очищен от доказанно мёртвых selectors, Ghost theme overrides и неиспользуемых custom properties; общий CSS консолидирован, повторный визуальный QA трёх product pages пройден.
 - Воспроизводимый `scripts/check-static-site.py` проходит 274 проверки HTML, metadata, аналитики, JSON-LD, ссылок, ресурсов, Ghost/theme/commercial markers, robots.txt и sitemap.xml.
 - Полный browser-level QA project preview завершён: desktop, mobile, navigation, CTA, footer, images, fonts, console, network, keyboard focus и horizontal scroll - PASS.
-- Решение по `/about/` и итоговое поведение legacy URL ещё не зафиксированы.
+- `/about/` утверждена к переносу: используется только исходный текст, а разметка и дизайн создаются заново без пункта в навигации главной. Legal, blog, archives, RSS и Ghost-служебные маршруты не переносятся и используют пользовательскую 404.
 - DNS не изменялся; VPS и Ghost остаются временным fallback до production QA.
