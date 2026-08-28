@@ -136,3 +136,16 @@ GitHub Pages не настраивался. DNS, VPS и Ghost не изменя�
 - DNS, VPS и Ghost не изменялись.
 
 Результат: PASS.
+
+
+## 28.08.2026 - Финальный production candidate и DNS preflight
+
+- Финальный предрелизный baseline подтверждён на commit `5ae69967647909f9d97d8d595a791a46f7b0139f`.
+- Единый CSS, product typography, главная, мобильное меню и все пять контентных страниц прошли пользовательский визуальный QA.
+- Финальная HTML-очистка удалила скрытые SEO-блоки, legacy Article metadata, дубли Schema.org, Telegram ref-workaround и лишний stylesheet preload.
+- Публичная DNS-проверка непосредственно перед cutover: `A @ = 5.183.191.200`, `A www = 5.183.191.200`, TTL 21600, NS `ns1.reg.ru` и `ns2.reg.ru`.
+- Публичные AAAA, MX, TXT, CAA, CNAME для `www` и wildcard-запись не обнаружены.
+- Rollback-план: при неуспешном cutover восстановить для `@` и `www` IPv4 `5.183.191.200`; Ghost и VPS до production QA не отключать.
+- На этом checkpoint DNS, GitHub Pages custom domain, VPS и Ghost не изменялись.
+
+Результат: PASS.

@@ -10,13 +10,13 @@
 
 ## Текущий гейт
 
-Статический baseline опубликован в GitHub Pages preview и прошёл последовательную очистку Ghost runtime, metadata, Schema.org, шрифтов и исключённых коммерческих и юридических ссылок.
+Финальный предрелизный baseline: `5ae69967647909f9d97d8d595a791a46f7b0139f` (`refactor: remove legacy product markup`).
 
-Подтверждённый визуальный baseline после редизайна трёх product pages: `dd1a9f0d77e6275adf9827d74d91dae5ff6e125d` (`style: refresh elyor page`).
+Шесть CSS-файлов объединены в один `assets/css/site.css`; дубли шрифтов и общих правил удалены. Главная, `/about/`, КвантоКод, Mystic Oracle и ЭЛИОР прошли desktop/mobile browser QA после консолидации и последующих визуальных исправлений.
 
-Воспроизводимые static-site проверки и полный browser-level QA GitHub Pages project preview завершены: PASS.
+Из product pages удалены скрытые SEO-заголовки, legacy Article metadata и Schema.org, Telegram ref-workaround, дублирующий stylesheet preload и другие подтверждённые Ghost-хвосты. Воспроизводимый static-site integrity checker проходит.
 
-Страница `/about/` реализована из исходного текста в визуальной системе нового сайта и прошла визуальный QA. Текущий гейт - нормализовать восстановительные `!important` КвантоКода, объединить шесть CSS-файлов в один `assets/css/site.css`, пройти полный визуальный QA и только затем перейти к custom domain и DNS cutover.
+Текущий гейт - подготовка GitHub Pages custom domain, удаление временного каталога `migration-audit/` из публикуемой ветки, DNS cutover и production QA. DNS, VPS и Ghost пока не изменялись.
 
 ## Репозиторий
 
@@ -107,4 +107,4 @@ Production-перенос должен быть завершён до оконч
 - Воспроизводимый `scripts/check-static-site.py` проверяет HTML, metadata, аналитику, JSON-LD, ссылки, ресурсы, Ghost/theme/commercial markers, robots.txt и sitemap.xml.
 - Полный browser-level QA project preview завершён: desktop, mobile, navigation, CTA, footer, images, fonts, console, network, keyboard focus и horizontal scroll - PASS.
 - `/about/` реализована из исходного текста в визуальной системе нового сайта, прошла визуальный QA и не добавлена в навигацию главной. Legal, blog, archives, RSS и Ghost-служебные маршруты не переносятся и используют пользовательскую 404.
-- DNS не изменялся; VPS и Ghost остаются временным fallback до production QA.
+- Повторная публичная DNS-проверка перед cutover подтверждает `A @ = 5.183.191.200`, `A www = 5.183.191.200`, NS `ns1.reg.ru` и `ns2.reg.ru`; DNS ещё не изменялся. VPS и Ghost остаются fallback до production QA.

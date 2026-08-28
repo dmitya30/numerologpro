@@ -438,3 +438,12 @@
 - Удалены лишние stylesheet preload, пустые legacy-комментарии и два inline-стиля выравнивания.
 - Видимые тексты, CTA, дизайн, аналитика и рабочие WebPage/SoftwareApplication schemas сохранены.
 - Следующий шаг: финальный browser QA перед production cutover.
+
+
+## 28.08.2026 - Финальный предрелизный гейт
+
+- Production candidate зафиксирован на commit `5ae69967647909f9d97d8d595a791a46f7b0139f`.
+- CSS-консолидация, восстановление Inter, навигация главной, карточки и финальная HTML-очистка завершены.
+- Static-site integrity и пользовательский browser QA: PASS.
+- Повторная read-only DNS-проверка выполнена; действующий Ghost всё ещё обслуживается с `5.183.191.200`.
+- Следующий шаг: удалить `migration-audit/` из публикуемой ветки, настроить custom domain в GitHub Pages и только затем изменить DNS в REG.RU.
