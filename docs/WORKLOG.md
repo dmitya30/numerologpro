@@ -429,3 +429,12 @@
 - Текстовые группы и относительные центры свечения подняты выше.
 - Цвета, тексты, ссылки, мобильная композиция и product pages не изменялись.
 - Следующий шаг: визуальный QA карточек на desktop, tablet и mobile.
+
+## 28.08.2026 - Финальная очистка HTML перед production
+
+- Удалены скрытые SEO-заголовки с трёх product pages.
+- Удалены legacy Article metadata, Article JSON-LD и дублирующая Schema.org-разметка КвантоКода.
+- Telegram URL очищены от устаревшего ref; три workaround-скрипта удалены.
+- Удалены лишние stylesheet preload, пустые legacy-комментарии и два inline-стиля выравнивания.
+- Видимые тексты, CTA, дизайн, аналитика и рабочие WebPage/SoftwareApplication schemas сохранены.
+- Следующий шаг: финальный browser QA перед production cutover.

@@ -6,10 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="preload" as="style" href="../assets/css/site.css?v=5">
-    <link rel="stylesheet" type="text/css" href="../assets/css/site.css?v=5">
-
-    
+    <link rel="stylesheet" type="text/css" href="../assets/css/site.css?v=6">
 
     <meta name="description" content="8 систем - Таро, Руны, Астрология, Сонник и другие. Задай вопрос
 про отношения, деньги, сон или выбор. 3 ответа бесплатно,
@@ -26,8 +23,6 @@
 без регистрации, в Telegram.">
     <meta property="og:url" content="https://numerologpro.ru/oracle/">
     <meta property="og:image" content="https://numerologpro.ru/assets/images/home/og-quiet-house.jpg">
-    <meta property="article:published_time" content="2026-06-13T18:25:27.000Z">
-    <meta property="article:modified_time" content="2026-07-14T10:26:16.000Z">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Спроси то, что давно крутится в голове - Оракул ответит за минуту">
     <meta name="twitter:description" content="8 систем - Таро, Руны, Астрология, Сонник и другие. Задай вопрос
@@ -35,39 +30,9 @@
 без регистрации, в Telegram.">
     <meta name="twitter:url" content="https://numerologpro.ru/oracle/">
     <meta name="twitter:image" content="https://numerologpro.ru/assets/images/home/og-quiet-house.jpg">
-    <meta name="twitter:label1" content="Written by">
-    <meta name="twitter:data1" content="Дмитрий Паневин">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    
-    <script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "publisher": {
-        "@type": "Organization",
-        "name": "Тихий Дом: инструменты для самопознания.",
-        "url": "https://numerologpro.ru/",
-        "logo": {
-            "@type": "ImageObject",
-            "url": "https://numerologpro.ru/assets/images/brand/logo.svg"
-        }
-    },
-    "headline": "Оракул онлайн - задай вопрос и услышь себя | Mystic Oracle",
-    "url": "https://numerologpro.ru/oracle/",
-    "datePublished": "2026-06-13T18:25:27.000Z",
-    "dateModified": "2026-07-14T10:26:16.000Z",
-    "description": "8 систем - Таро, Руны, Астрология, Сонник и другие. Задай вопрос\nпро отношения, деньги, сон или выбор. 3 ответа бесплатно,\nбез регистрации, в Telegram.",
-    "mainEntityOfPage": "https://numerologpro.ru/oracle/"
-}
-    </script>
 
-    
-    
-    
-    
-    
-    
     <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
     (function(m,e,t,r,i,k,a){
@@ -91,10 +56,7 @@
   gtag('config', 'G-EEJ6Z1C216');
 </script>
 
-
-
 <!-- Тихий Дом: дизайн-система -->
-
 
 <script type="application/ld+json">
 {
@@ -126,7 +88,6 @@
 }
 </script>
 
-
 </head>
 <body class="product-page__body product-page__body--oracle">
 <header class="product-header">
@@ -134,7 +95,7 @@
         <a class="product-header__logo" href="../" aria-label="Тихий Дом — на главную">
             <img src="../assets/images/brand/logo.svg" alt="Тихий Дом: инструменты для самопознания.">
         </a>
-        <a class="product-header__telegram" href="https://telegram.me/mistic_oracle_bot?start=site_oracle&ref=numerologpro.ru" target="_blank" rel="noopener noreferrer">Спросить Оракула</a>
+        <a class="product-header__telegram" href="https://telegram.me/mistic_oracle_bot?start=site_oracle" target="_blank" rel="noopener noreferrer">Спросить Оракула</a>
     </div>
 </header>
 
@@ -142,9 +103,6 @@
   <div class="oracle-inner">
 
     <!-- Cкрытый H2 -->
-    <h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">
-      Онлайн-оракул: Таро, Руны, Астрология, Сонник - задай свой вопрос
-    </h2>
 
     <!-- ЗНАК -->
     <span class="oracle-sigil" aria-hidden="true"></span>
@@ -166,7 +124,7 @@
     <!-- ОСНОВНАЯ CTA -->
     <div class="oracle-cta-wrap">
       <a
-        href="https://telegram.me/mistic_oracle_bot?start=site_oracle&ref=numerologpro.ru"
+        href="https://telegram.me/mistic_oracle_bot?start=site_oracle"
         class="oracle-cta"
         target="_blank"
         rel="noopener noreferrer"
@@ -224,7 +182,6 @@
       3 ответа бесплатно. Дальше - только если захочешь.
     </div>
 
-    <!-- ОФЕРТА / ПОЛИТИКА -->
 </div>
 </main>
 
@@ -245,41 +202,6 @@ document.addEventListener('DOMContentLoaded', function () {
         gtag('event', label, { event_category: 'oracle_engagement', event_label: link.href });
     }
   }, true);
-
-});
-</script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  /* Убираем ref-параметр с telegram.me ссылок ДО клика */
-  function stripRefFromTelegramLinks() {
-    var links = document.querySelectorAll('a[href*="telegram.me"]');
-    links.forEach(function(link) {
-      try {
-        var url = new URL(link.href);
-        url.searchParams.delete('ref');
-        link.href = url.toString();
-      } catch(e) {}
-    });
-  }
-
-  /* Запускаем сразу и через небольшой delay
-     (на случай если attribution-скрипт добавляет ref после DOMContentLoaded) */
-  stripRefFromTelegramLinks();
-  setTimeout(stripRefFromTelegramLinks, 500);
-
-  /* Перехватываем клик: чистим href прямо перед переходом */
-  document.addEventListener('click', function(e) {
-    var link = e.target.closest('a[href*="telegram.me"]');
-    if (!link) return;
-    try {
-      var url = new URL(link.href);
-      if (url.searchParams.has('ref')) {
-        url.searchParams.delete('ref');
-        link.href = url.toString();
-      }
-    } catch(e) {}
-  }, true); /* capture phase - срабатывает ДО нативного перехода */
 
 });
 </script>

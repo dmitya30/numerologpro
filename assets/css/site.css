@@ -3372,3 +3372,8 @@ html.product-page,
     transform: translateY(-18px);
   }
 }
+
+/* Final CTA alignment cleanup */
+:where(html:not(.product-page)) .final-cta .actions {
+  justify-content: center;
+}
