@@ -1,6 +1,6 @@
 # Статус проекта
 
-Дата актуализации: 27.08.2026.
+Дата актуализации: 28.08.2026.
 
 ## Цель
 
@@ -12,9 +12,9 @@
 
 Статический baseline опубликован в GitHub Pages preview и прошёл последовательную очистку Ghost runtime, metadata, Schema.org, шрифтов и исключённых коммерческих и юридических ссылок.
 
-Последний технический baseline перед обновлением документации: `8682cebb672d575106c6d9851a8c5dff43095943` (`fix: complete SEO image URLs and GA setup`).
+Текущий технический baseline: `b39d3a420fd272dc33f171200c092cad3035b16c` (`fix: remove residual dead product selectors`).
 
-Текущий гейт - документирование фактического состояния, затем read-only аудит оставшегося product CSS и только после него точечная очистка доказанно неиспользуемых правил без визуальной регрессии.
+Текущий гейт - read-only аудит оставшихся глобальных product CSS-правил и custom properties после двух консервативных checkpoint очистки selector branches.
 
 ## Репозиторий
 
@@ -22,7 +22,7 @@
 - Репозиторий: `https://github.com/dmitya30/numerologpro`.
 - Локальный путь: `~/projects/numerologpro`.
 - Основная ветка: `main`.
-- Подтверждённый технический baseline: `8682cebb672d575106c6d9851a8c5dff43095943`.
+- Подтверждённый технический baseline: `b39d3a420fd272dc33f171200c092cad3035b16c`.
 - Первый коммит: `af775211841937ddfa5244262022d7c1d9776f6c` (`docs: establish project execution contract`).
 - Базовая документация зафиксирована коммитом `d75faaa7b4e4a73c193768f9b4e5da02c1b931a7`.
 - Инструмент исходного аудита зафиксирован коммитом `2ce304d501b55c7cb4fa6e7a34dbaa2df5028e79`.
@@ -100,7 +100,7 @@ Production-перенос должен быть завершён до оконч
 - Социальные изображения и Schema.org logo используют абсолютные production URL.
 - Lora Roman, Lora Italic и Inter обслуживаются локальными файлами.
 - Product headers работают в sticky-режиме; визуальный QA трёх product pages пройден.
-- В product CSS остаются исторические комментарии, theme overrides и потенциально неиспользуемые правила; их удаление требует отдельного read-only анализа селекторов.
+- Доказанно мёртвые и остаточные legacy selectors удалены; оставшиеся глобальные правила и custom properties требуют отдельного read-only анализа перед дальнейшим упрощением.
 - Полный browser-level QA console, network, keyboard focus и horizontal scroll ещё не завершён.
 - Решение по `/about/` и итоговое поведение legacy URL ещё не зафиксированы.
 - DNS не изменялся; VPS и Ghost остаются временным fallback до production QA.
