@@ -349,3 +349,12 @@
 - Подтверждены фон, sticky header, типографика, CTA и основные content sections.
 - Гейт очистки product CSS завершён на техническом baseline `4a3666dc27d9e14955e6d772b9de94aae85b64ec`.
 - Следующий шаг: добавить воспроизводимые автоматические проверки HTML, metadata, ссылок и runtime-ресурсов.
+
+## 28.08.2026 - Добавлены воспроизводимые static-site проверки
+
+- Добавлен `scripts/check-static-site.py` без внешних Python-зависимостей.
+- Проверяются HTML structure, metadata, JSON-LD, canonical, аналитика и Telegram CTA.
+- Проверяются внутренние ссылки, локальные HTML/CSS runtime-ресурсы, robots.txt и sitemap.xml.
+- Проверяется отсутствие Ghost runtime, theme switching, исключённых legal routes и коммерческих markers.
+- Первый полный запуск проверок: PASS.
+- Следующий шаг: browser-level QA console, network, keyboard focus и horizontal scroll.
