@@ -25,7 +25,7 @@
   <link rel="preload" as="image" href="assets/images/home/hero-desktop.webp" media="(min-width: 721px)" fetchpriority="high">
   <link rel="preload" as="image" href="assets/images/home/hero-mobile.webp" media="(max-width: 720px)" fetchpriority="high">
   <link rel="preload" as="font" href="assets/fonts/inter-roman.woff2" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="assets/css/site.css?v=3">
+  <link rel="stylesheet" href="assets/css/site.css?v=4">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -61,9 +61,13 @@
       <a class="brand" href="./" aria-label="Тихий Дом - главная">
         <img class="brand-logo" src="assets/images/brand/logo.svg" width="710" height="256" alt="Тихий Дом">
       </a>
-      <nav aria-label="Основная навигация">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Открыть меню">
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+      </button>
+      <nav class="site-navigation" id="primary-navigation" aria-label="Основная навигация">
         <ul class="nav-links">
-          <li><a href="#products">Продукты</a></li>
           <li><a href="quantocode/">КвантоКод</a></li>
           <li><a href="oracle/">Oracle</a></li>
           <li><a href="elyor/">ЭЛИОР</a></li>
@@ -88,7 +92,7 @@
           <p class="hero-lead">Числа, символы и образы - инструменты, которые помогают увидеть главное и сделать следующий шаг.</p>
           </div>
           <div class="actions">
-            <a class="button button-primary" href="#products">Выбрать свой путь <span aria-hidden="true">↓</span></a>
+            <a class="button button-primary" href="#paths">Выбрать свой путь <span aria-hidden="true">↓</span></a>
             <a class="button button-secondary" href="quantocode/">Начать с КвантоКода <span aria-hidden="true">→</span></a>
           </div>
           <p class="hero-note">Бесплатные точки входа в Telegram. Без регистрации на сайте.</p>
@@ -96,7 +100,7 @@
       </div>
     </section>
 
-    <section class="section" id="products" aria-labelledby="products-title">
+    <section class="section" id="paths" aria-labelledby="products-title">
       <div class="shell">
         <div class="section-heading" data-reveal>
           <span class="eyebrow">Три инструмента</span>
@@ -105,22 +109,28 @@
         </div>
         <div class="product-grid">
           <a class="product-card product-card--quantocode" href="quantocode/" data-reveal>
-            <span class="product-number">01 · ЧИСЛА</span>
-            <h3>КвантоКод</h3>
-            <p>Квантовая матрица личности: три кода - Душа, Тело и Личность - по дате рождения и имени.</p>
-            <span class="card-link">Рассчитать Код Души <span aria-hidden="true">→</span></span>
+            <div class="product-card__content">
+              <span class="product-number">ЧИСЛА</span>
+              <h3>КвантоКод</h3>
+              <p>Квантовая матрица личности: три кода - Душа, Тело и Личность - по дате рождения и имени.</p>
+              <span class="card-link">Рассчитать Код Души <span aria-hidden="true">→</span></span>
+            </div>
           </a>
           <a class="product-card product-card--oracle" href="oracle/" data-reveal>
-            <span class="product-number">02 · ОБРАЗЫ</span>
-            <h3>Mystic Oracle</h3>
-            <p>Таро, Руны, Астрология и Сонник - восемь систем, которые помогают услышать собственный ответ.</p>
-            <span class="card-link">Задать вопрос <span aria-hidden="true">→</span></span>
+            <div class="product-card__content">
+              <span class="product-number">ОБРАЗЫ</span>
+              <h3>Mystic Oracle</h3>
+              <p>Таро, Руны, Астрология и Сонник - восемь систем, которые помогают услышать собственный ответ.</p>
+              <span class="card-link">Задать вопрос <span aria-hidden="true">→</span></span>
+            </div>
           </a>
           <a class="product-card product-card--elyor" href="elyor/" data-reveal>
-            <span class="product-number">03 · СИМВОЛ</span>
-            <h3>ЭЛИОР</h3>
-            <p>Персональный символ-якорь под важную цель: образ и мантра для фокуса и ежедневной практики.</p>
-            <span class="card-link">Создать первый символ <span aria-hidden="true">→</span></span>
+            <div class="product-card__content">
+              <span class="product-number">СИМВОЛ</span>
+              <h3>ЭЛИОР</h3>
+              <p>Персональный символ-якорь под важную цель: образ и мантра для фокуса и ежедневной практики.</p>
+              <span class="card-link">Создать первый символ <span aria-hidden="true">→</span></span>
+            </div>
           </a>
         </div>
       </div>
@@ -168,6 +178,6 @@
     </div>
   </footer>
 <noscript><div><img src="https://mc.yandex.ru/watch/109066888" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-  <script src="assets/js/site.js" defer></script>
+  <script src="assets/js/site.js?v=2" defer></script>
 </body>
 </html>

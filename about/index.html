@@ -23,7 +23,7 @@
   <meta name="twitter:description" content="История Тихого Дома и люди, которые создают его продукты.">
   <meta name="twitter:image" content="https://numerologpro.ru/assets/images/home/og-quiet-house.jpg">
   <link rel="preload" as="font" href="../assets/fonts/inter-roman.woff2" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="../assets/css/site.css?v=3">
+  <link rel="stylesheet" href="../assets/css/site.css?v=4">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -63,9 +63,13 @@
       <a class="brand" href="../" aria-label="Тихий Дом - главная">
         <img class="brand-logo" src="../assets/images/brand/logo.svg" width="710" height="256" alt="Тихий Дом">
       </a>
-      <nav aria-label="Основная навигация">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Открыть меню">
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+        <span class="nav-toggle__bar" aria-hidden="true"></span>
+      </button>
+      <nav class="site-navigation" id="primary-navigation" aria-label="Основная навигация">
         <ul class="nav-links">
-          <li><a href="../#products">Продукты</a></li>
           <li><a href="../quantocode/">КвантоКод</a></li>
           <li><a href="../oracle/">Oracle</a></li>
           <li><a href="../elyor/">ЭЛИОР</a></li>
@@ -181,6 +185,6 @@
   </footer>
 
   <noscript><div><img src="https://mc.yandex.ru/watch/109066888" style="position:absolute;left:-9999px" alt=""></div></noscript>
-  <script src="../assets/js/site.js"></script>
+  <script src="../assets/js/site.js?v=2"></script>
 </body>
 </html>
