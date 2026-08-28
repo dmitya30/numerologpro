@@ -41,14 +41,6 @@
     --color-whitegrey: #FAF8F4 !important;
     --color-border: #E8DFCF !important;
   }
-
-  html.dark-mode,
-  body.dark-mode {
-    --background-color: #FAF8F4 !important;
-    --color-primary-text: #1F2937 !important;
-    background-color: #FAF8F4 !important;
-    color: #1F2937 !important;
-  }
   @media (prefers-color-scheme: dark) {
     :root {
       --background-color: #FAF8F4 !important;
@@ -60,19 +52,12 @@
     }
   }
 
-  /* Скрытие UI-элементов темы */
-  button[aria-label*="theme" i],
-  button[aria-label*="тема" i] {
-    display: none !important;
-  }
-
   /* Прижатие футера к низу */
   html, body {
     min-height: 100vh;
     overflow-x: clip;
   }
   body { display: flex; flex-direction: column; }
-  main.site-main { flex: 1 0 auto; }
 
   /* ============================================================
      3. БАЗОВАЯ ТИПОГРАФИКА
@@ -137,15 +122,6 @@ h6 {
   /* Меню - шрифт и компактный padding пунктов */
 
   /* Цвета пунктов меню */
-  
-  li.nav-current a,
-li.nav-current > span {
-    color: var(--td-accent) !important;
-    font-weight: 600 !important;
-  }
-  li.nav-current a:hover {
-    color: var(--td-accent-warm) !important;
-  }
 
   /* ============================================================
      6. ЛЕНДИНГ-УТИЛИТЫ
@@ -231,19 +207,6 @@ li.nav-current > span {
    ФИКС 1 - фон страницы, перебиваем глобальный
    light-force и media-query из дизайн-системы
    ═══════════════════════════════════════════════ */
-body.page-oracle,
-body.page-oracle.page-template,
-html body.page-oracle {
-  background-color: #0d0b1a !important;
-  color: #e8e0f0 !important;
-}
-@media (prefers-color-scheme: dark) {
-  body.page-oracle,
-  html body.page-oracle {
-    background-color: #0d0b1a !important;
-    color: #e8e0f0 !important;
-  }
-}
 
 /* ═══════════════════════════════════════════════
    ШАПКА: тёмная тема только на /oracle/
@@ -326,7 +289,6 @@ html body.page-oracle {
    глобального h1 { font-size: clamp(36px,...) }
    ═══════════════════════════════════════════════ */
 h1.oracle-headline,
-body.page-oracle h1.oracle-headline,
 .oracle-inner h1.oracle-headline {
   font-family: 'Lora', Georgia, serif !important;
   font-size: clamp(1.65rem, 4.8vw, 2.5rem) !important;
@@ -340,7 +302,6 @@ body.page-oracle h1.oracle-headline,
   max-width: none !important;
 }
 h1.oracle-headline em,
-body.page-oracle h1.oracle-headline em,
 .oracle-inner h1.oracle-headline em {
   font-style: italic !important;
   color: #c9a96e !important;
@@ -507,7 +468,6 @@ body.page-oracle h1.oracle-headline em,
     padding: 44px 18px 60px;
   }
   h1.oracle-headline,
-  body.page-oracle h1.oracle-headline,
   .oracle-inner h1.oracle-headline {
     font-size: clamp(1.5rem, 7vw, 2rem) !important;
     line-height: 1.3 !important;

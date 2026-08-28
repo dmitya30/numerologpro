@@ -43,3 +43,10 @@ Source checkpoint: `568fc7045524d0268423c0ed2a9c4c956ce6f7bc`.
 ## Следующий шаг
 
 Проверить оставшиеся глобальные правила и custom properties отдельно, не смешивая это с текущим доказанным удалением.
+
+## Дополнительная верификация 28.08.2026
+
+- Первый cleanup-парсер не удалил часть вложенных и смешанных legacy selectors.
+- Остаточные `dark-mode`, `nav-current`, `site-main`, theme-button и `body.page-*` rules удалены отдельным checkpoint.
+- После удаления проверены обязательные активные product wrapper selectors и баланс CSS braces.
+- Визуальный QA первого cleanup: PASS.

@@ -41,14 +41,6 @@
     --color-whitegrey: #FAF8F4 !important;
     --color-border: #E8DFCF !important;
   }
-
-  html.dark-mode,
-  body.dark-mode {
-    --background-color: #FAF8F4 !important;
-    --color-primary-text: #1F2937 !important;
-    background-color: #FAF8F4 !important;
-    color: #1F2937 !important;
-  }
   @media (prefers-color-scheme: dark) {
     :root {
       --background-color: #FAF8F4 !important;
@@ -60,19 +52,12 @@
     }
   }
 
-  /* Скрытие UI-элементов темы */
-  button[aria-label*="theme" i],
-  button[aria-label*="тема" i] {
-    display: none !important;
-  }
-
   /* Прижатие футера к низу */
   html, body {
     min-height: 100vh;
     overflow-x: clip;
   }
   body { display: flex; flex-direction: column; }
-  main.site-main { flex: 1 0 auto; }
 
   /* ============================================================
      3. БАЗОВАЯ ТИПОГРАФИКА
@@ -137,15 +122,6 @@ h6 {
   /* Меню - шрифт и компактный padding пунктов */
 
   /* Цвета пунктов меню */
-  
-  li.nav-current a,
-li.nav-current > span {
-    color: var(--td-accent) !important;
-    font-weight: 600 !important;
-  }
-  li.nav-current a:hover {
-    color: var(--td-accent-warm) !important;
-  }
 
   /* ============================================================
      6. ЛЕНДИНГ-УТИЛИТЫ
@@ -228,19 +204,6 @@ li.nav-current > span {
   }
 
 /* ═══ ФИКС 1 - фон страницы (бьём глобальный светлый CSS) ═══ */
-body.page-quantocode,
-body.page-quantocode.page-template,
-html body.page-quantocode {
-  background-color: #0E0E1A !important;
-  color: #E8E6F0 !important;
-}
-@media (prefers-color-scheme: dark) {
-  body.page-quantocode,
-  html body.page-quantocode {
-    background-color: #0E0E1A !important;
-    color: #E8E6F0 !important;
-  }
-}
 
 /* ═══ ШАПКА: тёмная только на /quantocode/ ═══ */
 
@@ -298,7 +261,6 @@ html body.page-quantocode {
 
 /* ═══ HERO ═══ */
 h1.qk-h1,
-body.page-quantocode h1.qk-h1,
 .qk-inner h1.qk-h1 {
   font-family: 'Lora', Georgia, serif !important;
   font-size: clamp(1.7rem, 5vw, 2.6rem) !important;

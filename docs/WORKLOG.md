@@ -314,3 +314,12 @@
 - Действующие глобальные правила, product selectors, общий `products.css`, шрифты, DOM, CTA и аналитика не изменялись.
 - Версии product-specific CSS обновлены с `v=1` до `v=2`.
 - Следующий шаг: визуальный QA, затем аудит оставшихся активных глобальных правил и variables.
+
+## 28.08.2026 - Завершена очистка остаточных dead product selectors
+
+- После первого cleanup обнаружена неполная обработка вложенных и смешанных selectors.
+- Удалены остаточные `dark-mode`, `nav-current`, `site-main`, theme-button и `body.page-*` rules.
+- Активные product selectors и визуальное оформление сохранены.
+- Версии product-specific CSS обновлены до `v=3`.
+- Визуальный QA предыдущего cleanup подтверждён пользователем как PASS.
+- Следующий шаг: аудит оставшихся global rules и custom properties.
