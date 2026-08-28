@@ -12,9 +12,9 @@
 
 Статический baseline опубликован в GitHub Pages preview и прошёл последовательную очистку Ghost runtime, metadata, Schema.org, шрифтов и исключённых коммерческих и юридических ссылок.
 
-Текущий технический baseline: `b39d3a420fd272dc33f171200c092cad3035b16c` (`fix: remove residual dead product selectors`).
+Текущий технический baseline: `4a3666dc27d9e14955e6d772b9de94aae85b64ec` (`refactor: remove Ghost theme product CSS`).
 
-Текущий гейт - read-only аудит оставшихся глобальных product CSS-правил и custom properties после двух консервативных checkpoint очистки selector branches.
+Текущий гейт - создание воспроизводимых автоматических проверок HTML, metadata, внутренних ссылок и локальных runtime-ресурсов перед полным browser-level QA.
 
 ## Репозиторий
 
@@ -22,7 +22,7 @@
 - Репозиторий: `https://github.com/dmitya30/numerologpro`.
 - Локальный путь: `~/projects/numerologpro`.
 - Основная ветка: `main`.
-- Подтверждённый технический baseline: `b39d3a420fd272dc33f171200c092cad3035b16c`.
+- Подтверждённый технический baseline: `4a3666dc27d9e14955e6d772b9de94aae85b64ec`.
 - Первый коммит: `af775211841937ddfa5244262022d7c1d9776f6c` (`docs: establish project execution contract`).
 - Базовая документация зафиксирована коммитом `d75faaa7b4e4a73c193768f9b4e5da02c1b931a7`.
 - Инструмент исходного аудита зафиксирован коммитом `2ce304d501b55c7cb4fa6e7a34dbaa2df5028e79`.
@@ -100,7 +100,7 @@ Production-перенос должен быть завершён до оконч
 - Социальные изображения и Schema.org logo используют абсолютные production URL.
 - Lora Roman, Lora Italic и Inter обслуживаются локальными файлами.
 - Product headers работают в sticky-режиме; визуальный QA трёх product pages пройден.
-- Доказанно мёртвые и остаточные legacy selectors удалены; оставшиеся глобальные правила и custom properties требуют отдельного read-only анализа перед дальнейшим упрощением.
+- Product CSS очищен от доказанно мёртвых selectors, Ghost theme overrides и неиспользуемых custom properties; общий CSS консолидирован, повторный визуальный QA трёх product pages пройден.
 - Полный browser-level QA console, network, keyboard focus и horizontal scroll ещё не завершён.
 - Решение по `/about/` и итоговое поведение legacy URL ещё не зафиксированы.
 - DNS не изменялся; VPS и Ghost остаются временным fallback до production QA.

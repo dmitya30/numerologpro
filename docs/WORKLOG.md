@@ -342,3 +342,10 @@
 - Активные layout, typography, links и focus styles сохранены.
 - Версия общего `products.css` обновлена с `v=5` до `v=6`.
 - Следующий шаг: визуальный QA трёх product pages.
+
+## 28.08.2026 - Product CSS cleanup gate завершён
+
+- После удаления Ghost theme и unused global CSS повторный визуальный QA `/quantocode/`, `/oracle/` и `/elyor/` пройден: PASS.
+- Подтверждены фон, sticky header, типографика, CTA и основные content sections.
+- Гейт очистки product CSS завершён на техническом baseline `4a3666dc27d9e14955e6d772b9de94aae85b64ec`.
+- Следующий шаг: добавить воспроизводимые автоматические проверки HTML, metadata, ссылок и runtime-ресурсов.

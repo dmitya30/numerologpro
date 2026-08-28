@@ -34,4 +34,4 @@ Source checkpoint: `ea58e93be2121d56a1a4cda79c27bc705e70ab96`.
 - Preserved active page geometry, typography, links, focus styles and five used `--td-*` properties.
 - Shared CSS cache version changed from `v=5` to `v=6`.
 
-A new visual QA pass is required after publication.
+Visual QA after publication: PASS.
