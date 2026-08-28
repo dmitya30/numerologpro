@@ -323,3 +323,12 @@
 - Версии product-specific CSS обновлены до `v=3`.
 - Визуальный QA предыдущего cleanup подтверждён пользователем как PASS.
 - Следующий шаг: аудит оставшихся global rules и custom properties.
+
+## 28.08.2026 - Консолидация общего product CSS
+
+- Read-only аудит подтвердил идентичность глобального CSS-префикса трёх product pages.
+- Общий префикс перенесён в `assets/css/products.css` без изменения нормализованного effective CSS.
+- Product-specific CSS теперь начинается с фактических product wrapper selectors.
+- Версия общего CSS обновлена до `v=5`, product-specific CSS - до `v=4`.
+- Неиспользуемые variables и глобальные selector branches пока не удалялись.
+- Следующий шаг: визуальный QA, затем отдельная точечная очистка общего блока.
