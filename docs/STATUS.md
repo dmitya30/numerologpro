@@ -12,11 +12,11 @@
 
 Статический baseline опубликован в GitHub Pages preview и прошёл последовательную очистку Ghost runtime, metadata, Schema.org, шрифтов и исключённых коммерческих и юридических ссылок.
 
-Текущий технический baseline: `f55a17e157c53ff258212d2b76091d2ec2d554f9` (`test: add static site integrity checks`).
+Текущий технический baseline: `f6267b5e8a7fb8c52ddeeda04d97cb804efd5310` (`feat: add redesigned about page`).
 
 Воспроизводимые static-site проверки и полный browser-level QA GitHub Pages project preview завершены: PASS.
 
-Поведение `/about/` и остальных legacy URL зафиксировано решением D-014. Текущий гейт - реализовать `/about/` из исходного текста в визуальной системе нового сайта, не добавляя страницу в навигацию главной.
+Страница `/about/` реализована из исходного текста в визуальной системе нового сайта и прошла визуальный QA. Текущий гейт - включить маршрут в sitemap и воспроизводимые проверки, после чего перейти к подготовке custom domain и DNS rollback.
 
 ## Репозиторий
 
@@ -24,7 +24,7 @@
 - Репозиторий: `https://github.com/dmitya30/numerologpro`.
 - Локальный путь: `~/projects/numerologpro`.
 - Основная ветка: `main`.
-- Подтверждённый технический baseline: `f55a17e157c53ff258212d2b76091d2ec2d554f9`.
+- Подтверждённый технический baseline: `f6267b5e8a7fb8c52ddeeda04d97cb804efd5310`.
 - Первый коммит: `af775211841937ddfa5244262022d7c1d9776f6c` (`docs: establish project execution contract`).
 - Базовая документация зафиксирована коммитом `d75faaa7b4e4a73c193768f9b4e5da02c1b931a7`.
 - Инструмент исходного аудита зафиксирован коммитом `2ce304d501b55c7cb4fa6e7a34dbaa2df5028e79`.
@@ -36,9 +36,10 @@
 - `/`;
 - `/elyor/`;
 - `/quantocode/`;
-- `/oracle/`.
+- `/oracle/`;
+- `/about/`.
 
-Маршрут `/about/` остаётся на отдельном контентном гейте и пока не входит в обязательную навигацию или sitemap.
+Маршрут `/about/` существует как отдельная фоновая страница и не добавляется в навигацию главной.
 
 ## Не переносится
 
@@ -103,7 +104,7 @@ Production-перенос должен быть завершён до оконч
 - Lora Roman, Lora Italic и Inter обслуживаются локальными файлами.
 - Product headers работают в sticky-режиме; визуальный QA трёх product pages пройден.
 - Product CSS очищен от доказанно мёртвых selectors, Ghost theme overrides и неиспользуемых custom properties; общий CSS консолидирован, повторный визуальный QA трёх product pages пройден.
-- Воспроизводимый `scripts/check-static-site.py` проходит 274 проверки HTML, metadata, аналитики, JSON-LD, ссылок, ресурсов, Ghost/theme/commercial markers, robots.txt и sitemap.xml.
+- Воспроизводимый `scripts/check-static-site.py` проверяет HTML, metadata, аналитику, JSON-LD, ссылки, ресурсы, Ghost/theme/commercial markers, robots.txt и sitemap.xml.
 - Полный browser-level QA project preview завершён: desktop, mobile, navigation, CTA, footer, images, fonts, console, network, keyboard focus и horizontal scroll - PASS.
-- `/about/` утверждена к переносу: используется только исходный текст, а разметка и дизайн создаются заново без пункта в навигации главной. Legal, blog, archives, RSS и Ghost-служебные маршруты не переносятся и используют пользовательскую 404.
+- `/about/` реализована из исходного текста в визуальной системе нового сайта, прошла визуальный QA и не добавлена в навигацию главной. Legal, blog, archives, RSS и Ghost-служебные маршруты не переносятся и используют пользовательскую 404.
 - DNS не изменялся; VPS и Ghost остаются временным fallback до production QA.

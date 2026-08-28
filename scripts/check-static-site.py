@@ -30,6 +30,10 @@ PAGES = {
         "canonical": "https://numerologpro.ru/elyor/",
         "telegram": "telegram.me/yourElyor_bot",
     },
+    "about/index.html": {
+        "canonical": "https://numerologpro.ru/about/",
+        "telegram": "telegram.me/quantocode_bot",
+    },
     "404.html": {
         "canonical": None,
         "telegram": None,
@@ -41,6 +45,7 @@ EXPECTED_SITEMAP = {
     "https://numerologpro.ru/elyor/",
     "https://numerologpro.ru/quantocode/",
     "https://numerologpro.ru/oracle/",
+    "https://numerologpro.ru/about/",
 }
 
 GHOST_MARKERS = [
@@ -271,7 +276,7 @@ tree = ET.parse(ROOT / "sitemap.xml")
 namespace = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
 urls = {node.text for node in tree.findall("sm:url/sm:loc", namespace)}
 require(urls == EXPECTED_SITEMAP, "sitemap URL set is invalid")
-require(len(tree.findall("sm:url", namespace)) == 4, "sitemap URL count is invalid")
+require(len(tree.findall("sm:url", namespace)) == 5, "sitemap URL count is invalid")
 
 require((ROOT / ".nojekyll").is_file(), ".nojekyll is missing")
 require(".work/" in (ROOT / ".gitignore").read_text(encoding="utf-8").splitlines(), ".work is not ignored")

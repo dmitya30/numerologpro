@@ -386,3 +386,13 @@
 - `/about/` не добавлена в навигацию главной.
 - Sitemap и воспроизводимый checker пока не изменялись: это отдельный checkpoint после публикации и визуального QA.
 - Следующий шаг: проверить `/about/` в GitHub Pages preview на desktop и mobile.
+
+## 28.08.2026 - Гейт `/about/` завершён
+
+- Новая статическая `/about/` опубликована в GitHub Pages preview и прошла визуальный QA.
+- Удалена подпись редакции как ненужный остаток блоговой модели старого Ghost-сайта.
+- `/about/` добавлена в sitemap и воспроизводимый static-site checker.
+- Проверки страницы включают HTML structure, metadata, canonical, analytics, JSON-LD, Telegram CTA, внутренние ссылки и локальные ресурсы.
+- Страница не добавлена в навигацию главной.
+- Отдельный `about.css` остаётся временным page-specific слоем до общей дедупликации CSS после редизайна product pages.
+- Следующий шаг: подготовка custom domain, фиксация DNS baseline и rollback-плана без изменения DNS.

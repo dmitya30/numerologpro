@@ -219,12 +219,6 @@
   border-top: 1px solid var(--line);
 }
 
-.about-credit {
-  margin-top: 2rem !important;
-  color: var(--muted);
-  font-size: 0.86rem !important;
-}
-
 @media (max-width: 900px) {
   .about-story,
   .people-grid {
