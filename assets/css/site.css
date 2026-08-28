@@ -3361,3 +3361,14 @@ html.product-page,
     transform: translateY(-10px);
   }
 }
+
+/* Home card proportions v5 */
+@media (min-width: 721px) {
+  :where(html:not(.product-page)) .product-card {
+    min-height: clamp(292px, 29vw, 340px);
+  }
+
+  :where(html:not(.product-page)) .product-card__content {
+    transform: translateY(-18px);
+  }
+}
