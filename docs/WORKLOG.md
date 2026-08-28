@@ -396,3 +396,20 @@
 - Страница не добавлена в навигацию главной.
 - Отдельный `about.css` остаётся временным page-specific слоем до общей дедупликации CSS после редизайна product pages.
 - Следующий шаг: подготовка custom domain, фиксация DNS baseline и rollback-плана без изменения DNS.
+
+## 28.08.2026 - Редизайн трёх product pages завершён
+
+- КвантоКод переведён на сине-золотую визуальную систему.
+- Финальный проверенный Quantocode checkpoint: d8fa94618f7c2430799fc661fd8ddd80e3ac21a3.
+- Mystic Oracle переведён на фиолетово-золотую систему; hero emoji заменён CSS-сферой.
+- Финальный проверенный Oracle checkpoint: 0a2da77fdc6e1123971085cf3c075ddc6a1b5692.
+- ЭЛИОР обновлён с сохранением SVG и основного accent #E01CBC.
+- Финальный проверенный Elyor checkpoint: dd1a9f0d77e6275adf9827d74d91dae5ff6e125d.
+- Визуальный QA всех трёх обновлённых product pages: PASS.
+- Тексты, CTA, Telegram URL, metadata и аналитика сохранены.
+- Read-only CSS-аудит подтвердил отсутствие Ghost и theme-state markers.
+- В site.css остаются два оправданных reduced-motion !important.
+- В Quantocode остаётся восстановительный блок из 35 !important.
+- Следующий шаг: нормализация Quantocode CSS и общая CSS-консолидация.
+
+Статус: product redesign PASS; CSS consolidation ещё не выполнена.

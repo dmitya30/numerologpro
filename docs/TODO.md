@@ -127,3 +127,18 @@
 - [x] Добавить `/about/` в sitemap и автоматические проверки.
 - [x] Выполнить browser-level QA новой `/about/`.
 - [ ] Подготовить GitHub Pages custom domain, DNS rollback и production cutover после отдельного разрешения.
+
+## Оперативный checkpoint - 28.08.2026: product redesign
+
+- [x] Обновить КвантоКод без изменения текста, CTA, metadata, аналитики и URL.
+- [x] Пройти визуальный QA обновлённого КвантоКода.
+- [x] Обновить Mystic Oracle и заменить системный hero emoji на CSS-сферу.
+- [x] Пройти визуальный QA обновлённого Mystic Oracle.
+- [x] Обновить ЭЛИОР с сохранением SVG и фирменного magenta #E01CBC.
+- [x] Пройти визуальный QA обновлённого ЭЛИОР.
+- [x] Выполнить read-only аудит шести CSS-файлов и деклараций !important.
+- [ ] Нормализовать восстановительные !important в CSS КвантоКода.
+- [ ] Объединить шесть CSS-файлов в один assets/css/site.css.
+- [ ] Удалить дубли font-face, reset и общих компонентных правил.
+- [ ] Пройти полный desktop/mobile/browser QA после консолидации CSS.
+- [ ] Перейти к custom domain и DNS только после отдельного подтверждения.

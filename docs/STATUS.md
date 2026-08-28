@@ -12,11 +12,11 @@
 
 Статический baseline опубликован в GitHub Pages preview и прошёл последовательную очистку Ghost runtime, metadata, Schema.org, шрифтов и исключённых коммерческих и юридических ссылок.
 
-Текущий технический baseline: `f6267b5e8a7fb8c52ddeeda04d97cb804efd5310` (`feat: add redesigned about page`).
+Подтверждённый визуальный baseline после редизайна трёх product pages: `dd1a9f0d77e6275adf9827d74d91dae5ff6e125d` (`style: refresh elyor page`).
 
 Воспроизводимые static-site проверки и полный browser-level QA GitHub Pages project preview завершены: PASS.
 
-Страница `/about/` реализована из исходного текста в визуальной системе нового сайта и прошла визуальный QA. Текущий гейт - включить маршрут в sitemap и воспроизводимые проверки, после чего перейти к подготовке custom domain и DNS rollback.
+Страница `/about/` реализована из исходного текста в визуальной системе нового сайта и прошла визуальный QA. Текущий гейт - нормализовать восстановительные `!important` КвантоКода, объединить шесть CSS-файлов в один `assets/css/site.css`, пройти полный визуальный QA и только затем перейти к custom domain и DNS cutover.
 
 ## Репозиторий
 
