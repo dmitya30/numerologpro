@@ -305,3 +305,12 @@
 - Добавлен санитизированный текущий отчёт `migration-audit/static-baseline-2026-08-27.md`.
 - `AGENTS.md` проверен и не изменён: его правила `.work/` и `migration-audit/` уже соответствуют текущему состоянию.
 - Следующий шаг: read-only аудит фактического использования product CSS без изменений файлов.
+
+## 27.08.2026 - Консервативная очистка мёртвых product CSS selectors
+
+- Read-only аудит выполнен на checkpoint `568fc7045524d0268423c0ed2a9c4c956ce6f7bc`.
+- Из трёх product-specific CSS удалены только selector branches с доказанно отсутствующими class, id или theme-state tokens.
+- Смешанные selector groups сохранены с удалением только мёртвых ветвей.
+- Действующие глобальные правила, product selectors, общий `products.css`, шрифты, DOM, CTA и аналитика не изменялись.
+- Версии product-specific CSS обновлены с `v=1` до `v=2`.
+- Следующий шаг: визуальный QA, затем аудит оставшихся активных глобальных правил и variables.

@@ -115,8 +115,9 @@
 - [x] Перевести social image и Schema.org logo на абсолютные production URL.
 - [x] Добавить полную инициализацию GA на главную и пользовательскую 404.
 - [x] Обновить постоянную документацию текущего статического baseline.
-- [ ] Выполнить read-only анализ селекторов `product-quantocode.css`, `product-oracle.css` и `product-elyor.css`.
-- [ ] Удалять только доказанно неиспользуемые legacy-комментарии и CSS-правила отдельными checkpoint-коммитами.
+- [x] Выполнить read-only анализ селекторов `product-quantocode.css`, `product-oracle.css` и `product-elyor.css`.
+- [x] Удалить доказанно неиспользуемые selector branches и legacy-комментарии первым консервативным CSS-checkpoint.
+- [ ] Проверить оставшиеся активные глобальные product CSS-правила и variables перед дальнейшим упрощением.
 - [ ] Выполнить полный browser-level QA: desktop, mobile, keyboard, console, network и horizontal scroll.
 - [ ] Создать воспроизводимые автоматические проверки HTML, ссылок, metadata и runtime-ресурсов.
 - [ ] Зафиксировать поведение `/about/` и остальных legacy URL.

@@ -4,7 +4,6 @@
             --background-color: #ffffff
         }
 
-
 /* ============================================================
      1. ДИЗАЙН-ТОКЕНЫ
      ============================================================ */
@@ -33,7 +32,6 @@
     --td-transition: 0.2s ease;
     --td-transition-fast: 0.15s ease;
 
-    /* Перекрытие переменных темы Source */
     --background-color: #FAF8F4 !important;
     --color-primary-text: #1F2937 !important;
     --color-secondary-text: #4B5563 !important;
@@ -44,11 +42,7 @@
     --color-border: #E8DFCF !important;
   }
 
-  /* ============================================================
-     2. ПЕРЕБИВКА ТЕМЫ SOURCE
-     ============================================================ */
   html.dark-mode,
-  html[data-theme="dark"],
   body.dark-mode {
     --background-color: #FAF8F4 !important;
     --color-primary-text: #1F2937 !important;
@@ -68,15 +62,7 @@
 
   /* Скрытие UI-элементов темы */
   button[aria-label*="theme" i],
-button[aria-label*="тема" i],
-.theme-toggle,
-#theme-toggle,
-.subscribe-form,
-.footer-subscribe,
-.site-footer,
-.post-card-meta,
-.author-profile,
-.post-info {
+  button[aria-label*="тема" i] {
     display: none !important;
   }
 
@@ -86,29 +72,7 @@ button[aria-label*="тема" i],
     overflow-x: clip;
   }
   body { display: flex; flex-direction: column; }
-  .site-main,
-main.site-main { flex: 1 0 auto; }
-  
-  
-
-  .td-header-cta {
-    display: inline-block;
-    margin-left: 16px;
-    padding: 8px 18px;
-    background-color: var(--td-accent-warm);
-    color: #fff !important;
-    border-radius: 6px;
-    font-family: 'Inter', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.2s ease;
-  }
-  .td-header-cta:hover {
-    background-color: var(--td-accent);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
-  }
+  main.site-main { flex: 1 0 auto; }
 
   /* ============================================================
      3. БАЗОВАЯ ТИПОГРАФИКА
@@ -156,44 +120,21 @@ h6 {
     text-decoration-color: var(--td-accent-warm);
   }
 
-  .post-card {
-    background-color: var(--td-bg-secondary) !important;
-    border-radius: var(--td-radius-md);
-    border: 1px solid rgba(31, 41, 55, 0.05);
-  }
-
   /* ============================================================
      4. EXCERPT - лид под H1 на страницах и постах
      ============================================================ */
-  
 
   /* ============================================================
      5. ШАПКА САЙТА
      ============================================================ */
-  
 
   /* Sticky header */
-  
-
-  
-  
 
   /* Логотип (картинка) */
-  
-  
 
   /* Текстовый логотип (fallback, если без картинки) */
-  .site-logo {
-    font-family: 'Lora', Georgia, serif !important;
-    font-weight: 600 !important;
-    color: var(--td-text) !important;
-    letter-spacing: 0.01em;
-  }
-  
 
   /* Меню - шрифт и компактный padding пунктов */
-  
-  
 
   /* Цвета пунктов меню */
   
@@ -209,86 +150,13 @@ li.nav-current > span {
   /* ============================================================
      6. ЛЕНДИНГ-УТИЛИТЫ
      ============================================================ */
-  .td-section-out {
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
-    box-sizing: border-box;
-  }
-
-  .td-section-inner {
-    max-width: var(--td-w-wide);
-    margin: 0 auto;
-  }
-  .td-section-inner--narrow {
-    max-width: var(--td-w-narrow);
-    margin: 0 auto;
-  }
-  .td-section-inner--narrowest {
-    max-width: var(--td-w-reading);
-    margin: 0 auto;
-  }
-
-  .td-section-title {
-    font-family: 'Lora', Georgia, serif;
-    font-weight: 500;
-    font-size: clamp(30px, 4vw, 40px);
-    color: var(--td-text);
-    margin: 0 0 16px;
-    text-align: center;
-  }
-
-  .td-section-lead {
-    font-family: 'Inter', sans-serif;
-    font-size: 18px;
-    line-height: 1.6;
-    color: var(--td-text);
-    text-align: center;
-    max-width: var(--td-w-reading);
-    margin: 0 auto 56px;
-  }
 
   /* ============================================================
      7. КНОПКИ
      ============================================================ */
-  .td-btn {
-    display: inline-block;
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    text-decoration: none !important;
-    border: none;
-    border-radius: var(--td-radius-sm);
-    cursor: pointer;
-    text-align: center;
-    transition: background-color var(--td-transition), transform var(--td-transition-fast), box-shadow var(--td-transition);
-  }
-  .td-btn--sm  { font-size: 16px; padding: 12px 24px; }
-  .td-btn      { font-size: 17px; padding: 14px 32px; }
-  .td-btn--lg  { font-size: 18px; padding: 18px 40px; border-radius: 10px; }
 
-  .td-btn--primary {
-    background-color: var(--td-accent);
-    color: #FFFFFF !important;
-    box-shadow: var(--td-shadow-sm);
-  }
-  .td-btn--primary:hover {
-    background-color: var(--td-accent-warm);
-    transform: translateY(-1px);
-    box-shadow: var(--td-shadow-md);
-  }
-  .td-btn--warm {
-    background-color: var(--td-accent-warm);
-    color: #FFFFFF !important;
-    box-shadow: 0 4px 14px rgba(201, 123, 79, 0.3);
-  }
-  .td-btn--warm:hover {
-    background-color: var(--td-bg);
-    color: var(--td-accent) !important;
-    transform: translateY(-1px);
-  }
-
-  .td-btn:focus-visible,
-a:focus-visible,
-summary:focus-visible {
+  a:focus-visible,
+  summary:focus-visible {
     outline: 2px solid var(--td-accent-warm);
     outline-offset: 2px;
     border-radius: 4px;
@@ -297,68 +165,28 @@ summary:focus-visible {
   /* ============================================================
      8. ЧИСЛА В ТЕКСТЕ
      ============================================================ */
-  .td-num {
-    font-weight: 600;
-    color: var(--td-accent);
-    font-feature-settings: "tnum" 1, "lnum" 1;
-    font-variant-numeric: tabular-nums lining-nums;
-  }
-
-  
-
-  /* Контейнер: читательская ширина 720px, центрирование.
-     Отключаем grid темы Source на не-главных шаблонах,
-     чтобы дочерние элементы не наследовали колоночные ограничения. */
-  
 
   /* Дочерние элементы - обычный поток, без grid-column */
-  
-
-  
-
-  
-  
 
   /* Параграфы */
-  
 
   /* Заголовки */
-  
-  
-  
 
   /* Цитаты */
-  
-  
 
   /* Списки */
-  
-  
 
   /* Inline strong / em */
-  
-  
 
   /* Inline-код */
-  
 
   /* Блочный код */
-  
-  
 
   /* Разделитель */
-  
 
   /* Подпись автора: курсивный параграф после <hr> */
-  
-  
-  
 
   /* Таблицы из markdown (без класса, могут быть в обёртке темы) */
-  
-  
-  
-  
 
   /* ============================================================
      10. УТИЛИТЫ КОНТЕНТА - самостоятельные классы
@@ -367,121 +195,22 @@ summary:focus-visible {
      ============================================================ */
 
   /* Таблица в фирменном стиле (для html-card) */
-  .td-table {
-    width: 100% !important;
-    border-collapse: collapse !important;
-    margin: 0 0 24px !important;
-    font-family: 'Inter', sans-serif !important;
-    font-size: 17px !important;
-    line-height: 1.5 !important;
-  }
-  .td-table {
-    table-layout: auto;
-  }
-  .td-table th:last-child,
-  .td-table td:last-child {
-    white-space: nowrap;       /* цена не переносится */
-    width: 1%;                  /* сжимается до контента */
-    text-align: right;
-  }
-
-  
-  
-
-  .td-table th {
-    font-size: 17px !important;
-    font-weight: 600 !important;
-    background-color: var(--td-bg-secondary) !important;
-    color: var(--td-text) !important;
-    text-align: left !important;
-    padding: 12px 16px !important;
-    border-bottom: 2px solid var(--td-accent-warm) !important;
-  }
-
-  .td-table td {
-    font-size: 17px !important;
-    padding: 12px 16px !important;
-    border-bottom: 1px solid rgba(31, 41, 55, 0.08) !important;
-    color: var(--td-text) !important;
-  }
-
-  .td-table tr:last-child td {
-    border-bottom: none !important;
-  }
 
   /* CTA-обёртка */
-  .td-page-cta {
-    margin: 40px 0 8px;
-    text-align: center;
-  }
-  .td-page-cta a {
-    display: inline-block;
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    font-size: 18px;
-    padding: 18px 40px;
-    background-color: var(--td-accent);
-    color: #FFFFFF !important;
-    border-radius: 10px;
-    text-decoration: none !important;
-    box-shadow: var(--td-shadow-sm);
-    transition: background-color var(--td-transition), transform var(--td-transition-fast), box-shadow var(--td-transition);
-  }
-  .td-page-cta a:hover {
-    background-color: var(--td-accent-warm);
-    transform: translateY(-1px);
-    box-shadow: var(--td-shadow-md);
-  }
 
   /* Подпись автора (для html-card) */
-  .td-byline {
-    margin-top: 48px;
-    padding-top: 24px;
-    border-top: 1px solid var(--td-border);
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    line-height: 1.55;
-    color: var(--td-text-muted);
-    font-style: italic;
-  }
-  .td-byline a {
-    color: var(--td-accent) !important;
-    text-decoration: none;
-    border-bottom: 1px solid rgba(15, 76, 92, 0.3);
-    transition: color var(--td-transition-fast), border-color var(--td-transition-fast);
-  }
-  .td-byline a:hover {
-    color: var(--td-accent-warm) !important;
-    border-color: var(--td-accent-warm);
-  }
-
-  
-  
-  
-  
-  
 
   /* ============================================================
      11. ШАПКА СТАТЬИ (H1, тег, excerpt, featured image)
      ============================================================ */
-  /* Шапка статьи - отключаем grid темы Source, чтобы title и excerpt
-     получали полную ширину экрана, а не сжатую центральную колонку */
-  
-  
 
   /* Заголовок статьи - единая ширина с excerpt и content */
-  
 
   /* Тег в шапке статьи - туда же */
-  
 
   /* Главная картинка статьи - та же ширина */
-  
-
-  
 
   /* Скрыть стандартный header статьи только на главной (для SEO остаётся в DOM) */
-  
 
   /* ============================================================
      12. АДАПТИВ - мобильные значения
@@ -489,37 +218,12 @@ summary:focus-visible {
   @media (max-width: 720px) {
     /* Контейнер контента - padding 20px уже задан в разделе 9,
        здесь только уменьшаем вертикальные отступы */
-    
 
     /* Картинка статьи - уменьшаем вертикальные отступы */
-    
 
     /* Типографика контента */
-    
-    
-    
-    
-    
-    
-    .td-table {
-      font-size: 15px !important;
-    }
-    .td-table th,
-.td-table td {
-      padding: 10px 12px !important;
-      font-size: 15px !important;
-    }
-    
-
-    
-
-    
-
-    
-    
 
     /* Когда бургер открыт - переключаем в колонку, чтобы меню встало под brand */
-    
 
   }
 
@@ -538,18 +242,7 @@ html body.page-elyor {
   }
 }
 
-
-
-
-
-
 /* ═══ ШАПКА ═══ */
-
-
-
-
-
-body.page-elyor .td-header-cta { display: none !important; }
 
 /* ═══ ОБЁРТКА ═══ */
 .el-wrap {
@@ -764,15 +457,6 @@ body.page-elyor h1.el-h1,
 .el-final .el-lead { margin-bottom: 24px; }
 
 /* ═══ ЮР-ССЫЛКИ ═══ */
-.el-foot { margin-top: 40px; text-align: center; }
-.el-foot a {
-  font-size: .75rem; color: rgba(237,233,240,.28) !important;
-  text-decoration: none !important;
-  border-bottom: 1px solid rgba(237,233,240,.09);
-  padding-bottom: 1px; margin: 0 8px;
-  transition: color .15s ease;
-}
-.el-foot a:hover { color: rgba(224,28,188,.6) !important; }
 
 /* ═══ МОБАЙЛ ═══ */
 @media (max-width: 480px) {
