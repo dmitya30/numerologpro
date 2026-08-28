@@ -358,3 +358,12 @@
 - Проверяется отсутствие Ghost runtime, theme switching, исключённых legal routes и коммерческих markers.
 - Первый полный запуск проверок: PASS.
 - Следующий шаг: browser-level QA console, network, keyboard focus и horizontal scroll.
+
+## 28.08.2026 - GitHub Pages draft browser QA завершён
+
+- На checkpoint `f55a17e157c53ff258212d2b76091d2ec2d554f9` повторно выполнен `scripts/check-static-site.py`: PASS, 274 проверки.
+- Обязательные маршруты project preview возвращают HTTP 200; пользовательская 404 возвращает HTTP 404.
+- Выполнен полный browser-level QA desktop и mobile layout, navigation, CTA, footer, images и fonts: PASS.
+- Проверены horizontal scroll, keyboard navigation, focus states, browser console и network: PASS.
+- Подтверждено отсутствие runtime-запросов к Ghost и VPS; DNS, VPS и Ghost не изменялись.
+- Следующий шаг: зафиксировать поведение `/about/` и остальных legacy URL перед подготовкой DNS cutover.

@@ -12,9 +12,11 @@
 
 Статический baseline опубликован в GitHub Pages preview и прошёл последовательную очистку Ghost runtime, metadata, Schema.org, шрифтов и исключённых коммерческих и юридических ссылок.
 
-Текущий технический baseline: `4a3666dc27d9e14955e6d772b9de94aae85b64ec` (`refactor: remove Ghost theme product CSS`).
+Текущий технический baseline: `f55a17e157c53ff258212d2b76091d2ec2d554f9` (`test: add static site integrity checks`).
 
-Текущий гейт - создание воспроизводимых автоматических проверок HTML, metadata, внутренних ссылок и локальных runtime-ресурсов перед полным browser-level QA.
+Воспроизводимые static-site проверки и полный browser-level QA GitHub Pages project preview завершены: PASS.
+
+Текущий гейт - зафиксировать итоговое поведение `/about/` и остальных legacy URL перед подготовкой custom domain, DNS rollback и production cutover.
 
 ## Репозиторий
 
@@ -22,7 +24,7 @@
 - Репозиторий: `https://github.com/dmitya30/numerologpro`.
 - Локальный путь: `~/projects/numerologpro`.
 - Основная ветка: `main`.
-- Подтверждённый технический baseline: `4a3666dc27d9e14955e6d772b9de94aae85b64ec`.
+- Подтверждённый технический baseline: `f55a17e157c53ff258212d2b76091d2ec2d554f9`.
 - Первый коммит: `af775211841937ddfa5244262022d7c1d9776f6c` (`docs: establish project execution contract`).
 - Базовая документация зафиксирована коммитом `d75faaa7b4e4a73c193768f9b4e5da02c1b931a7`.
 - Инструмент исходного аудита зафиксирован коммитом `2ce304d501b55c7cb4fa6e7a34dbaa2df5028e79`.
@@ -101,6 +103,7 @@ Production-перенос должен быть завершён до оконч
 - Lora Roman, Lora Italic и Inter обслуживаются локальными файлами.
 - Product headers работают в sticky-режиме; визуальный QA трёх product pages пройден.
 - Product CSS очищен от доказанно мёртвых selectors, Ghost theme overrides и неиспользуемых custom properties; общий CSS консолидирован, повторный визуальный QA трёх product pages пройден.
-- Полный browser-level QA console, network, keyboard focus и horizontal scroll ещё не завершён.
+- Воспроизводимый `scripts/check-static-site.py` проходит 274 проверки HTML, metadata, аналитики, JSON-LD, ссылок, ресурсов, Ghost/theme/commercial markers, robots.txt и sitemap.xml.
+- Полный browser-level QA project preview завершён: desktop, mobile, navigation, CTA, footer, images, fonts, console, network, keyboard focus и horizontal scroll - PASS.
 - Решение по `/about/` и итоговое поведение legacy URL ещё не зафиксированы.
 - DNS не изменялся; VPS и Ghost остаются временным fallback до production QA.
