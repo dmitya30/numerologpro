@@ -1,270 +1,414 @@
-/* Oracle product-specific CSS */
+/* Mystic Oracle product-specific CSS: visual redesign pilot */
+
+.product-page--oracle {
+  --oracle-bg: #030711;
+  --oracle-bg-soft: #0b0820;
+  --oracle-surface: rgba(20, 14, 48, 0.72);
+  --oracle-surface-strong: rgba(27, 17, 61, 0.88);
+  --oracle-text: #f8f4ff;
+  --oracle-text-soft: rgba(235, 225, 251, 0.76);
+  --oracle-text-muted: rgba(218, 202, 242, 0.52);
+  --oracle-violet: #9b72ff;
+  --oracle-violet-light: #bea5ff;
+  --oracle-gold: #f4c879;
+  --oracle-border: rgba(174, 137, 255, 0.2);
+  --oracle-border-strong: rgba(190, 165, 255, 0.38);
+}
+
+.product-page__body--oracle {
+  background: var(--oracle-bg);
+}
+
+.product-page--oracle .product-header {
+  background: rgba(3, 7, 17, 0.84);
+  border-bottom-color: rgba(174, 137, 255, 0.14);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.product-page--oracle .product-header__telegram {
+  min-height: 44px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: var(--oracle-violet);
+  box-shadow: 0 10px 30px rgba(155, 114, 255, 0.24);
+  color: #100827;
+}
+
+.product-page--oracle .product-header__telegram:hover {
+  background: var(--oracle-violet-light);
+  box-shadow: 0 14px 38px rgba(155, 114, 255, 0.32);
+  transform: translateY(-1px);
+}
+
+.product-page--oracle .product-header__telegram:focus-visible {
+  outline: 3px solid rgba(190, 165, 255, 0.52);
+  outline-offset: 3px;
+}
 
 .oracle-page-wrapper {
-  min-height: 100vh;
-  background: #0d0b1a;
-  color: #e8e0f0;
-  font-family: 'Inter', system-ui, sans-serif;
-  padding: 0;
-  margin: 0;
   position: relative;
-  overflow-x: hidden;
+  isolation: isolate;
+  min-height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background:
+    radial-gradient(circle at 50% 6%, rgba(155, 114, 255, 0.24), transparent 34rem),
+    radial-gradient(circle at 8% 54%, rgba(83, 53, 165, 0.1), transparent 30rem),
+    radial-gradient(circle at 94% 72%, rgba(244, 200, 121, 0.07), transparent 26rem),
+    linear-gradient(180deg, var(--oracle-bg) 0%, var(--oracle-bg-soft) 50%, var(--oracle-bg) 100%);
+  color: var(--oracle-text);
+  font-family: Inter, system-ui, sans-serif;
 }
 
-/* Туманности - position:fixed, z-index:0, не влияют на поток */
 .oracle-page-wrapper::before {
   content: '';
-  position: fixed;
-  top: -20%;
+  position: absolute;
+  z-index: -1;
+  top: 64px;
   left: 50%;
-  transform: translateX(-50%);
-  width: 900px;
-  height: 900px;
-  background: radial-gradient(ellipse at center,
-    rgba(120, 60, 180, 0.18) 0%,
-    rgba(60, 20, 100, 0.10) 45%,
-    transparent 70%);
+  width: min(78vw, 940px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(190, 165, 255, 0.08);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow:
+    0 0 0 90px rgba(155, 114, 255, 0.016),
+    0 0 0 180px rgba(155, 114, 255, 0.01);
   pointer-events: none;
-  z-index: 0;
-}
-.oracle-page-wrapper::after {
-  content: '';
-  position: fixed;
-  bottom: -10%;
-  right: -10%;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(ellipse at center,
-    rgba(201, 169, 110, 0.08) 0%,
-    transparent 65%);
-  pointer-events: none;
-  z-index: 0;
 }
 
-/* ═══════════════════════════════════════════════
-   ВНУТРЕННИЙ КОНТЕЙНЕР
-   ═══════════════════════════════════════════════ */
+.oracle-page-wrapper::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(244, 240, 255, 0.24) 0 1px, transparent 1.5px),
+    radial-gradient(circle, rgba(190, 165, 255, 0.18) 0 1px, transparent 1.5px);
+  background-position: 0 0, 46px 74px;
+  background-size: 128px 128px, 176px 176px;
+  mask-image: linear-gradient(to bottom, black, transparent 74%);
+  -webkit-mask-image: linear-gradient(to bottom, black, transparent 74%);
+  opacity: 0.28;
+  pointer-events: none;
+}
+
 .oracle-inner {
   position: relative;
   z-index: 1;
-  max-width: 640px;
+  width: min(100% - 48px, 1040px);
+  max-width: none;
   margin: 0 auto;
-  padding: 56px 24px 72px;
-  box-sizing: border-box;
+  padding: clamp(62px, 9vw, 108px) 0 clamp(82px, 10vw, 128px);
 }
 
-/* ═══════════════════════════════════════════════
-   ЗНАК
-   ═══════════════════════════════════════════════ */
 .oracle-sigil {
-  display: block;
-  text-align: center;
-  font-size: 2.4rem;
-  margin-bottom: 20px;
-  filter: drop-shadow(0 0 16px rgba(201, 169, 110, 0.45));
-  animation: oracle-pulse 4s ease-in-out infinite;
-}
-@keyframes oracle-pulse {
-  0%,100% { filter: drop-shadow(0 0 16px rgba(201, 169, 110, 0.45)); }
-  50%      { filter: drop-shadow(0 0 28px rgba(201, 169, 110, 0.75)); }
+  display: grid;
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 28px;
+  place-items: center;
+  border: 1px solid rgba(190, 165, 255, 0.26);
+  border-radius: 50%;
+  background: rgba(155, 114, 255, 0.09);
+  box-shadow:
+    0 0 38px rgba(155, 114, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  font-size: 23px;
+  line-height: 1;
+  filter: saturate(0.72);
 }
 
-/* ═══════════════════════════════════════════════
-   ЗАГОЛОВОК - ФИКС размера, специфичность выше
-   глобального h1 { font-size: clamp(36px,...) }
-   ═══════════════════════════════════════════════ */
 h1.oracle-headline,
 .oracle-inner h1.oracle-headline {
-  font-family: 'Lora', Georgia, serif !important;
-  font-size: clamp(1.65rem, 4.8vw, 2.5rem) !important;
-  font-weight: 600 !important;
-  line-height: 1.28 !important;
-  text-align: center !important;
-  color: #f0eafa !important;
-  margin: 0 0 20px !important;
-  letter-spacing: -0.01em !important;
-  padding: 0 !important;
-  max-width: none !important;
+  max-width: 920px;
+  margin: 0 auto 24px;
+  padding: 0;
+  color: var(--oracle-text);
+  font-family: Lora, Georgia, serif;
+  font-size: clamp(42px, 6.1vw, 72px);
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.042em;
+  text-align: center;
+  text-wrap: balance;
 }
+
 h1.oracle-headline em,
 .oracle-inner h1.oracle-headline em {
-  font-style: italic !important;
-  color: #c9a96e !important;
+  color: var(--oracle-violet-light);
+  font-style: italic;
+  font-weight: 500;
 }
 
-/* ═══════════════════════════════════════════════
-   ПОДЗАГОЛОВОК
-   ═══════════════════════════════════════════════ */
 .oracle-sub {
-  font-size: 0.98rem;
+  max-width: 690px;
+  margin: 0 auto 34px;
+  color: var(--oracle-text-soft);
+  font-size: clamp(17px, 2vw, 20px);
   line-height: 1.65;
   text-align: center;
-  color: rgba(232, 224, 240, 0.75);
-  margin: 0 auto 32px;
-  max-width: 460px;
-}
-.oracle-sub strong {
-  color: rgba(201, 169, 110, 0.95);
-  font-weight: 500;
 }
 
-/* ═══════════════════════════════════════════════
-   CTA-КНОПКА
-   ═══════════════════════════════════════════════ */
+.oracle-sub strong {
+  color: var(--oracle-gold);
+  font-weight: 600;
+}
+
 .oracle-cta-wrap {
+  margin-bottom: 48px;
   text-align: center;
-  margin-bottom: 36px;
 }
+
 .oracle-cta {
-  display: inline-block;
-  width: 100%;
-  max-width: 380px;
-  padding: 16px 28px;
-  background: linear-gradient(135deg, #c9a96e 0%, #a07850 40%, #8b5e9e 100%);
-  color: #0d0b1a !important;
-  font-family: 'Inter', sans-serif;
-  font-size: 1rem;
-  font-weight: 500;
-  text-decoration: none !important;
-  border-radius: 12px;
-  letter-spacing: 0.02em;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
-  box-shadow:
-    0 4px 20px rgba(201, 169, 110, 0.28),
-    0 1px 4px rgba(0, 0, 0, 0.40);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: min(100%, 380px);
+  min-height: 56px;
+  padding: 15px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  background: var(--oracle-violet);
+  box-shadow: 0 15px 40px rgba(155, 114, 255, 0.3);
+  color: #100827;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transition: background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
   -webkit-tap-highlight-color: transparent;
-  box-sizing: border-box;
 }
+
 .oracle-cta:hover {
+  background: var(--oracle-violet-light);
+  box-shadow: 0 19px 48px rgba(155, 114, 255, 0.4);
+  color: #100827;
   transform: translateY(-2px);
-  box-shadow:
-    0 8px 28px rgba(201, 169, 110, 0.42),
-    0 2px 8px rgba(0, 0, 0, 0.40);
-  color: #0d0b1a !important;
-  text-decoration: none !important;
 }
+
 .oracle-cta:active {
   transform: translateY(0);
 }
+
+.oracle-cta:focus-visible {
+  outline: 3px solid rgba(190, 165, 255, 0.58);
+  outline-offset: 4px;
+}
+
 .oracle-cta-hint {
   display: block;
+  margin-top: 11px;
+  color: var(--oracle-text-muted);
+  font-size: 13px;
+  line-height: 1.5;
+  letter-spacing: 0;
   text-align: center;
-  font-size: 0.78rem;
-  color: rgba(232, 224, 240, 0.38);
-  margin-top: 9px;
-  letter-spacing: 0.01em;
 }
 
-/* ═══════════════════════════════════════════════
-   РАЗДЕЛИТЕЛЬ
-   ═══════════════════════════════════════════════ */
 .oracle-divider {
-  width: 40px;
+  width: min(100%, 760px);
   height: 1px;
-  background: linear-gradient(90deg,
+  margin: 0 auto clamp(56px, 8vw, 84px);
+  background: linear-gradient(
+    90deg,
     transparent,
-    rgba(201, 169, 110, 0.45),
-    transparent);
-  margin: 0 auto 32px;
+    rgba(190, 165, 255, 0.32),
+    rgba(244, 200, 121, 0.22),
+    transparent
+  );
 }
 
-/* ═══════════════════════════════════════════════
-   МЕТКА «О ЧЁМ СПРАШИВАЮТ»
-   ═══════════════════════════════════════════════ */
 .oracle-pains-label {
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: rgba(201, 169, 110, 0.60);
+  margin-bottom: 22px;
+  color: var(--oracle-gold);
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.4;
+  letter-spacing: 0.16em;
   text-align: center;
-  margin-bottom: 14px;
-  font-family: 'Inter', sans-serif;
+  text-transform: uppercase;
 }
 
-/* ═══════════════════════════════════════════════
-   СЕТКА БОЛЕЙ
-   ═══════════════════════════════════════════════ */
 .oracle-pains {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 9px;
-  margin-bottom: 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0;
 }
+
 .oracle-pain-card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(201, 169, 110, 0.13);
-  border-radius: 10px;
-  padding: 13px 14px;
+  position: relative;
   display: flex;
-  align-items: flex-start;
-  gap: 9px;
-  transition: border-color 0.2s ease, background 0.2s ease;
+  min-width: 0;
+  min-height: 108px;
+  align-items: center;
+  gap: 15px;
+  overflow: hidden;
+  padding: 23px 22px;
+  border: 1px solid var(--oracle-border);
+  border-radius: 20px;
+  background:
+    linear-gradient(145deg, rgba(155, 114, 255, 0.1), transparent 58%),
+    var(--oracle-surface);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.045);
 }
-.oracle-pain-card:hover {
-  border-color: rgba(201, 169, 110, 0.30);
-  background: rgba(255, 255, 255, 0.07);
+
+.oracle-pain-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 22px;
+  left: 22px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--oracle-violet-light), transparent);
+  opacity: 0.48;
 }
+
 .oracle-pain-icon {
-  font-size: 1.1rem;
+  display: grid;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  place-items: center;
+  border: 1px solid rgba(190, 165, 255, 0.18);
+  border-radius: 12px;
+  background: rgba(155, 114, 255, 0.08);
+  font-size: 17px;
   line-height: 1;
-  flex-shrink: 0;
-  margin-top: 2px;
+  filter: grayscale(0.25) saturate(0.72);
+  opacity: 0.82;
 }
+
 .oracle-pain-text {
-  font-size: 0.86rem;
-  line-height: 1.4;
-  color: rgba(232, 224, 240, 0.80);
-  font-family: 'Inter', sans-serif;
+  color: var(--oracle-text-soft);
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 520;
+  line-height: 1.45;
 }
+
 .oracle-pain-card--all {
   grid-column: 1 / -1;
-  background: rgba(201, 169, 110, 0.05);
-  border-color: rgba(201, 169, 110, 0.18);
+  min-height: 88px;
+  border-color: rgba(244, 200, 121, 0.22);
+  background:
+    linear-gradient(110deg, rgba(244, 200, 121, 0.09), transparent 64%),
+    var(--oracle-surface-strong);
 }
+
+.oracle-pain-card--all::before {
+  background: linear-gradient(90deg, transparent, var(--oracle-gold), transparent);
+}
+
+.oracle-pain-card--all .oracle-pain-icon {
+  border-color: rgba(244, 200, 121, 0.22);
+  background: rgba(244, 200, 121, 0.08);
+}
+
 .oracle-pain-card--all .oracle-pain-text {
-  color: rgba(201, 169, 110, 0.85);
+  color: rgba(248, 237, 210, 0.86);
 }
 
-/* ═══════════════════════════════════════════════
-   СТРОКА ДОВЕРИЯ
-   ═══════════════════════════════════════════════ */
 .oracle-trust {
-  margin-top: 32px;
-  padding: 14px 18px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 10px;
-  font-size: 0.81rem;
-  line-height: 1.6;
-  color: rgba(232, 224, 240, 0.48);
+  max-width: 760px;
+  margin: 34px auto 0;
+  padding: 25px 28px;
+  border: 1px solid rgba(190, 165, 255, 0.13);
+  border-radius: 18px;
+  background: rgba(9, 8, 28, 0.46);
+  color: var(--oracle-text-muted);
+  font-family: Lora, Georgia, serif;
+  font-size: 16px;
+  font-style: italic;
+  line-height: 1.7;
   text-align: center;
-  font-family: 'Inter', sans-serif;
 }
 
-/* ═══════════════════════════════════════════════
-   ССЫЛКИ ОФЕРТЫ
-   ═══════════════════════════════════════════════ */
-
-/* ═══════════════════════════════════════════════
-   АДАПТИВ - мобайл
-   ═══════════════════════════════════════════════ */
-@media (max-width: 480px) {
-  .oracle-inner {
-    padding: 44px 18px 60px;
+@media (hover: hover) and (pointer: fine) {
+  .oracle-pain-card {
+    transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
   }
+
+  .oracle-pain-card:hover {
+    border-color: var(--oracle-border-strong);
+    transform: translateY(-3px);
+  }
+}
+
+@media (max-width: 820px) {
+  .oracle-inner {
+    width: min(100% - 36px, 680px);
+    padding-top: 56px;
+  }
+
+  .oracle-pains {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .oracle-pain-card--all {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 520px) {
+  .oracle-inner {
+    width: min(100% - 28px, 680px);
+    padding-top: 44px;
+    padding-bottom: 76px;
+  }
+
+  .oracle-sigil {
+    width: 46px;
+    height: 46px;
+    margin-bottom: 22px;
+    font-size: 20px;
+  }
+
   h1.oracle-headline,
   .oracle-inner h1.oracle-headline {
-    font-size: clamp(1.5rem, 7vw, 2rem) !important;
-    line-height: 1.3 !important;
+    font-size: clamp(37px, 11vw, 50px);
+    line-height: 1.08;
   }
+
+  .oracle-sub {
+    font-size: 17px;
+  }
+
+  .oracle-cta {
+    width: 100%;
+    min-height: 54px;
+  }
+
+  .oracle-divider {
+    margin-bottom: 58px;
+  }
+
   .oracle-pains {
     grid-template-columns: 1fr;
   }
+
+  .oracle-pain-card,
   .oracle-pain-card--all {
     grid-column: 1;
+    min-height: 82px;
+    padding: 20px;
   }
-  .oracle-cta {
-    max-width: 100%;
-    padding: 16px 20px;
+
+  .oracle-trust {
+    padding: 22px 18px;
+    font-size: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .oracle-cta,
+  .oracle-pain-card,
+  .product-page--oracle .product-header__telegram {
+    transition: none;
   }
 }
