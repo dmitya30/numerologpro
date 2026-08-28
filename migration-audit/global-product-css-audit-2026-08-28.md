@@ -22,3 +22,16 @@ Source checkpoint: `ea58e93be2121d56a1a4cda79c27bc705e70ab96`.
 
 - Unused custom properties, absent element branches, empty media blocks and historical comments were not removed in this checkpoint.
 - Their deletion requires a separate patch followed by visual QA.
+
+## Theme and unused global CSS cleanup
+
+- Visual QA after shared-prefix consolidation: PASS.
+- Removed the unused `prefers-color-scheme` override and remaining theme-state assumptions.
+- Removed 21 custom properties with no references in the effective product bundle.
+- Removed the duplicate product override of `--color-primary-text`; the static base definition remains.
+- Removed absent `blockquote`, `h4`-`h6`, `small` and `summary` selector branches.
+- Removed the empty `max-width: 720px` media block and obsolete section comments.
+- Preserved active page geometry, typography, links, focus styles and five used `--td-*` properties.
+- Shared CSS cache version changed from `v=5` to `v=6`.
+
+A new visual QA pass is required after publication.

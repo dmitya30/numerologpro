@@ -332,3 +332,13 @@
 - Версия общего CSS обновлена до `v=5`, product-specific CSS - до `v=4`.
 - Неиспользуемые variables и глобальные selector branches пока не удалялись.
 - Следующий шаг: визуальный QA, затем отдельная точечная очистка общего блока.
+
+## 28.08.2026 - Удаление Ghost theme и unused global product CSS
+
+- После консолидации общего CSS пользователь подтвердил визуальный QA трёх product pages: PASS.
+- Удалены неиспользуемый `prefers-color-scheme` override и остаточные theme-state правила Ghost.
+- Удалена 21 неиспользуемая custom property и дублирующий override `--color-primary-text`.
+- Удалены отсутствующие element selector branches, пустой mobile media block и исторические комментарии.
+- Активные layout, typography, links и focus styles сохранены.
+- Версия общего `products.css` обновлена с `v=5` до `v=6`.
+- Следующий шаг: визуальный QA трёх product pages.
