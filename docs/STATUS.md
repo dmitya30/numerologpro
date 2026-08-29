@@ -16,7 +16,9 @@
 
 Из product pages удалены скрытые SEO-заголовки, legacy Article metadata и Schema.org, Telegram ref-workaround, дублирующий stylesheet preload и другие подтверждённые Ghost-хвосты. Воспроизводимый static-site integrity checker проходит.
 
-GitHub Pages custom domain `numerologpro.ru` настроен, корневой файл `CNAME` создан GitHub. Каталог `migration-audit/` удаляется из публикуемой ветки после переноса итоговых фактов в постоянную документацию. Текущий гейт - DNS cutover и production QA. DNS, VPS и Ghost пока не изменялись.
+Production cutover на GitHub Pages завершён. Custom domain `numerologpro.ru`, DNS apex, `www` и HTTPS работают; обязательные маршруты и ресурсы проверены. Пользовательский production QA пройден. Каталоги `migration-audit/` и локальная `.work/` удалены после переноса итоговых фактов в постоянную документацию.
+
+Текущий гейт - немедленный вывод legacy Ghost/VPS из эксплуатации по отдельному решению пользователя. Период ожидания после production QA отменён для прекращения расходов на VPS.
 
 ## Репозиторий
 
@@ -90,15 +92,15 @@ GitHub Pages custom domain `numerologpro.ru` настроен, корневой 
 
 ## Инфраструктура и срок
 
-Текущий VPS оплачен до 05.09.2026. Он остаётся временным источником и fallback до завершения публикации, DNS cutover и production QA.
+Текущий VPS оплачен до 05.09.2026. Production больше не зависит от VPS: DNS переключён на GitHub Pages, HTTPS работает, production QA пройден.
 
-Production-перенос должен быть завершён до окончания оплаченного периода с запасом на DNS, HTTPS, проверку и rollback.
+Пользователь распорядился немедленно удалить legacy Ghost/VPS, связанные резервные копии и снимки, после чего отменить услугу VPS, не ожидая окончания прежнего DNS TTL.
 
 ## Текущие ограничения
 
 - GitHub Pages project preview доступен по `https://dmitya30.github.io/numerologpro/`.
 - Обязательные маршруты `/`, `/elyor/`, `/quantocode/` и `/oracle/` опубликованы.
-- `.work/` игнорируется Git и удалён из публикуемой ветки; санитизированный контекст хранится в `migration-audit/`.
+- `.work/` и `migration-audit/` удалены из текущего дерева; необходимая история и итоговые факты сохранены в Git и постоянной документации.
 - Главная, 404 и product pages сохраняют Яндекс Метрику `109066888` и Google Analytics `G-EEJ6Z1C216`.
 - Социальные изображения и Schema.org logo используют абсолютные production URL.
 - Lora Roman, Lora Italic и Inter обслуживаются локальными файлами.
@@ -107,4 +109,7 @@ Production-перенос должен быть завершён до оконч
 - Воспроизводимый `scripts/check-static-site.py` проверяет HTML, metadata, аналитику, JSON-LD, ссылки, ресурсы, Ghost/theme/commercial markers, robots.txt и sitemap.xml.
 - Полный browser-level QA project preview завершён: desktop, mobile, navigation, CTA, footer, images, fonts, console, network, keyboard focus и horizontal scroll - PASS.
 - `/about/` реализована из исходного текста в визуальной системе нового сайта, прошла визуальный QA и не добавлена в навигацию главной. Legal, blog, archives, RSS и Ghost-служебные маршруты не переносятся и используют пользовательскую 404.
-- Повторная публичная DNS-проверка перед cutover подтверждает `A @ = 5.183.191.200`, `A www = 5.183.191.200`, NS `ns1.reg.ru` и `ns2.reg.ru`; DNS ещё не изменялся. VPS и Ghost остаются fallback до production QA.
+- Production DNS подтверждён: apex использует четыре IPv4 GitHub Pages, `www` использует CNAME `dmitya30.github.io`, NS остаются `ns1.reg.ru` и `ns2.reg.ru`, TTL новых записей равен 3600 секунд.
+- HTTPS доступен для apex и `www`; выпущен единый сертификат для `numerologpro.ru` и `www.numerologpro.ru`.
+- Главная, `/about/`, `/elyor/`, `/oracle/`, `/quantocode/`, robots.txt, sitemap.xml, CSS и JavaScript проверены на production-домене.
+- Пользователь подтвердил production QA и разрешил немедленный вывод Ghost/VPS из эксплуатации.
